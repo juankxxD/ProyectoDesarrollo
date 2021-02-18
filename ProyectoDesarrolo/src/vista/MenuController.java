@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -34,6 +36,17 @@ public class MenuController implements Initializable {
     private TextField TxtUsuario;
     @FXML
     private Label LabelUsuario;
+    @FXML
+    private MenuBar MenuBar;
+    @FXML
+    private Menu MenuUsuarios;
+    @FXML
+    private Menu MenuAdm;
+    @FXML
+    private Menu MenuVentas;
+    @FXML
+    private Menu MenuVendedores;
+    Administracion adm = new Administracion();
 
     /**
      * Initializes the controller class.
@@ -41,10 +54,25 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        iniciar();
     }    
     public void setProgramaPrincipal(principal programa)
     {
         programaPrincipal= programa;
+    }
+    public void iniciar(){
+        MenuBar.setVisible(false);
+    }
+    public void IniciarSesion(){
+        TxtContraseña.setVisible(false);
+        TxtUsuario.setVisible(false);
+        labelContraseña.setVisible(false);
+        LabelUsuario.setVisible(false);
+        BtnIniciar.setVisible(false);
+        BtnRegistrarse.setVisible(false);
+        if(adm.getUsuario().equals("administrador")){
+            MenuBar.setVisible(true);
+        }
     }
     
 }
