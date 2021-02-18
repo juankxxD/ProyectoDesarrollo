@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
  */
 public class MenuController implements Initializable {
 
+    private principal programaPrincipal;
     @FXML
     private PasswordField TxtContraseña;
     @FXML
@@ -41,5 +42,9 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    public void setProgramaPrincipal(principal programa)
+    {
+        programaPrincipal= programa;
+    }
     
 }
