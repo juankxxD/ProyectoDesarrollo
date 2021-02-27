@@ -72,6 +72,8 @@ public class MenuController implements Initializable {
         BtnRegistrarse.setVisible(false);
         if(adm.getUsuario().equals("administrador")){
             MenuBar.setVisible(true);
+            System.out.println("Hoyoossss perraco");
+                  
         }
     }
     
