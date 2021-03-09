@@ -47,7 +47,17 @@
               </menus>
             </MenuBar>
             <Label fx:id="Perfil" layoutX="432.0" layoutY="79.0" text="Usuario" />
-            <TableView fx:id="Tabla" layoutY="27.0" prefHeight="374.0" prefWidth="430.0">
+            <TableView fx:id="Tabla" layoutY="26.0" onSort="#consultarUsuarios" prefHeight="375.0" prefWidth="448.0">
+              <columns>
+                <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
+                <TableColumn fx:id="ColumNombre" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="ColumApe" prefWidth="75.0" text="Apellido" />
+                  <TableColumn fx:id="ColumTel" prefWidth="75.0" text="Telefono" />
+                  <TableColumn fx:id="ColumDire" prefWidth="75.0" text="Direccion" />
+                  <TableColumn fx:id="ColumPunt" prefWidth="75.0" text="Puntos" />
+              </columns>
+            </TableView>
+            <TableView layoutY="26.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />

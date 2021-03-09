@@ -6,7 +6,14 @@
 package vista;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,8 +21,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
+import modelo.Conexion;
+import static modelo.Conexion.BD;
+import static modelo.Conexion.Usuario;
+import static modelo.Conexion.contraseña;
 
 /**
  * FXML Controller class
@@ -25,6 +39,8 @@ import javafx.scene.control.TextField;
 public class MenuController implements Initializable {
 
     private principal programaPrincipal;
+    private Conexion BD = new Conexion();
+    
     @FXML
     private PasswordField TxtContraseña;
     @FXML
@@ -52,6 +68,19 @@ public class MenuController implements Initializable {
     private Label Perfil;
     @FXML
     private TableView<?> Tabla;
+    @FXML
+    private TableColumn<?, ?> ColumDocu;
+    @FXML
+    private TableColumn<?, ?> ColumNombre;
+    @FXML
+    private TableColumn<?, ?> ColumApe;
+    @FXML
+    private TableColumn<?, ?> ColumTel;
+    @FXML
+    private TableColumn<?, ?> ColumDire;
+    @FXML
+    private TableColumn<?, ?> ColumPunt;
+    private ObservableList<Conexion> personas;
 
     /**
      * Initializes the controller class.
@@ -81,5 +110,18 @@ public class MenuController implements Initializable {
             MenuBar.setVisible(true);
         }
     }
-    
+    public void consultarUsuarios() throws SQLException{
+        String sql = "Select * FROM Usuarios";
+        String ID = "";
+        String Nombre = "";
+        
+        personas = FXCollections.observableArrayList();
+        //this.ColumDocu.setCellValueFactory(new PropertyValueFactory("documento"));
+        ResultSet rs = BD.Algo(sql);
+        while(rs.next()){
+            String ID = rs.getString(Usuario);
+            
+        }
+        
+    }
 }
