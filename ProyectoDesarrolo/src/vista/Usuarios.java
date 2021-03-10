@@ -5,6 +5,16 @@
  */
 package vista;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import modelo.Conexion;
+
 /**
  *
  * @author Juan
@@ -15,6 +25,9 @@ public class Usuarios {
     private String Apellido;
     private String Telefono;
 
+    public Usuarios(){
+        
+    }
     public String getID() {
         return ID;
     }
@@ -72,5 +85,31 @@ public class Usuarios {
         this.Telefono = Telefono;
         this.direccion = direccion;
         this.Contraseña = Contraseña;
+    }
+    public ObservableList<Usuarios> getUsuarios(){
+        ObservableList<Usuarios> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT P1.\"ID\", P1.\"Nombre\", P1.\"Telefono\", P1.direccion, P1.\"Contraseña\", P1.\"Apellido\" \n" +
+"				 FROM public.\"Usuario\" P1;";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID =rs.getString("ID");
+                String nombre= rs.getString("Nombre");
+                String Apellido= rs.getString("Apellido");
+                String Telefono= rs.getString("Telefono");
+                String direccion= rs.getString("direccion");
+                String Contraseña= rs.getString("Contraseña");
+                
+                Usuarios u = new Usuarios(ID, nombre,Apellido, Telefono, direccion, Contraseña );
+                
+                obs.add(u);
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
     }
 }

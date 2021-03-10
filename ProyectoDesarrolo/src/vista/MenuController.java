@@ -69,18 +69,18 @@ public class MenuController implements Initializable {
     @FXML
     private TableView<Usuarios> Tabla;
     @FXML
-    private TableColumn ColumDocu;
+    private TableColumn<Usuarios,String> ColumDocu;
     @FXML
-    private TableColumn ColumNombre;
+    private TableColumn<Usuarios,String> ColumNombre;
     @FXML
-    private TableColumn ColumApe;
+    private TableColumn<Usuarios,String> ColumApe;
     @FXML
-    private TableColumn ColumTel;
+    private TableColumn<Usuarios,String> ColumTel;
     @FXML
-    private TableColumn ColumDire;
+    private TableColumn<Usuarios,String> ColumDire;
     @FXML
-    private TableColumn ColumPunt;
-    private ObservableList<Conexion> personas;
+    private TableColumn<Usuarios,String> ColumPunt;
+    private ObservableList<Conexion> MenuController;
 
     /**
      * Initializes the controller class.
@@ -89,6 +89,18 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         iniciar();
+        
+        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
+        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));
+        this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
+        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
+        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
+       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("Contraseña"));
+        
+        Usuarios u = new Usuarios();
+        ObservableList<Usuarios> item = u.getUsuarios();
+        this.Tabla.setItems(item);
+       // IniciarSesion();
     }    
     public void setProgramaPrincipal(principal programa)
     {
@@ -111,17 +123,49 @@ public class MenuController implements Initializable {
         }
     }
     public void consultarUsuarios() throws SQLException{
-        String sql = "Select * FROM Usuarios";
-        String ID = "";
-        String Nombre = "";
+        String sql = "SELECT P1.\"ID\", P1.\"Nombre\", P1.\"Telefono\", P1.direccion, P1.\"Contraseña\", P1.\"Apellido\" \n" +
+"				 FROM public.\"Usuario\" P1;";
+        try
+    {   
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
         
-        personas = FXCollections.observableArrayList();
-        //this.ColumDocu.setCellValueFactory(new PropertyValueFactory("documento"));
-        ResultSet rs = BD.Algo(sql);
+     
+        System.out.println(sql);
+        ps= con.prepareStatement(sql);
+        rs= ps.executeQuery();
+        MenuController = FXCollections.observableArrayList();
         while(rs.next()){
-            String ID = rs.getString(Usuario);
-            
-        }
-        
+        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
+        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));  
+        this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
+        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
+        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
+        }  
+                
+                
+                    
+    }catch(SQLException ex){
+        System.err.println(ex.toString());
     }
+        /*
+        ResultSet rs = BD.Algo(sql);
+        String[] aver = new String[5];
+       // aver=BD.getDatos();
+        System.out.println(aver[1]);
+        Usuarios = FXCollections.observableArrayList();
+        
+        Usuarios = FXCollections.observableArrayList();
+        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
+        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));  
+        this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
+        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
+        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));*/
+        }
+        /*private void AgregarUsuarios(){
+            String 
+        }*/
+    
 }
