@@ -43,10 +43,29 @@ public class Conexion {
         }
             return rs;
         }
-       /* public static void main(String[] args)
+        
+        
+       public static void main(String[] args)
     {
-        String prueba = "SELECT *\n" +
-"			FROM Usuario \n";
-    }*/
+       // String sql = "SELECT P1.\"ID\" FROM public.\"Usuario\" P1";
+        String sql = "SELECT * FROM \"Usuario\"";
+        try{
+           
+             PreparedStatement pst= getConexion().prepareStatement(sql);
+             
+             ResultSet rs = pst.executeQuery();
+             if(rs.next()){
+              System.out.println(rs.getString("ID"));
+              System.out.println(rs.getString("Nombre"));
+              System.out.println(rs.getString("Apellido"));
+              System.out.println(rs.getString("Telefono"));
+              System.out.println(rs.getString("Direccion"));
+              
+             }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error my so" + e);
+        }
+    }
     
 }

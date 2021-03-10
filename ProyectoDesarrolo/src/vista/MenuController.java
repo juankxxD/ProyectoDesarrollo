@@ -67,19 +67,19 @@ public class MenuController implements Initializable {
     @FXML
     private Label Perfil;
     @FXML
-    private TableView<?> Tabla;
+    private TableView<Usuarios> Tabla;
     @FXML
-    private TableColumn<?, ?> ColumDocu;
+    private TableColumn ColumDocu;
     @FXML
-    private TableColumn<?, ?> ColumNombre;
+    private TableColumn ColumNombre;
     @FXML
-    private TableColumn<?, ?> ColumApe;
+    private TableColumn ColumApe;
     @FXML
-    private TableColumn<?, ?> ColumTel;
+    private TableColumn ColumTel;
     @FXML
-    private TableColumn<?, ?> ColumDire;
+    private TableColumn ColumDire;
     @FXML
-    private TableColumn<?, ?> ColumPunt;
+    private TableColumn ColumPunt;
     private ObservableList<Conexion> personas;
 
     /**
