@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -81,6 +82,23 @@ public class MenuController implements Initializable {
     @FXML
     private TableColumn<Usuarios,String> ColumPunt;
     private ObservableList<Conexion> MenuController;
+    @FXML
+    private MenuItem MenuConUsu;
+    @FXML
+    private TableView<?> TablaPro;
+    @FXML
+    private TableColumn<?, ?> ProCod;
+    @FXML
+    private TableColumn<?, ?> ProNom;
+    @FXML
+    private TableColumn<?, ?> ProFec;
+    @FXML
+    private TableColumn<?, ?> ProVa;
+    @FXML
+    private TableColumn<?, ?> ProDes;
+    @FXML
+    private Button BtnRegistrar;
+    //private TableView<Productos> TablaPro;
 
     /**
      * Initializes the controller class.
@@ -90,24 +108,20 @@ public class MenuController implements Initializable {
         // TODO
         iniciar();
         
-        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));
-        this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
-        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
-        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
-       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("Contraseña"));
         
-        Usuarios u = new Usuarios();
-        ObservableList<Usuarios> item = u.getUsuarios();
-        this.Tabla.setItems(item);
        // IniciarSesion();
     }    
     public void setProgramaPrincipal(principal programa)
     {
         programaPrincipal= programa;
     }
+    
     public void iniciar(){
         MenuBar.setVisible(false);
+        Tabla.setVisible(false);
+        TablaPro.setVisible(false);
+        Perfil.setVisible(false);
+        BtnRegistrar.setVisible(false);
     }
     @FXML
     public void IniciarSesion(){
@@ -118,54 +132,33 @@ public class MenuController implements Initializable {
         BtnIniciar.setVisible(false);
         BtnRegistrarse.setVisible(false);
         Tabla.setVisible(false);
+        
         if(adm.getUsuario().equals("administrador")){
             MenuBar.setVisible(true);
+        }else{
+            BtnRegistrar.setVisible(true);
         }
     }
+    @FXML
     public void consultarUsuarios() throws SQLException{
-        String sql = "SELECT P1.\"ID\", P1.\"Nombre\", P1.\"Telefono\", P1.direccion, P1.\"Contraseña\", P1.\"Apellido\" \n" +
-"				 FROM public.\"Usuario\" P1;";
-        try
-    {   
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-     
-        System.out.println(sql);
-        ps= con.prepareStatement(sql);
-        rs= ps.executeQuery();
-        MenuController = FXCollections.observableArrayList();
-        while(rs.next()){
+        Perfil.setVisible(false);
+        Tabla.setVisible(true);
         this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));  
+        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));
         this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
         this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
         this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
+       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("Contraseña"));
+        
+        Usuarios u = new Usuarios();
+        ObservableList<Usuarios> item = u.getUsuarios();
+        this.Tabla.setItems(item);
         }  
                 
-                
-                    
-    }catch(SQLException ex){
-        System.err.println(ex.toString());
-    }
-        /*
-        ResultSet rs = BD.Algo(sql);
-        String[] aver = new String[5];
-       // aver=BD.getDatos();
-        System.out.println(aver[1]);
-        Usuarios = FXCollections.observableArrayList();
-        
-        Usuarios = FXCollections.observableArrayList();
-        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("ID"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("Nombre"));  
-        this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
-        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
-        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));*/
-        }
-        /*private void AgregarUsuarios(){
-            String 
-        }*/
+    public void abrirOtraVentana()
+    {
+        programaPrincipal.abrirOtraVentana();
+    }       
+                  
     
 }

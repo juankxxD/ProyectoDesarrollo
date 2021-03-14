@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Administracion {
    private int porcentajeTraba;
-   private String usuario = "administrador";
+   private String usuario = "adm";
 
    public Administracion(){
        

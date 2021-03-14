@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.swing.JOptionPane;
 import modelo.Conexion;
 
 /**
@@ -111,5 +112,30 @@ public class Usuarios {
             System.err.println(e.toString());
         }
         return obs;
+    }
+    public void registrarCliente(String Documento, String nombre, String Apellido, String telefono, String Direccion, String Puntos, String contraseña){
+        try{
+        String sql = " INSERT INTO PUBLIC.\"Usuario\"\n(" +
+"             \"ID\", \"Nombre\",\"Apellido\", \"Telefono\", \"direccion\", \"Contraseña\")\n" +
+"				 VALUES (?,?,?,?,? ,?);";
+        String[] opcion = {"Si","No"};
+        String n = (String)JOptionPane.showInputDialog(null,"Desea registrar el usuario","Aviso registro", JOptionPane.ERROR_MESSAGE, null, opcion, opcion[0]);
+        if(n.equals("No")){
+            JOptionPane.showMessageDialog(null, "Usuario no registrado");
+        }else{
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setString(1, Documento.trim());
+        ps.setString(2, nombre.trim());
+        ps.setString(3, Apellido.trim());
+        ps.setString(4, telefono.trim());
+        ps.setString(5, Direccion.trim());
+        ps.setString(6, contraseña.trim());
+        ps.executeUpdate();
+        }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 }

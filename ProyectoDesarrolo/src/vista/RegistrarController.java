@@ -6,11 +6,13 @@
 package vista;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -19,6 +21,7 @@ import javafx.scene.control.TextField;
  */
 public class RegistrarController implements Initializable {
 
+     private principal programaPrincipal;
     @FXML
     private Button BtonRegistrar;
     @FXML
@@ -33,6 +36,10 @@ public class RegistrarController implements Initializable {
     private TextField txtDireccion;
     @FXML
     private TextField txtPuntos;
+    @FXML
+    private TextField txtApellido;
+    @FXML
+    private TextField txtContraseña;
 
     /**
      * Initializes the controller class.
@@ -41,23 +48,24 @@ public class RegistrarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    public void Registrar(){
-        txtDocumento.getText();
-        TxtNombre.getText();
-        txtApellido.getText();
-        TxtTelefono.getText();
-        txtDireccion.getText();
-        txtContraseña.getText();
-        txtPuntos.getText();
-        
-        
+    public void setProgramaPrincipal(principal programa)
+    {
+        programaPrincipal= programa;
+    }
+    public void Registrar() throws SQLException{
+        System.out.println(TxtNombreC.getText());
+        if(TxtNombreC.getText()== " "){
+        JOptionPane.showMessageDialog(null, "No puede tener datos nulos");
+        }else{
+        Usuarios cliente = new Usuarios();
+        cliente.registrarCliente(txtDocumento.getText(), TxtNombreC.getText(), txtApellido.getText(), TxtTelefono.getText(), txtDireccion.getText(), txtPuntos.getText(), txtContraseña.getText());
+        }
     }
     
-    public String validacionContra(){
-        String mensaje = "";
-        if(txtDocumento.getText().equals(null)){
-            
-        }
-        return mensaje;
+    public void regresarAPrincipal()
+    {
+        programaPrincipal.initRootLayout();
     }
-}
+    
+    }
+

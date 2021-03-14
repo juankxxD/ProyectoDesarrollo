@@ -53,30 +53,30 @@ public class principal extends Application{
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }/*
+    }
     public void abrirOtraVentana()
     {
         try 
         {
             FXMLLoader loader= new FXMLLoader();
-            loader.setLocation(principal.class.getResource("/vista/Tablero.fxml"));
+            loader.setLocation(principal.class.getResource("/vista/Registrar.fxml"));
             BorderPane ventana= (BorderPane) loader.load();
             
-            primaryStage.setTitle("Ventana alternativa");
+            primaryStage.setTitle("Registro de Usuarios");
             
             Scene scene = new Scene(ventana);
             
             primaryStage.setScene(scene);
             
-            TableroController otraVentana= loader.getController();
+            RegistrarController registrar= loader.getController();
             
-            otraVentana.setProgramaPrincipal(this);
+            registrar.setProgramaPrincipal(this);
             
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /*
     public void AbrirTerceraVentana()
     {
         try 
