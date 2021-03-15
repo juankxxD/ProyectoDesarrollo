@@ -133,9 +133,45 @@ public class Usuarios {
         ps.setString(5, Direccion.trim());
         ps.setString(6, contraseña.trim());
         ps.executeUpdate();
+        EnCliente(Documento, Puntos);
+        JOptionPane.showMessageDialog(null, "Usuario registrado");
         }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+   public void EnCliente(String ID, String Puntos){
+       try{
+       String sql= "INSERT INTO PUBLIC.\"clientes\"(\n" +
+"             \"ID\", \"puntos\")\n" +
+"				 VALUES (?,?)";
+       int puntos= Integer.parseInt(Puntos);
+       Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setString(1, ID.trim());
+        ps.setInt(2, puntos);
+        ps.executeUpdate();
+        EnUsuario_Tipo(ID);
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+   }
+   
+   public void EnUsuario_Tipo(String ID){
+       try{
+       String sql= "INSERT INTO PUBLIC.\"Usuario_tipo\"(\n" +
+"             \"id_U\", \"id_T\")VALUES (?, ?)";
+       String cliente = "3";
+       Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setString(1, ID.trim());
+        ps.setString(2, cliente.trim());
+        ps.executeUpdate();
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+   }
 }

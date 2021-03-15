@@ -53,8 +53,8 @@ public class RegistrarController implements Initializable {
         programaPrincipal= programa;
     }
     public void Registrar() throws SQLException{
-        System.out.println(TxtNombreC.getText());
-        if(TxtNombreC.getText()== " "){
+        txtPuntos.setText("0");
+        if(txtDocumento.getText().equals("")||TxtNombreC.getText().equals("")||txtApellido.getText().equals("")||TxtTelefono.getText().equals("")||txtDireccion.getText().equals("")||txtPuntos.getText().equals("")||txtContraseña.getText().equals("")){
         JOptionPane.showMessageDialog(null, "No puede tener datos nulos");
         }else{
         Usuarios cliente = new Usuarios();
