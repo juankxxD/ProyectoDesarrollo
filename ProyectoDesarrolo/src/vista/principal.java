@@ -23,6 +23,15 @@ public class principal extends Application{
     
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
     @Override
     public void start(Stage stage) throws Exception
@@ -37,7 +46,7 @@ public class principal extends Application{
         try 
         {
             FXMLLoader loader= new FXMLLoader();
-            loader.setLocation(principal.class.getResource("/vista/menu.fxml"));
+            loader.setLocation(principal.class.getResource("/vista/InicioSesion.fxml"));
             rootLayout= (BorderPane) loader.load();
             
             //Aquí se carga la escena principal
@@ -46,7 +55,7 @@ public class principal extends Application{
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             
-            MenuController controller= loader.getController();
+            InicioSesionController controller= loader.getController();
             controller.setProgramaPrincipal(this);
             primaryStage.show();
             
@@ -76,13 +85,14 @@ public class principal extends Application{
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    /*
-    public void AbrirTerceraVentana()
+    
+    public void AbrirTerceraVentana(String tipo)
     {
         try 
         {
+            this.tipo=tipo;
             FXMLLoader loader= new FXMLLoader();
-            loader.setLocation(principal.class.getResource("/vista/Jugadores.fxml"));
+            loader.setLocation(principal.class.getResource("/vista/Menu.fxml"));
             BorderPane ventana= (BorderPane) loader.load();
             
             primaryStage.setTitle("Ventana alternativa");
@@ -91,14 +101,15 @@ public class principal extends Application{
             
             primaryStage.setScene(scene);
             
-            JugadoresController AbrirTerceraVentana= loader.getController();
+            MenuController AbrirTerceraVentana= loader.getController();
             
             AbrirTerceraVentana.setProgramaPrincipal(this);
+            AbrirTerceraVentana.iniciar();
             
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
     
     public static void main(String[] args)
     {

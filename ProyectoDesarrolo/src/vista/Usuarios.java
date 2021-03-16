@@ -25,6 +25,15 @@ public class Usuarios {
     private String Nombre;
     private String Apellido;
     private String Telefono;
+    private String TipoUsuario;
+
+    public String getTipoUsuario() {
+        return TipoUsuario;
+    }
+
+    public void setTipoUsuario(String TipoUsuario) {
+        this.TipoUsuario = TipoUsuario;
+    }
 
     public Usuarios(){
         
@@ -112,6 +121,10 @@ public class Usuarios {
             System.err.println(e.toString());
         }
         return obs;
+    }
+    public void guardarTipo(String Tipo){
+        TipoUsuario = Tipo.trim();
+        System.out.println(TipoUsuario);
     }
     public void registrarCliente(String Documento, String nombre, String Apellido, String telefono, String Direccion, String Puntos, String contraseña){
         try{

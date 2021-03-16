@@ -41,19 +41,6 @@ public class MenuController implements Initializable {
 
     private principal programaPrincipal;
     private Conexion BD = new Conexion();
-    
-    @FXML
-    private PasswordField TxtContraseña;
-    @FXML
-    private Button BtnRegistrarse;
-    @FXML
-    private Button BtnIniciar;
-    @FXML
-    private Label labelContraseña;
-    @FXML
-    private TextField TxtUsuario;
-    @FXML
-    private Label LabelUsuario;
     @FXML
     private MenuBar MenuBar;
     @FXML
@@ -106,7 +93,7 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        iniciar();
+    //   iniciar();
         
         
        // IniciarSesion();
@@ -117,27 +104,30 @@ public class MenuController implements Initializable {
     }
     
     public void iniciar(){
-        MenuBar.setVisible(false);
+        Usuarios u = new Usuarios();
+        u.setTipoUsuario(programaPrincipal.getTipo());
         Tabla.setVisible(false);
+        MenuBar.setVisible(false);
         TablaPro.setVisible(false);
         Perfil.setVisible(false);
         BtnRegistrar.setVisible(false);
-    }
-    @FXML
-    public void IniciarSesion(){
-        TxtContraseña.setVisible(false);
-        TxtUsuario.setVisible(false);
-        labelContraseña.setVisible(false);
-        LabelUsuario.setVisible(false);
-        BtnIniciar.setVisible(false);
-        BtnRegistrarse.setVisible(false);
-        Tabla.setVisible(false);
-        
-        if(adm.getUsuario().equals("administrador")){
+        if(u.getTipoUsuario().equals("1")){
             MenuBar.setVisible(true);
-        }else{
+            Perfil.setText("Administrador");
+            Perfil.setVisible(true);
+        }else if(u.getTipoUsuario().equals("2")){
+            Perfil.setText("vendedor");
+            Perfil.setVisible(true);
             BtnRegistrar.setVisible(true);
+        }else{
+            Perfil.setText("Cliente");
+            Perfil.setVisible(true);
         }
+        
+        
+        
+        
+        
     }
     @FXML
     public void consultarUsuarios() throws SQLException{
@@ -155,6 +145,7 @@ public class MenuController implements Initializable {
         this.Tabla.setItems(item);
         }  
                 
+    @FXML
     public void abrirOtraVentana()
     {
         programaPrincipal.abrirOtraVentana();
