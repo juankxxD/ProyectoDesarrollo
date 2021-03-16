@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -15,7 +14,6 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="TxtUsuario" layoutX="226.0" layoutY="167.0" />
             <MenuBar fx:id="MenuBar" layoutY="2.0">
               <menus>
                 <Menu fx:id="MenuUsuarios" mnemonicParsing="false" text="Usuarios">

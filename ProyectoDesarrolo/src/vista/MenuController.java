@@ -55,19 +55,19 @@ public class MenuController implements Initializable {
     @FXML
     private Label Perfil;
     @FXML
-    private TableView<Usuarios> Tabla;
+    private TableView<Cliente> Tabla;
     @FXML
-    private TableColumn<Usuarios,String> ColumDocu;
+    private TableColumn<Cliente,String> ColumDocu;
     @FXML
-    private TableColumn<Usuarios,String> ColumNombre;
+    private TableColumn<Cliente,String> ColumNombre;
     @FXML
-    private TableColumn<Usuarios,String> ColumApe;
+    private TableColumn<Cliente,String> ColumApe;
     @FXML
-    private TableColumn<Usuarios,String> ColumTel;
+    private TableColumn<Cliente,String> ColumTel;
     @FXML
-    private TableColumn<Usuarios,String> ColumDire;
+    private TableColumn<Cliente,String> ColumDire;
     @FXML
-    private TableColumn<Usuarios,String> ColumPunt;
+    private TableColumn<Cliente,String> ColumPunt;
     private ObservableList<Conexion> MenuController;
     @FXML
     private MenuItem MenuConUsu;
@@ -138,10 +138,10 @@ public class MenuController implements Initializable {
         this.ColumApe.setCellValueFactory(new PropertyValueFactory("Apellido"));
         this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
         this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
-       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("Contraseña"));
+       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("puntos"));
         
-        Usuarios u = new Usuarios();
-        ObservableList<Usuarios> item = u.getUsuarios();
+        Cliente c = new Cliente();
+        ObservableList<Cliente> item = c.getCliente();
         this.Tabla.setItems(item);
         }  
                 

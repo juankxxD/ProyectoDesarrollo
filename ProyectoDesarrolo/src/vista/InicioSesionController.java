@@ -68,6 +68,13 @@ public class InicioSesionController implements Initializable {
          ResultSet rs= ps.executeQuery();
          if(rs.next()){
              String tipo_nivel = rs.getString("id_T");
+             if(tipo_nivel.equals("1")){
+                 Usuarios u = new Usuarios(TxtDocumento.getText());
+             }else if(tipo_nivel.equals("1")){
+                 Vendedor v = new Vendedor(TxtDocumento.getText());
+             }else{
+                 Cliente c = new Cliente(TxtDocumento.getText());
+             }
              Usuarios usuario = new Usuarios();
              usuario.guardarTipo(tipo_nivel);
              IniciarSesion(tipo_nivel);
