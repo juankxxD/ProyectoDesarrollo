@@ -44,6 +44,7 @@ public class InicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
     public void setProgramaPrincipal(principal programa)
@@ -51,8 +52,8 @@ public class InicioSesionController implements Initializable {
         programaPrincipal= programa;
     }
     
-    public void IniciarSesion(String Tipo){
-        programaPrincipal.AbrirTerceraVentana(Tipo);
+    public void IniciarSesion(String Tipo){//, String ID ){
+        programaPrincipal.AbrirTerceraVentana(Tipo);//, ID);
     }
     public void entrar(){
         try{
@@ -70,14 +71,17 @@ public class InicioSesionController implements Initializable {
              String tipo_nivel = rs.getString("id_T");
              if(tipo_nivel.equals("1")){
                  Usuarios u = new Usuarios(TxtDocumento.getText());
-             }else if(tipo_nivel.equals("1")){
+                 u.completarDatos();
+             }else if(tipo_nivel.equals("2")){
                  Vendedor v = new Vendedor(TxtDocumento.getText());
+                 v.completarDatos();
              }else{
                  Cliente c = new Cliente(TxtDocumento.getText());
+                 c.completarDatos();
              }
              Usuarios usuario = new Usuarios();
              usuario.guardarTipo(tipo_nivel);
-             IniciarSesion(tipo_nivel);
+             IniciarSesion(tipo_nivel);//, TxtDocumento.getText().trim());
          }else{
              JOptionPane.showMessageDialog(null, "Datos incorrectos");
              TxtDocumento.setText("");

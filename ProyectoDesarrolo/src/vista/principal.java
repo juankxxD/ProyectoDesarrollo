@@ -24,6 +24,15 @@ public class principal extends Application{
     private Stage primaryStage;
     private BorderPane rootLayout;
     private String tipo;
+    private String ID;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 
     public String getTipo() {
         return tipo;
@@ -86,10 +95,11 @@ public class principal extends Application{
         }
     }
     
-    public void AbrirTerceraVentana(String tipo)
+    public void AbrirTerceraVentana(String tipo)//, String Id)
     {
         try 
         {
+            //this.ID=Id;
             this.tipo=tipo;
             FXMLLoader loader= new FXMLLoader();
             loader.setLocation(principal.class.getResource("/vista/Menu.fxml"));

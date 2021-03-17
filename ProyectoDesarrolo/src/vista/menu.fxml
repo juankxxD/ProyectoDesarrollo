@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.MenuController">
    <center>
@@ -39,7 +40,7 @@
               </menus>
             </MenuBar>
             <Label fx:id="Perfil" layoutX="432.0" layoutY="79.0" text="Usuario" />
-            <TableView fx:id="Tabla" layoutY="26.0" onSort="#consultarUsuarios" prefHeight="375.0" prefWidth="448.0">
+            <TableView fx:id="Tabla" layoutY="26.0" onSort="#consultarUsuarios" prefHeight="375.0" prefWidth="448.0" visible="false">
               <columns>
                 <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
                 <TableColumn fx:id="ColumNombre" prefWidth="75.0" text="Nombre" />
@@ -49,9 +50,9 @@
                   <TableColumn fx:id="ColumPunt" prefWidth="75.0" text="Puntos" />
               </columns>
             </TableView>
-            <TableView fx:id="TablaPro" layoutY="26.0" prefHeight="328.0" prefWidth="447.0">
+            <TableView fx:id="TablaPro" layoutY="26.0" prefHeight="328.0" prefWidth="447.0" visible="false">
               <columns>
-                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" visible="false" />
                 <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha vencimiento" />
                   <TableColumn fx:id="ProVa" prefWidth="130.0" text="Valor sin descuento" />
@@ -59,6 +60,11 @@
               </columns>
             </TableView>
             <Button fx:id="BtnRegistrar" layoutX="467.0" layoutY="180.0" mnemonicParsing="false" onAction="#abrirOtraVentana" text="Registrar usuario" />
+            <Label fx:id="LabelBienvenido" layoutX="25.0" layoutY="367.0" text="Label">
+               <font>
+                  <Font name="Algerian" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

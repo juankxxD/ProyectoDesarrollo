@@ -5,6 +5,7 @@
  */
 package vista;
 
+import com.sun.prism.paint.Color;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;

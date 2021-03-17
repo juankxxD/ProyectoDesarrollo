@@ -21,11 +21,11 @@ import modelo.Conexion;
  * @author Juan
  */
 public class Usuarios {
-    private String ID;
-    private String Nombre;
-    private String Apellido;
-    private String Telefono;
-    private String TipoUsuario;
+    private static String ID;
+    private static String Nombre;
+    private static String Apellido;
+    private static String Telefono;
+    private static String TipoUsuario;
 
     public String getTipoUsuario() {
         return TipoUsuario;
@@ -149,7 +149,33 @@ public class Usuarios {
            JOptionPane.showMessageDialog(null, e);
        }
    }
-   
+   public void completarDatos(){
+        try{
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        
+        PreparedStatement ps= con.prepareStatement(" SELECT *\n" +
+"             FROM \"Usuario\" p1\n" +
+"             WHERE p1.\"ID\"='" + ID +"'");
+        ResultSet rs= ps.executeQuery();
+        if(rs.next()){
+             String ID = rs.getString("ID");
+             String Nombre = rs.getString("Nombre");
+             String Apellido = rs.getString("Apellido");
+             String Telefono = rs.getString("Telefono");
+             String direccion = rs.getString("direccion");
+             String contraseña = rs.getString("Contraseña");
+             
+             System.out.println(Nombre);
+             Usuarios u = new Usuarios(ID, Nombre, Apellido, Telefono, direccion, contraseña);
+             System.out.println(this.Apellido);
+            // MenuController m = new MenuController();
+             //m.recibirDatos(ID, Nombre, Apellido);
+        }
+        } catch(SQLException ex){
+       JOptionPane.showMessageDialog(null, ex);
+   }
+    }
    public void EnUsuario_Tipo(String ID){
        try{
        String sql= "INSERT INTO PUBLIC.\"Usuario_tipo\"(\n" +
@@ -160,6 +186,23 @@ public class Usuarios {
         PreparedStatement ps= con.prepareStatement(sql);
         ps.setString(1, ID.trim());
         ps.setString(2, cliente.trim());
+        ps.executeUpdate();
+           EnClientes_Registrados(ID);
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+   }
+   public void EnClientes_Registrados(String ID){
+       try{
+       String sql= "INSERT INTO PUBLIC.\"Clientes_Registrados\"(\n" +
+"             \"ID_V\", \"ID_C\")\n" +
+"				 VALUES (?,?)";
+       Vendedor v = new Vendedor();
+       Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setString(1, v.getID());
+        ps.setString(2, ID);
         ps.executeUpdate();
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, e);
