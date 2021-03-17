@@ -204,8 +204,10 @@ public class Usuarios {
         ps.setString(1, v.getID());
         ps.setString(2, ID);
         ps.executeUpdate();
+        v.AumentarNumeroClientes();
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, e);
        }
    }
+   
 }

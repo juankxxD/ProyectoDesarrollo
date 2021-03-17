@@ -123,6 +123,19 @@ public class Vendedor {
     public void setNumero_Clientes(int Numero_Clientes) {
         this.Numero_Clientes = Numero_Clientes;
     }
-    
-    
+    public void AumentarNumeroClientes(){
+        String SQL = "update Vendedores set Tota_clientes = ? where ID = '" + ID + "'" ;
+        try{
+           
+        int Numero = Numero_Clientes + 1;
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        
+        PreparedStatement ps= con.prepareStatement(SQL);
+        ps.setInt(1,Numero);
+       // ResultSet rs= ps.executeQuery();
+       } catch(SQLException ex){
+       JOptionPane.showMessageDialog(null, ex);
+    }
+    }
 }
