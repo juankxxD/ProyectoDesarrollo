@@ -11,6 +11,8 @@ package vista;
  */
 public class Ventas {
     private int descuento;
+    private int Comision;
+    
     
     
 }
