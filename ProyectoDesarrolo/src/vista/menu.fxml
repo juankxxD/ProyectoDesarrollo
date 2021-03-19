@@ -17,7 +17,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar fx:id="MenuBar" layoutY="2.0">
+            <MenuBar fx:id="MenuBar" layoutY="2.0" visible="false">
               <menus>
                 <Menu fx:id="MenuUsuarios" mnemonicParsing="false" text="Usuarios">
                   <items>
@@ -42,7 +42,7 @@
               </menus>
             </MenuBar>
             <Label fx:id="Perfil" layoutX="432.0" layoutY="79.0" text="Usuario" visible="false" />
-            <TableView fx:id="Tabla" layoutY="26.0" onSort="#consultarUsuarios" prefHeight="375.0" prefWidth="448.0" visible="false">
+            <TableView fx:id="Tabla" layoutX="6.0" layoutY="51.0" onSort="#consultarUsuarios" prefHeight="300.0" prefWidth="455.0" visible="false">
               <columns>
                 <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
                 <TableColumn fx:id="ColumNombre" prefWidth="75.0" text="Nombre" />
@@ -59,7 +59,7 @@
                </font>
             </Label>
             <Button fx:id="agregarpro" layoutX="70.0" layoutY="178.0" mnemonicParsing="false" onAction="#AgregarPro" text="Agregar Productos" visible="false" />
-            <TableView fx:id="TablaPro" layoutX="-2.0" layoutY="25.0" onSort="#consultarProductos" prefHeight="360.0" prefWidth="453.0" visible="false">
+            <TableView fx:id="TablaPro" layoutX="14.0" layoutY="56.0" onSort="#consultarProductos" prefHeight="289.0" prefWidth="453.0" visible="false">
               <columns>
                 <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" />
                 <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
@@ -78,9 +78,10 @@
                 <MenuItem fx:id="ActualizarClientes" mnemonicParsing="false" onAction="#ConsultarActualizar" text="Clientes para actualizar" />
               </items>
             </SplitMenuButton>
-            <Label fx:id="txtCodigo" layoutX="510.0" layoutY="119.0" text="Codigo" />
-            <TextField fx:id="txtConsultar" layoutX="480.0" layoutY="153.0" prefHeight="25.0" prefWidth="99.0" />
-            <Button fx:id="btnConsultarCliente" layoutX="496.0" layoutY="201.0" mnemonicParsing="false" text="Consultar" />
+            <Label fx:id="txtCodigo" layoutX="510.0" layoutY="119.0" text="Codigo" visible="false" />
+            <TextField fx:id="txtConsultar" layoutX="480.0" layoutY="153.0" prefHeight="25.0" prefWidth="99.0" visible="false" />
+            <Button fx:id="btnConsultarCliente" layoutX="496.0" layoutY="201.0" mnemonicParsing="false" onAction="#ActualizarDatos" text="Consultar" visible="false" />
+            <Button fx:id="btnConsultarProductosC" layoutX="124.0" layoutY="253.0" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" />
          </children>
       </AnchorPane>
    </center>

@@ -165,6 +165,29 @@ public class principal extends Application{
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     
+     public void Actualizar()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/Actualizar.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Actualizar Datos");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ActualizarController actualizar= loader.getController();
+            
+            actualizar.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void main(String[] args)
     {
         launch(args); 

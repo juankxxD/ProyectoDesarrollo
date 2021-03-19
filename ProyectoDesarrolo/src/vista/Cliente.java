@@ -70,6 +70,9 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    public void setID(String ID) {
+        this.ID=ID;
+    }
     public String getID() {
         return ID;
     }

@@ -7,27 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ActualizarController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="31.0" layoutY="14.0" text="Label" />
-            <Label layoutX="378.0" layoutY="14.0" text="Label" />
-            <Label layoutX="31.0" layoutY="94.0" text="Label" />
-            <Label layoutX="378.0" layoutY="94.0" text="Label" />
-            <Label layoutX="31.0" layoutY="192.0" text="Label" />
-            <Label layoutX="378.0" layoutY="192.0" text="Label" />
-            <Label layoutX="31.0" layoutY="270.0" text="Label" />
-            <TextField layoutX="45.0" layoutY="40.0" />
-            <TextField layoutX="392.0" layoutY="40.0" />
-            <TextField layoutX="45.0" layoutY="127.0" />
-            <TextField layoutX="392.0" layoutY="127.0" />
-            <TextField layoutX="45.0" layoutY="223.0" />
-            <TextField layoutX="392.0" layoutY="236.0" />
-            <TextArea editable="false" layoutX="45.0" layoutY="293.0" prefHeight="100.0" prefWidth="200.0" />
-            <Button layoutX="366.0" layoutY="343.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="467.0" layoutY="343.0" mnemonicParsing="false" text="Button" />
+            <Label layoutX="31.0" layoutY="14.0" text="ID" />
+            <Label layoutX="378.0" layoutY="14.0" text="Nombre" />
+            <Label layoutX="31.0" layoutY="94.0" text="Apellido" />
+            <Label layoutX="378.0" layoutY="94.0" text="Telefono" />
+            <Label layoutX="31.0" layoutY="192.0" text="direccion" />
+            <Label layoutX="378.0" layoutY="192.0" text="Contraseña" />
+            <Label layoutX="31.0" layoutY="270.0" text="Mensaje" />
+            <TextField fx:id="txtID" editable="false" layoutX="45.0" layoutY="40.0" />
+            <TextField fx:id="txtNombre" editable="false" layoutX="392.0" layoutY="40.0" />
+            <TextField fx:id="txtApellido" editable="false" layoutX="45.0" layoutY="127.0" />
+            <TextField fx:id="txtTelefono" layoutX="392.0" layoutY="127.0" />
+            <TextField fx:id="txtDireccion" layoutX="45.0" layoutY="223.0" />
+            <TextField fx:id="txtContraseña" layoutX="392.0" layoutY="236.0" />
+            <TextArea fx:id="txtMensaje" editable="false" layoutX="45.0" layoutY="293.0" prefHeight="100.0" prefWidth="200.0" />
+            <Button fx:id="btnActualizar" layoutX="336.0" layoutY="343.0" mnemonicParsing="false" onAction="#actualizar" text="Actualizar Datos" />
+            <Button fx:id="volver" layoutX="467.0" layoutY="343.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
          </children>
       </AnchorPane>
    </center>

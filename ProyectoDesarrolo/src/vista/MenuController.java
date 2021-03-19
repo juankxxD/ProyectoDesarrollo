@@ -118,6 +118,8 @@ public class MenuController implements Initializable {
     private TextField txtConsultar;
     @FXML
     private Button btnConsultarCliente;
+    @FXML
+    private Button btnConsultarProductosC;
     
     //private TableView<Productos> TablaPro;
 
@@ -159,6 +161,7 @@ public class MenuController implements Initializable {
         btnConsultarCliente.setVisible(false);
         txtConsultar.setVisible(false);
         txtCodigo.setVisible(false);
+        btnConsultarProductosC.setVisible(false);
         if(u.getTipoUsuario().equals("1")){
             MenuBar.setVisible(true);
             Perfil.setText("Administrador");
@@ -183,6 +186,7 @@ public class MenuController implements Initializable {
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(false);
             ActualizarClien.setVisible(true);
+            btnConsultarProductosC.setVisible(true);
         }
         
     }
@@ -212,8 +216,11 @@ public class MenuController implements Initializable {
                 
         @FXML
     public void consultarProductos() throws SQLException{
+        ActualizarClien.setVisible(false);
+        btnConsultarProductosC.setVisible(false);
         LabelBienvenido.setVisible(false);
         Perfil.setVisible(false);
+        Tabla.setVisible(false);
         TablaPro.setVisible(true);
         agregarpro.setVisible(false);
         this.ProCod.setCellValueFactory(new PropertyValueFactory("codigo"));
@@ -249,7 +256,12 @@ public class MenuController implements Initializable {
         txtConsultar.setVisible(true);
         txtCodigo.setVisible(true);
     }
-                  
+    @FXML             
+    public void ActualizarDatos(){
+        Cliente c = new Cliente();
+        c.setID(txtConsultar.getText());
+        programaPrincipal.Actualizar();
+    }
     @FXML
     public void consultarDeVendedorRegistrados(){
          LabelBienvenido.setVisible(false);
