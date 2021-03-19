@@ -5,15 +5,27 @@
  */
 package vista;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import modelo.Conexion;
 
 /**
  *
  * @author Juan
  */
 public class Administracion {
-   private int porcentajeTraba;
-   private String usuario = "administrador";
+   private static int porcentajeTraba;
+   private static int descuento;
+
+    public static int getDescuento() {
+        return descuento;
+    }
+
+    public static void setDescuento(int descuento) {
+        Administracion.descuento = descuento;
+    }
 
    public Administracion(){
        
@@ -31,7 +43,23 @@ public class Administracion {
     public void setPorcentajeTraba(int porcentajeTraba) {
         this.porcentajeTraba = porcentajeTraba;
     }
-    public String getUsuario() {
-        return usuario;
+  public void Cambiarcomision(){
+      try{
+          Vendedor v = new Vendedor();
+          porcentajeTraba = v.getComision() + 5000;
+         String SQL = "UPDATE \"Vendedores\"\n" +
+"				 SET \"Comision\" = ?\n" +
+"				 WHERE \"ID\" = '" + v.getID().trim() +"'";
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        v.setComision(porcentajeTraba);
+        PreparedStatement ps= con.prepareStatement(SQL);
+        ps.setInt(1,porcentajeTraba);
+        ps.executeUpdate();
+        
+       // ResultSet rs= ps.executeQuery();
+       } catch(SQLException ex){
+       JOptionPane.showMessageDialog(null, ex);
     }
+  } 
 }

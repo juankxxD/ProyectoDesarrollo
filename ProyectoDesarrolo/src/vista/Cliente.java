@@ -22,9 +22,45 @@ public class Cliente {
     private static String ID;
     private static String Nombre;
     private static String Apellido;
-    private static String Telefono;
-    private static String direccion;
     private static int puntos;
+    private  String Telefono;
+    private  String direccion;
+    private  int puntosC;
+    private String NombreC;
+    private String ApellidoC;
+    private String IDC;
+
+    public int getPuntosC() {
+        return puntosC;
+    }
+
+    public void setPuntosC(int puntosC) {
+        this.puntosC = puntosC;
+    }
+
+    public String getIDC() {
+        return IDC;
+    }
+
+    public void setIDC(String IDC) {
+        this.IDC = IDC;
+    }
+
+    public String getNombreC() {
+        return NombreC;
+    }
+
+    public void setNombreC(String aver) {
+        this.NombreC = aver;
+    }
+
+    public String getApellidoC() {
+        return ApellidoC;
+    }
+
+    public void setApellidoC(String ApellidoC) {
+        this.ApellidoC = ApellidoC;
+    }
 
     public String getDireccion() {
         return direccion;
@@ -56,9 +92,13 @@ public class Cliente {
 
     public Cliente(String ID, String Nombre, String Apellido, String Telefono,String direccion, int puntos) {
         this.ID = ID;
+        this.IDC=ID;
         this.Nombre = Nombre;
+        this.NombreC= Nombre;
+        this.ApellidoC=Apellido;
         this.Apellido = Apellido;
         this.Telefono = Telefono;
+        this.puntosC = puntos;
         this.puntos = puntos;
         this.direccion = direccion;
     }
@@ -120,7 +160,65 @@ public class Cliente {
         }
         return obs;
     }
-
+    
+    public ObservableList<Cliente> getConsultar(){
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            Vendedor v = new Vendedor();
+            String sql = "SELECT p1.\"ID\", p1.\"Nombre\", p1.\"Apellido\", p1.\"Telefono\", p1.\"direccion\", p2.\"puntos\"\n" +
+"            FROM \"Usuario\" p1, \"clientes\" p2, \"Clientes_Registrados\" P3\n" +
+"             WHERE p1.\"ID\"=p2.\"ID\" AND p2.\"ID\" = P3.\"ID_C\" AND P3.\"ID_V\" = '" + v.getID() +"'";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID =rs.getString("ID");
+                String nombre= rs.getString("Nombre");
+                String Apellido= rs.getString("Apellido");
+                String Telefono= rs.getString("Telefono");
+                String direccion= rs.getString("direccion");
+                int puntos= rs.getInt("puntos");
+                
+                Cliente c = new Cliente(ID, nombre,Apellido, Telefono, direccion, puntos);
+                obs.add(c);
+            }
+            
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+    
+    public ObservableList<Cliente> getActualizar(){
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            Vendedor v = new Vendedor();
+            String sql = "SELECT p1.\"ID\", p1.\"Nombre\", p1.\"Apellido\", p1.\"Telefono\", p1.\"direccion\", p2.\"puntos\"\n" +
+"            FROM \"Usuario\" p1, \"clientes\" p2\n" +
+"             WHERE p1.\"ID\"=p2.\"ID\" AND p2.estado='SI'";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID =rs.getString("ID");
+                String nombre= rs.getString("Nombre");
+                String Apellido= rs.getString("Apellido");
+                String Telefono= rs.getString("Telefono");
+                String direccion= rs.getString("direccion");
+                int puntos= rs.getInt("puntos");
+                
+                Cliente c = new Cliente(ID, nombre,Apellido, Telefono, direccion, puntos);
+                obs.add(c);
+            }
+            
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+    
     public Cliente() {
     }
 }

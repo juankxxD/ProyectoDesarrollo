@@ -65,7 +65,8 @@ public class RegistrarController implements Initializable {
     
     public void regresarAPrincipal()
     {
-        programaPrincipal.initRootLayout();
+        Usuarios u = new Usuarios();
+        programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
     }
     
     }

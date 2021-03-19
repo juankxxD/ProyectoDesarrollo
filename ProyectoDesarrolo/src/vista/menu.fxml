@@ -5,8 +5,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -24,7 +26,7 @@
                 </Menu>
                 <Menu fx:id="MenuAdm" mnemonicParsing="false" text="Administracion">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem fx:id="ConsulPro" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" />
                   </items>
                 </Menu>
                 <Menu fx:id="MenuVentas" mnemonicParsing="false" text="Ventas">
@@ -39,7 +41,7 @@
                   </Menu>
               </menus>
             </MenuBar>
-            <Label fx:id="Perfil" layoutX="432.0" layoutY="79.0" text="Usuario" />
+            <Label fx:id="Perfil" layoutX="432.0" layoutY="79.0" text="Usuario" visible="false" />
             <TableView fx:id="Tabla" layoutY="26.0" onSort="#consultarUsuarios" prefHeight="375.0" prefWidth="448.0" visible="false">
               <columns>
                 <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
@@ -50,21 +52,35 @@
                   <TableColumn fx:id="ColumPunt" prefWidth="75.0" text="Puntos" />
               </columns>
             </TableView>
-            <TableView fx:id="TablaPro" layoutY="26.0" prefHeight="328.0" prefWidth="447.0" visible="false">
-              <columns>
-                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" visible="false" />
-                <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha vencimiento" />
-                  <TableColumn fx:id="ProVa" prefWidth="130.0" text="Valor sin descuento" />
-                  <TableColumn fx:id="ProDes" prefWidth="91.0" text="Valor con descuento" />
-              </columns>
-            </TableView>
-            <Button fx:id="BtnRegistrar" layoutX="467.0" layoutY="180.0" mnemonicParsing="false" onAction="#abrirOtraVentana" text="Registrar usuario" />
-            <Label fx:id="LabelBienvenido" layoutX="25.0" layoutY="367.0" text="Label">
+            <Button fx:id="BtnRegistrar" layoutX="467.0" layoutY="180.0" mnemonicParsing="false" onAction="#abrirOtraVentana" text="Registrar usuario" visible="false" />
+            <Label fx:id="LabelBienvenido" layoutX="25.0" layoutY="367.0" text="Label" visible="false">
                <font>
                   <Font name="Algerian" size="18.0" />
                </font>
             </Label>
+            <Button fx:id="agregarpro" layoutX="70.0" layoutY="178.0" mnemonicParsing="false" onAction="#AgregarPro" text="Agregar Productos" visible="false" />
+            <TableView fx:id="TablaPro" layoutX="-2.0" layoutY="25.0" onSort="#consultarProductos" prefHeight="360.0" prefWidth="453.0" visible="false">
+              <columns>
+                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha_venci" />
+                  <TableColumn fx:id="ProVa" prefWidth="75.0" text="Valor" />
+                  <TableColumn fx:id="ProDes" prefWidth="75.0" text="Descuento" />
+                  <TableColumn fx:id="columCantidad" prefWidth="75.0" text="Cantidad" />
+              </columns>
+            </TableView>
+            <Button fx:id="ActualizarClien" layoutX="422.0" layoutY="247.0" mnemonicParsing="false" onAction="#autorizarActualizar" text="Actualizar Datos" visible="false" />
+            <Button fx:id="ConsultarVendedor" layoutX="91.0" layoutY="247.0" mnemonicParsing="false" onAction="#consultar" text="Consultar Clientes" visible="false" />
+            <SplitMenuButton fx:id="SplitBtn" layoutX="467.0" layoutY="25.0" mnemonicParsing="false" text="Opciones" visible="false">
+              <items>
+                <MenuItem fx:id="ClientesDeyo" mnemonicParsing="false" onAction="#consultarDeVendedorRegistrados" text="Clientes que he registrado" />
+                  <MenuItem fx:id="TodosClientes" mnemonicParsing="false" onAction="#consultarUsuarios" text="Todos los clientes" />
+                <MenuItem fx:id="ActualizarClientes" mnemonicParsing="false" onAction="#ConsultarActualizar" text="Clientes para actualizar" />
+              </items>
+            </SplitMenuButton>
+            <Label fx:id="txtCodigo" layoutX="510.0" layoutY="119.0" text="Codigo" />
+            <TextField fx:id="txtConsultar" layoutX="480.0" layoutY="153.0" prefHeight="25.0" prefWidth="99.0" />
+            <Button fx:id="btnConsultarCliente" layoutX="496.0" layoutY="201.0" mnemonicParsing="false" text="Consultar" />
          </children>
       </AnchorPane>
    </center>

@@ -22,10 +22,11 @@ public class Vendedor {
     private static String Apellido;
     private static String Telefono;
     private static String direccion;
-    private int Numero_Clientes;
-    private int Salario;
+    private static int Numero_Clientes;
+    private static int Salario;
+    private static int comision;
 
-    public Vendedor(String ID, String Nombre, String Apellido, String Telefono, String direccion, int Numero_Clientes, int salario) {
+    public Vendedor(String ID, String Nombre, String Apellido, String Telefono, String direccion, int Numero_Clientes, int salario, int comision) {
         this.ID = ID;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -33,9 +34,18 @@ public class Vendedor {
         this.direccion = direccion;
         this.Numero_Clientes = Numero_Clientes;
         this.Salario = salario;
+        this.comision = comision;
     }
     public Vendedor(){
         
+    }
+
+    public static int getComision() {
+        return comision;
+    }
+
+    public static void setComision(int comision) {
+        Vendedor.comision = comision;
     }
 
     public int getSalario() {
@@ -54,7 +64,7 @@ public class Vendedor {
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
         
-        PreparedStatement ps= con.prepareStatement(" SELECT p1.\"ID\", p1.\"Nombre\", p1.\"Apellido\", p1.\"Telefono\", p1.\"direccion\", p3.\"Tota_clientes\", p3.\"Salario\"\n" +
+        PreparedStatement ps= con.prepareStatement(" SELECT p1.\"ID\", p1.\"Nombre\", p1.\"Apellido\", p1.\"Telefono\", p1.\"direccion\", p3.\"Tota_clientes\", p3.\"Salario\", p3.\"Comision\"\n" +
 "             FROM \"Usuario\" p1, \"Vendedores\" p3\n" +
 "             WHERE p1.\"ID\"='" + ID + "' AND p1.\"ID\"=p3.\"ID\"");
         ResultSet rs= ps.executeQuery();
@@ -66,11 +76,10 @@ public class Vendedor {
              String direccion = rs.getString("direccion");
              int total_Clientes = rs.getInt("Tota_clientes");
              int Salario = rs.getInt("Salario");
-             System.out.println(Nombre);
-             Vendedor v = new Vendedor(ID, Nombre, Apellido, Telefono, direccion, total_Clientes, Salario);
-             System.out.println(this.Apellido);
-            // MenuController m = new MenuController();
-             //m.recibirDatos(ID, Nombre, Apellido);
+             int comision = rs.getInt("Comision");
+             System.out.println(total_Clientes);
+             Vendedor v = new Vendedor(ID, Nombre, Apellido, Telefono, direccion, total_Clientes, Salario, comision);
+             
         }
         } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);
@@ -124,7 +133,9 @@ public class Vendedor {
         this.Numero_Clientes = Numero_Clientes;
     }
     public void AumentarNumeroClientes(){
-        String SQL = "update Vendedores set Tota_clientes = ? where ID = '" + ID + "'" ;
+        String SQL = "UPDATE \"Vendedores\"\n" +
+"				 SET \"Tota_clientes\" = ?\n" +
+"				 WHERE \"ID\" = '" + ID +"'" ;
         try{
            
         int Numero = Numero_Clientes + 1;
@@ -133,6 +144,12 @@ public class Vendedor {
         
         PreparedStatement ps= con.prepareStatement(SQL);
         ps.setInt(1,Numero);
+            System.out.println(Numero_Clientes);
+        Numero_Clientes = Numero;
+        Administracion a = new Administracion();
+        a.Cambiarcomision();
+        ps.executeUpdate();
+        
        // ResultSet rs= ps.executeQuery();
        } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);

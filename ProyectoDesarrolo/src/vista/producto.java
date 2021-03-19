@@ -5,16 +5,46 @@
  */
 package vista;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import modelo.Conexion;
+
 /**
  *
  * @author Daniela
  */
 public class producto {
-    private String Nombre;
-    private String  codigo;
-    private int valor;
-    private int ValorDescuento;
-    private String FechaVencimiento;
+    private  String Nombre;
+    private  String  codigo;
+    private  int valor;
+    private  int ValorDescuento;
+    private  LocalDate FechaVencimiento;
+    private  int cantidad;
+
+    public  int getCantidad() {
+        return cantidad;
+    }
+
+    public  void setCantidad(int cantidad) {
+        cantidad = cantidad;
+    }
+
+    public producto() {
+         
+    }
+
+    public LocalDate getFechaVencimiento() {
+        return FechaVencimiento;
+    }
+
+    public void setFechaVencimiento(LocalDate FechaVencimiento) {
+        this.FechaVencimiento = FechaVencimiento;
+    }
 
     public String getNombre() {
         return Nombre;
@@ -48,20 +78,41 @@ public class producto {
         this.ValorDescuento = ValorDescuento;
     }
 
-    public String getFechaVencimiento() {
-        return FechaVencimiento;
-    }
+   
 
-    public void setFechaVencimiento(String FechaVencimiento) {
-        this.FechaVencimiento = FechaVencimiento;
-    }
-
-    public producto(String Nombre, String codigo, int valor, int ValorDescuento, String FechaVencimiento) {
+    public producto(String codigo, String Nombre, LocalDate Fecha_Ven, int Valor, int ValorDescuento, int cantidad) {
         this.Nombre = Nombre;
         this.codigo = codigo;
-        this.valor = valor;
+        this.valor = Valor;
         this.ValorDescuento = ValorDescuento;
-        this.FechaVencimiento = FechaVencimiento;
+        this.FechaVencimiento = Fecha_Ven;
+        this.cantidad = cantidad;
     }
             
+    public ObservableList<producto> getProducto(){
+        ObservableList<producto> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n" +
+"				 FROM \"Productos\"";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String codigo =rs.getString("codigo");
+                String Nombre= rs.getString("Nombre");
+                LocalDate Fecha_Ven= rs.getDate("Fecha_Ven").toLocalDate();
+                int Valor= rs.getInt("Valor");
+                int valor_Descuento= rs.getInt("valor_Descuento");
+                int cantidad= rs.getInt("cantidad");
+                
+                producto p = new producto(codigo, Nombre,Fecha_Ven, Valor, valor_Descuento, cantidad);
+                obs.add(p);
+                
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
 }

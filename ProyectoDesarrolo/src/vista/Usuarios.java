@@ -203,8 +203,9 @@ public class Usuarios {
         PreparedStatement ps= con.prepareStatement(sql);
         ps.setString(1, v.getID());
         ps.setString(2, ID);
-        ps.executeUpdate();
         v.AumentarNumeroClientes();
+        ps.executeUpdate();
+        
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, e);
        }

@@ -120,7 +120,51 @@ public class principal extends Application{
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+     public void AgregarP()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/AgregarProductos.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Agregar Producto");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            AgregarProductosController productos= loader.getController();
+            
+            productos.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public void Notificar()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/NotificarVendedor.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Agregar Producto");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            NotificarVendedorController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void main(String[] args)
     {
         launch(args); 
