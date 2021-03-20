@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.swing.JOptionPane;
 import modelo.Conexion;
 
 /**
@@ -114,5 +115,42 @@ public class producto {
             System.err.println(e.toString());
         }
         return obs;
+    }
+    public void seleccion(String ID, String Cantidad){
+        String SQL = "SELECT p4.\"cantidad\"\n" +
+"				 FROM \"Productos\" p4\n" +
+"				 WHERE p4.codigo='"+ ID +"'";
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            PreparedStatement ps= con.prepareStatement(SQL);
+            ResultSet rs= ps.executeQuery();
+            int cantidad = 0;
+            while(rs.next()){
+                cantidad =rs.getInt("cantidad");
+                }
+            
+            cantidad += Integer.parseInt(Cantidad);
+            aumentar(ID, cantidad);
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+    }
+    public void aumentar(String ID, int Cantidad){
+        String SQL="UPDATE \"Productos\"\n" +
+"				 SET \"cantidad\" = ?\n" +
+"				 WHERE \"codigo\" = '" + ID +"'";
+        try{
+        int cantidad = Cantidad;
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        
+        PreparedStatement ps= con.prepareStatement(SQL);
+        ps.setInt(1,cantidad);
+       
+        ps.executeUpdate();
+       } catch(SQLException ex){
+       JOptionPane.showMessageDialog(null, ex);
+    }
     }
 }

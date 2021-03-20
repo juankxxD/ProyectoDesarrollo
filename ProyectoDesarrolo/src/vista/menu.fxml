@@ -71,7 +71,7 @@
             </TableView>
             <Button fx:id="ActualizarClien" layoutX="422.0" layoutY="247.0" mnemonicParsing="false" onAction="#autorizarActualizar" text="Actualizar Datos" visible="false" />
             <Button fx:id="ConsultarVendedor" layoutX="91.0" layoutY="247.0" mnemonicParsing="false" onAction="#consultar" text="Consultar Clientes" visible="false" />
-            <SplitMenuButton fx:id="SplitBtn" layoutX="467.0" layoutY="25.0" mnemonicParsing="false" text="Opciones" visible="false">
+            <SplitMenuButton fx:id="SplitBtn" layoutX="475.0" layoutY="44.0" mnemonicParsing="false" text="Opciones" visible="false">
               <items>
                 <MenuItem fx:id="ClientesDeyo" mnemonicParsing="false" onAction="#consultarDeVendedorRegistrados" text="Clientes que he registrado" />
                   <MenuItem fx:id="TodosClientes" mnemonicParsing="false" onAction="#consultarUsuarios" text="Todos los clientes" />
@@ -81,7 +81,23 @@
             <Label fx:id="txtCodigo" layoutX="510.0" layoutY="119.0" text="Codigo" visible="false" />
             <TextField fx:id="txtConsultar" layoutX="480.0" layoutY="153.0" prefHeight="25.0" prefWidth="99.0" visible="false" />
             <Button fx:id="btnConsultarCliente" layoutX="496.0" layoutY="201.0" mnemonicParsing="false" onAction="#ActualizarDatos" text="Consultar" visible="false" />
-            <Button fx:id="btnConsultarProductosC" layoutX="124.0" layoutY="253.0" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" />
+            <Button fx:id="btnConsultarProductosC" layoutX="124.0" layoutY="253.0" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" visible="false" />
+            <Button fx:id="BtnVolver" layoutX="523.0" layoutY="355.0" mnemonicParsing="false" onAction="#volver" text="Volver" visible="false" />
+            <MenuBar layoutX="497.0" layoutY="2.0">
+              <menus>
+                <Menu fx:id="CerrarSesion" mnemonicParsing="false" onAction="#CerrarSesion" text="Cerrar Sesion">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Salir" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label fx:id="LabelCodigo" layoutX="516.0" layoutY="71.0" text="Codigo" visible="false" />
+            <Label fx:id="labelCantidad" layoutX="499.0" layoutY="157.0" text="Cantidad a agregar" visible="false" />
+            <TextField fx:id="txtCodigoPro" layoutX="502.0" layoutY="96.0" prefHeight="25.0" prefWidth="89.0" visible="false" />
+            <TextField fx:id="txtCantidadPro" layoutX="500.0" layoutY="180.0" prefHeight="25.0" prefWidth="89.0" visible="false" />
+            <Button fx:id="Aumentar" layoutX="519.0" layoutY="226.0" mnemonicParsing="false" onAction="#aumentar" text="Aumentar" visible="false" />
+            <Button fx:id="BtnConsultarVende" layoutX="400.0" layoutY="191.0" mnemonicParsing="false" onAction="#vendedores" text="Consultar Vendedores" />
          </children>
       </AnchorPane>
    </center>

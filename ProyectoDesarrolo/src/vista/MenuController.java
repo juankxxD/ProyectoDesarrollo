@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -120,6 +121,22 @@ public class MenuController implements Initializable {
     private Button btnConsultarCliente;
     @FXML
     private Button btnConsultarProductosC;
+    @FXML
+    private Button BtnVolver;
+    @FXML
+    private Menu CerrarSesion;
+    @FXML
+    private TextField txtCodigoPro;
+    @FXML
+    private TextField txtCantidadPro;
+    @FXML
+    private Label LabelCodigo;
+    @FXML
+    private Label labelCantidad;
+    @FXML
+    private Button Aumentar;
+    @FXML
+    private Button BtnConsultarVende;
     
     //private TableView<Productos> TablaPro;
 
@@ -162,6 +179,13 @@ public class MenuController implements Initializable {
         txtConsultar.setVisible(false);
         txtCodigo.setVisible(false);
         btnConsultarProductosC.setVisible(false);
+        BtnVolver.setVisible(false);
+        txtCodigoPro.setVisible(false);
+        txtCantidadPro.setVisible(false);    
+        LabelCodigo.setVisible(false);
+        labelCantidad.setVisible(false);
+        Aumentar.setVisible(false);
+        BtnConsultarVende.setVisible(false);
         if(u.getTipoUsuario().equals("1")){
             MenuBar.setVisible(true);
             Perfil.setText("Administrador");
@@ -169,6 +193,7 @@ public class MenuController implements Initializable {
             String aver =u.getNombre() + " " + u.getApellido();
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(true);
+            BtnConsultarVende.setVisible(true);
         }else if(u.getTipoUsuario().equals("2")){
             Perfil.setText("vendedor");
             Perfil.setVisible(true);
@@ -194,14 +219,19 @@ public class MenuController implements Initializable {
     public void autorizarActualizar(){
             programaPrincipal.Notificar();
         }
-    
+    @FXML
+    public void volver(){
+        iniciar();
+    }
     
     @FXML
     public void consultarUsuarios() throws SQLException{
         LabelBienvenido.setVisible(false);
+        BtnConsultarVende.setVisible(false);
         Perfil.setVisible(false);
         Tabla.setVisible(true);
         agregarpro.setVisible(false);
+        BtnVolver.setVisible(true);
         this.ColumDocu.setCellValueFactory(new PropertyValueFactory("IDC"));
         this.ColumNombre.setCellValueFactory(new PropertyValueFactory("NombreC"));
         this.ColumApe.setCellValueFactory(new PropertyValueFactory("ApellidoC"));
@@ -216,6 +246,15 @@ public class MenuController implements Initializable {
                 
         @FXML
     public void consultarProductos() throws SQLException{
+        Usuarios u = new Usuarios();
+        if(u.getTipoUsuario().equals("1")){
+        txtCodigoPro.setVisible(true);
+        txtCantidadPro.setVisible(true);    
+        LabelCodigo.setVisible(true);
+        labelCantidad.setVisible(true);
+        Aumentar.setVisible(true);
+        }
+        BtnConsultarVende.setVisible(false);
         ActualizarClien.setVisible(false);
         btnConsultarProductosC.setVisible(false);
         LabelBienvenido.setVisible(false);
@@ -229,7 +268,7 @@ public class MenuController implements Initializable {
         this.ProVa.setCellValueFactory(new PropertyValueFactory("valor"));
         this.ProDes.setCellValueFactory(new PropertyValueFactory("ValorDescuento"));
        this.columCantidad.setCellValueFactory(new PropertyValueFactory("cantidad"));
-        
+        BtnVolver.setVisible(true);
         producto p = new producto();
         ObservableList<producto> item = p.getProducto();
         this.TablaPro.setItems(item);
@@ -255,6 +294,8 @@ public class MenuController implements Initializable {
         btnConsultarCliente.setVisible(true);
         txtConsultar.setVisible(true);
         txtCodigo.setVisible(true);
+        BtnVolver.setVisible(true);
+        BtnConsultarVende.setVisible(false);
     }
     @FXML             
     public void ActualizarDatos(){
@@ -265,7 +306,7 @@ public class MenuController implements Initializable {
     @FXML
     public void consultarDeVendedorRegistrados(){
          LabelBienvenido.setVisible(false);
-         
+         BtnConsultarVende.setVisible(false);
          ConsultarVendedor.setVisible(false);
         Perfil.setVisible(false);
         Tabla.setVisible(true);
@@ -278,13 +319,13 @@ public class MenuController implements Initializable {
        Cliente c = new Cliente();
         ObservableList<Cliente> item = c.getConsultar();
         this.Tabla.setItems(item);
-        
+        BtnVolver.setVisible(true);
     }
     
     @FXML
     public void ConsultarActualizar(){
          LabelBienvenido.setVisible(false);
-         
+         BtnConsultarVende.setVisible(false);
          ConsultarVendedor.setVisible(false);
         Perfil.setVisible(false);
         Tabla.setVisible(true);
@@ -297,6 +338,24 @@ public class MenuController implements Initializable {
        Cliente c = new Cliente();
         ObservableList<Cliente> item = c.getActualizar();
         this.Tabla.setItems(item);
-        
+        BtnVolver.setVisible(true);
+    }
+
+    @FXML
+    private void CerrarSesion(ActionEvent event) {
+        Cliente c = new Cliente("","","","","", 0);
+        Vendedor v = new Vendedor("","","","","",0,0,0);
+        Usuarios u = new Usuarios("","","","","", "");
+        u.setTipoUsuario("");
+        programaPrincipal.initRootLayout();
+    }
+    @FXML
+    public void aumentar(){
+        producto p = new producto();
+        p.seleccion(txtCodigoPro.getText(),txtCantidadPro.getText());       
+    }
+    
+    public void vendedores(){
+        programaPrincipal.Vendedores();
     }
 }

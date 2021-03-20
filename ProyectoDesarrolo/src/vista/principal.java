@@ -188,6 +188,29 @@ public class principal extends Application{
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     
+     public void Vendedores()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/Vendedores.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Consultar");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            VendedoresController clase= loader.getController();
+            
+            clase.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void main(String[] args)
     {
         launch(args); 

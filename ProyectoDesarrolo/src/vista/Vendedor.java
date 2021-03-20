@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -23,11 +25,53 @@ public class Vendedor {
     private static String Telefono;
     private static String direccion;
     private static int Numero_Clientes;
+    private String NombreC;
     private static int Salario;
     private static int comision;
+    private String IDC;
+    
+    private String ClientesRegistrados;
+    private int NumeroClientes;
 
+    public String getIDC() {
+        return IDC;
+    }
+
+    public void setIDC(String IDC) {
+        this.IDC = IDC;
+    }
+
+    public String getClientesRegistrados() {
+        return ClientesRegistrados;
+    }
+
+    public void setClientesRegistrados(String ClientesRegistrados) {
+        this.ClientesRegistrados = ClientesRegistrados;
+    }
+
+    public int getNumeroClientes() {
+        return NumeroClientes;
+    }
+
+    public void setNumeroClientes(int NumeroClientes) {
+        this.NumeroClientes = NumeroClientes;
+    }
+     public Vendedor(String Nombrer, int Numero_Clientes){
+         this.NombreC = Nombrer;
+         this.NumeroClientes = Numero_Clientes;
+         
+     }
+
+    public String getNombreC() {
+        return NombreC;
+    }
+
+    public void setNombreC(String NombreC) {
+        this.NombreC = NombreC;
+    }
     public Vendedor(String ID, String Nombre, String Apellido, String Telefono, String direccion, int Numero_Clientes, int salario, int comision) {
         this.ID = ID;
+        this.IDC = ID;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Telefono = Telefono;
@@ -154,5 +198,30 @@ public class Vendedor {
        } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);
     }
+    }
+    
+    public ObservableList<Vendedor> getVendedor(){
+        ObservableList<Vendedor> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT P4.\"Nombre\", COUNT(P2.\"ID_C\")\n" +
+"				 FROM \"Vendedores\" P1, \"Clientes_Registrados\" P2, \"Usuario\" P4\n" +
+"				 WHERE P2.\"ID_V\" = P1.\"ID\" AND P2.\"ID_V\"=P4.\"ID\"\n" +
+"				 GROUP BY  P4.\"Nombre\"";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String Nombrer =rs.getString("Nombre");
+                int ClientesR= rs.getInt("count");
+                System.out.println(Nombrer);
+                Vendedor v = new Vendedor(Nombrer, ClientesR);
+                obs.add(v);
+                
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
     }
 }
