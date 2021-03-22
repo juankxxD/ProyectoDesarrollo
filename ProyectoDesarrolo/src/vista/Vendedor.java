@@ -29,9 +29,47 @@ public class Vendedor {
     private static int Salario;
     private static int comision;
     private String IDC;
-    
+    private String ApellidoC;
+    private String nombreCliente;
     private String ClientesRegistrados;
     private int NumeroClientes;
+    private int salarioC;
+
+    public Vendedor(String NombreC, String nombreCliente, String ApellidoC) {
+        this.NombreC = NombreC;
+        this.ApellidoC = ApellidoC;
+        this.nombreCliente = nombreCliente;
+    }
+    public Vendedor(String ID, String Nombre, int salario, String aver){
+        this.IDC = ID;
+         this.NombreC = Nombre;
+        this.salarioC = salario;
+    }
+
+    public int getSalarioC() {
+        return salarioC;
+    }
+
+    public void setSalarioC(int salarioC) {
+        this.salarioC = salarioC;
+    }
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getApellidoC() {
+        return ApellidoC;
+    }
+
+    public void setApellidoC(String ApellidoC) {
+        this.ApellidoC = ApellidoC;
+    }
+    
+    
 
     public String getIDC() {
         return IDC;
@@ -56,11 +94,12 @@ public class Vendedor {
     public void setNumeroClientes(int NumeroClientes) {
         this.NumeroClientes = NumeroClientes;
     }
-     public Vendedor(String Nombrer, int Numero_Clientes){
+     public Vendedor(String ID, String Nombrer, int Numero_Clientes){
+         this.IDC = ID;
          this.NombreC = Nombrer;
-         this.NumeroClientes = Numero_Clientes;
-         
+         this.NumeroClientes = Numero_Clientes;  
      }
+     
 
     public String getNombreC() {
         return NombreC;
@@ -205,17 +244,46 @@ public class Vendedor {
         try{
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
-            String sql = "SELECT P4.\"Nombre\", COUNT(P2.\"ID_C\")\n" +
+            String sql = "SELECT P4.\"ID\",P4.\"Nombre\", COUNT(P2.\"ID_C\")\n" +
 "				 FROM \"Vendedores\" P1, \"Clientes_Registrados\" P2, \"Usuario\" P4\n" +
 "				 WHERE P2.\"ID_V\" = P1.\"ID\" AND P2.\"ID_V\"=P4.\"ID\"\n" +
-"				 GROUP BY  P4.\"Nombre\"";
+"				 GROUP BY  P4.\"ID\",P4.\"Nombre\"";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID = rs.getString("ID");
+                String Nombrer =rs.getString("Nombre");
+                int ClientesR= rs.getInt("count");
+                System.out.println(Nombrer);
+                Vendedor v = new Vendedor(ID, Nombrer, ClientesR);
+                obs.add(v);
+                
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+    
+    public ObservableList<Vendedor> getregistradosV(){
+        ObservableList<Vendedor> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT P4.\"Nombre\" , P5.\"Nombre\" AS NombreC, P5.\"Apellido\"\n" +
+"				FROM \"Vendedores\" P1, \"Clientes_Registrados\" P2, \"Usuario\" P4, \"Usuario\" P5\n" +
+"				where P2.\"ID_V\" = P1.\"ID\" AND P5.\"ID\"=P2.\"ID_C\" AND P2.\"ID_V\"=P4.\"ID\" AND P5.\"ID\" IN \n" +
+"				(SELECT P5.\"ID\"\n" +
+"				FROM \"Usuario\" P5, \"Clientes_Registrados\" P6\n" +
+"				WHERE P5.\"ID\" = P6.\"ID_C\")\n" +
+"				GROUP BY P4.\"Nombre\", P5.\"Nombre\" , P5.\"Apellido\"";
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 String Nombrer =rs.getString("Nombre");
-                int ClientesR= rs.getInt("count");
-                System.out.println(Nombrer);
-                Vendedor v = new Vendedor(Nombrer, ClientesR);
+                String ClientesR= rs.getString("nombreC");
+                String Apellido= rs.getString("Apellido");
+                Vendedor v = new Vendedor(Nombrer, ClientesR, Apellido);
                 obs.add(v);
                 
             }
