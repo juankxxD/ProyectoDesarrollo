@@ -136,6 +136,25 @@ public class producto {
             System.err.println(e.toString());
         }
     }
+    public void CambiarDescuento(String id){
+        String cambiar = JOptionPane.showInputDialog(null, "Valor a ingresar", "Cambiar descuento");
+        String SQL = "UPDATE \"Productos\"\n" +
+"				SET \"valor_Descuento\" = ?\n" +
+"				WHERE \"codigo\" = '" + id +"'";
+        try{
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        
+        PreparedStatement ps= con.prepareStatement(SQL);
+        ps.setInt(1,Integer.parseInt(cambiar));
+       
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Cambio de descuento exitoso");
+       } catch(SQLException ex){
+       JOptionPane.showMessageDialog(null, ex);
+    }
+    }
+    
     public void aumentar(String ID, int Cantidad){
         String SQL="UPDATE \"Productos\"\n" +
 "				 SET \"cantidad\" = ?\n" +
@@ -149,6 +168,7 @@ public class producto {
         ps.setInt(1,cantidad);
        
         ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Ha aumentado el producto exitosamente");
        } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);
     }

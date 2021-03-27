@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -61,6 +62,10 @@ public class VendedoresController implements Initializable {
     private Label LabelSalario;
     @FXML
     private TableColumn<Vendedor, String> ColumID;
+    @FXML
+    private Button Volverbtn;
+    @FXML
+    private Button btnCambiarComision;
 
     /**
      * Initializes the controller class.
@@ -83,11 +88,17 @@ public class VendedoresController implements Initializable {
     }
     @FXML
     public void CantidadClientes(){
-        
+        btnCambiarComision.setVisible(false);
+        labelNombre.setVisible(true);
+        LabelSalario.setVisible(true);
+        txtNombre.setVisible(true);
+        txtSalario.setVisible(true);     
+        Volverbtn.setVisible(true);
         BtnNumeroClientes.setVisible(false);
         BtnClientes.setVisible(false);
         Tablacantidad.setVisible(true);
         TablaClient.setVisible(false);
+        
         this.ColumID.setCellValueFactory(new PropertyValueFactory("IDC"));
         this.ColumNombrev.setCellValueFactory(new PropertyValueFactory("NombreC"));
         this.ColumCantidad.setCellValueFactory(new PropertyValueFactory("NumeroClientes"));
@@ -99,7 +110,12 @@ public class VendedoresController implements Initializable {
     
     @FXML
     public void ClientesRegis(){
-    
+        btnCambiarComision.setVisible(false);
+        labelNombre.setVisible(false);
+        LabelSalario.setVisible(false);
+        txtNombre.setVisible(false);
+        txtSalario.setVisible(false);
+        Volverbtn.setVisible(true);
         BtnNumeroClientes.setVisible(false);
         BtnClientes.setVisible(false);
         Tablacantidad.setVisible(false);
@@ -146,7 +162,7 @@ public class VendedoresController implements Initializable {
     public int completar(String ID){
         int Salario = 0;
         try{
-            System.out.println(ID);
+            //System.out.println(ID);
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
         String SQL = "SELECT P1.\"ID\", p8.Clientes_Registrados*P1.\"Comision\" AS salario\n" +
@@ -159,10 +175,9 @@ public class VendedoresController implements Initializable {
      
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
-                System.out.println("Aqui");
+               
                 String IDs =rs.getString("ID");
                 int salario= rs.getInt("salario");
-                System.out.println(salario);
                 Salario = salario;
                 
             }
@@ -170,5 +185,22 @@ public class VendedoresController implements Initializable {
             System.err.println(e.toString());
         }
         return Salario;
+    }
+    @FXML
+    public void volver(){
+        labelNombre.setVisible(false);
+        LabelSalario.setVisible(false);
+        txtNombre.setVisible(false);
+        txtSalario.setVisible(false);
+        Volverbtn.setVisible(false);
+        BtnNumeroClientes.setVisible(true);
+        BtnClientes.setVisible(true);
+        Tablacantidad.setVisible(false);
+        TablaClient.setVisible(false);
+    }
+
+    @FXML
+    private void CambiarComision(ActionEvent event) {
+        programaPrincipal.Comision();
     }
 }

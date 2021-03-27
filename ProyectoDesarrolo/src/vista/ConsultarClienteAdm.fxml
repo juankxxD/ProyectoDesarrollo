@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ConsultarClienteAdmController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+               <right>
+                  <Pane prefHeight="367.0" prefWidth="152.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="salir" layoutX="69.0" layoutY="322.0" mnemonicParsing="false" onAction="#salir" text="Button" />
+                        <SplitMenuButton fx:id="btnOpciones1" layoutX="31.0" layoutY="21.0" mnemonicParsing="false" text="Opciones">
+                          <items>
+                            <MenuItem fx:id="btnTodos" mnemonicParsing="false" onAction="#consultarUsuarios" text="Consultar Usuarios" />
+                            <MenuItem fx:id="btnEliminarU" mnemonicParsing="false" onAction="#EliminarUsuarios" text="Eliminar Usuarios" />
+                              <MenuItem fx:id="BonoRegalo" mnemonicParsing="false" onAction="#BonoRegalo1" text="Bono de regalo" />
+                          </items>
+                        </SplitMenuButton>
+                        <Label fx:id="LabelCodigo" layoutX="55.0" layoutY="80.0" text="codigo" visible="false" />
+                        <TextField fx:id="txtConsultar" layoutX="15.0" layoutY="97.0" prefHeight="25.0" prefWidth="114.0" visible="false" />
+                        <Button fx:id="btnEliminar" layoutX="48.0" layoutY="171.0" mnemonicParsing="false" onAction="#Eliminar" text="Eliminar" visible="false" />
+                        <Button fx:id="btnConsultar" layoutX="50.0" layoutY="171.0" mnemonicParsing="false" text="consultar" visible="false" />
+                        <Button fx:id="btnPuntos" layoutX="43.0" layoutY="159.0" mnemonicParsing="false" onAction="#Puntos" text="Consultar" visible="false" />
+                     </children>
+                  </Pane>
+               </right>
+               <center>
+                  <TableView fx:id="Tabla" prefHeight="367.0" prefWidth="424.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
+                      <TableColumn fx:id="ColumNombre" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="ColumApe" prefWidth="75.0" text="Apellido" />
+                        <TableColumn fx:id="ColumTel" prefWidth="75.0" text="Telefono" />
+                        <TableColumn fx:id="ColumDire" prefWidth="75.0" text="Direccion" />
+                        <TableColumn fx:id="ColumPunt" prefWidth="75.0" text="Puntos" />
+                    </columns>
+                  </TableView>
+               </center>
+               <top>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="156.0" text="Consulta de clientes" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </top>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

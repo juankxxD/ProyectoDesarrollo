@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
@@ -220,6 +222,97 @@ public class Cliente {
             System.err.println(e.toString());
         }
         return obs;
+    }
+    
+    public ObservableList<Cliente> getEliminar(){
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+        try{
+            Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int MES = fecha.get(Calendar.MONTH) + 1;
+            int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+            String fechaActual = año +"-" + MES + "-" + DIA;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT \"cod_cliente\", p2.\"Nombre\", p2.\"Apellido\", p2.\"Telefono\", p2.\"direccion\", p1.\"puntos\"\n" +
+"				from\n" +
+"				(SELECT (\"fecha_compra\" + 365) AS fecha, P10.\"cod_cliente\" AS IDP\n" +
+"				FROM \"ventas\" p10) AS pofavor, \"ventas\" p11, \"clientes\" p1, \"Usuario\" p2\n" +
+"				where fecha <= '" + fechaActual +"' AND p11.\"cod_cliente\" = \"idp\" AND p1.\"ID\" = p11.cod_cliente AND p2.\"ID\" = p11.cod_cliente";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID =rs.getString("cod_cliente");
+                String nombre= rs.getString("Nombre");
+                String Apellido= rs.getString("Apellido");
+                String Telefono= rs.getString("Telefono");
+                String direccion= rs.getString("direccion");
+                int puntos= rs.getInt("puntos");
+                System.out.println(ID);
+                Cliente c = new Cliente(ID, nombre,Apellido, Telefono, direccion, puntos);
+                obs.add(c);
+                
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+    public ObservableList<Cliente> getPuntos1(){
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            Vendedor v = new Vendedor();
+            String sql = "SELECT p1.\"ID\", p1.\"Nombre\", p1.\"Apellido\", p1.\"Telefono\", p1.\"direccion\", p2.\"puntos\"\n" +
+" 				FROM \"clientes\" p2, \"Usuario\" p1\n" +
+" 				WHERE p1.\"ID\" IN \n" +
+" 				(SELECT \"ID\"\n" +
+" 				FROM \"clientes\"\n" +
+" 				WHERE \"puntos\" >=100) AND p2.\"ID\" = p1.\"ID\"";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String ID =rs.getString("ID");
+                String nombre= rs.getString("Nombre");
+                String Apellido= rs.getString("Apellido");
+                String Telefono= rs.getString("Telefono");
+                String direccion= rs.getString("direccion");
+                int puntos= rs.getInt("puntos");
+                
+                Cliente c = new Cliente(ID, nombre,Apellido, Telefono, direccion, puntos);
+                obs.add(c);
+            }
+            
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+    public void Eliminar(String ID) throws SQLException{
+        Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+        String SQL = "DELETE FROM \"ventas\"\n" +
+" 				WHERE \"cod_cliente\" = '"+ ID +"'";
+        PreparedStatement ps= con.prepareStatement(SQL);
+        ps.executeUpdate();
+        String SQL1 = "DELETE FROM \"Clientes_Registrados\"\n" +
+" 				WHERE \"ID_C\" = '"+ ID +"'";
+        PreparedStatement ps1= con.prepareStatement(SQL1);
+        ps1.executeUpdate();
+        String SQL2 = "DELETE FROM \"Usuario_tipo\"\n" +
+" 				WHERE \"id_U\" = '"+ ID +"'";
+         PreparedStatement ps2= con.prepareStatement(SQL2);
+        ps2.executeUpdate();
+        String SQL3 = "DELETE FROM \"clientes\"\n" +
+" 				WHERE \"ID\" = '" + ID +"'";
+        PreparedStatement ps3= con.prepareStatement(SQL3);
+        ps3.executeUpdate();
+        String SQL4 = "DELETE FROM \"Usuario\"\n" +
+" 				WHERE \"ID\" = '" + ID +"'";
+        PreparedStatement ps4= con.prepareStatement(SQL4);
+        ps4.executeUpdate();      
+        JOptionPane.showMessageDialog(null, "Usuario Eliminado");
     }
     
     public Cliente() {

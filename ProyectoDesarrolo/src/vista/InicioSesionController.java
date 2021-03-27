@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -70,7 +72,7 @@ public class InicioSesionController implements Initializable {
          if(rs.next()){
              String tipo_nivel = rs.getString("id_T");
              if(tipo_nivel.equals("1")){
-                 Usuarios u = new Usuarios(TxtDocumento.getText());
+                 Usuarios u = new Usuarios(TxtDocumento.getText());     
                  u.completarDatos();
              }else if(tipo_nivel.equals("2")){
                  Vendedor v = new Vendedor(TxtDocumento.getText());

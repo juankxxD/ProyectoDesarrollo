@@ -151,7 +151,7 @@ public class principal extends Application{
             loader.setLocation(principal.class.getResource("/vista/NotificarVendedor.fxml"));
             BorderPane ventana= (BorderPane) loader.load();
             
-            primaryStage.setTitle("Agregar Producto");
+            primaryStage.setTitle("Noticiar datos");
             
             Scene scene = new Scene(ventana);
             
@@ -206,6 +206,73 @@ public class principal extends Application{
             VendedoresController clase= loader.getController();
             
             clase.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public void Comision()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/Comision.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Cambiar Comision");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ComisionController clase= loader.getController();
+            
+            clase.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public void consultarP()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/consultarProductos.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("consultar Producto");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ConsultarProductosController productos= loader.getController();
+            
+            productos.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public void ConsultarClienteAdm()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/ConsultarClienteAdm.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Noticiar datos");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ConsultarClienteAdmController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
             
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);

@@ -21,12 +21,12 @@
               <menus>
                 <Menu fx:id="MenuUsuarios" mnemonicParsing="false" text="Usuarios">
                   <items>
-                    <MenuItem fx:id="MenuConUsu" mnemonicParsing="false" onAction="#consultarUsuarios" text="Consultar Usuarios" />
+                    <MenuItem fx:id="MenuConUsu" mnemonicParsing="false" onAction="#consultarClientesadmin" text="Consultar Usuarios" />
                   </items>
                 </Menu>
-                <Menu fx:id="MenuAdm" mnemonicParsing="false" text="Administracion">
+                <Menu fx:id="MenuAdm" mnemonicParsing="false" text="productos">
                   <items>
-                    <MenuItem fx:id="ConsulPro" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" />
+                    <MenuItem fx:id="ConsulPro" mnemonicParsing="false" onAction="#consultar1Productos" text="Consultar Productos" />
                   </items>
                 </Menu>
                 <Menu fx:id="MenuVentas" mnemonicParsing="false" text="Ventas">
@@ -59,16 +59,6 @@
                </font>
             </Label>
             <Button fx:id="agregarpro" layoutX="70.0" layoutY="178.0" mnemonicParsing="false" onAction="#AgregarPro" text="Agregar Productos" visible="false" />
-            <TableView fx:id="TablaPro" layoutX="14.0" layoutY="56.0" onSort="#consultarProductos" prefHeight="289.0" prefWidth="453.0" visible="false">
-              <columns>
-                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" />
-                <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha_venci" />
-                  <TableColumn fx:id="ProVa" prefWidth="75.0" text="Valor" />
-                  <TableColumn fx:id="ProDes" prefWidth="75.0" text="Descuento" />
-                  <TableColumn fx:id="columCantidad" prefWidth="75.0" text="Cantidad" />
-              </columns>
-            </TableView>
             <Button fx:id="ActualizarClien" layoutX="422.0" layoutY="247.0" mnemonicParsing="false" onAction="#autorizarActualizar" text="Actualizar Datos" visible="false" />
             <Button fx:id="ConsultarVendedor" layoutX="91.0" layoutY="247.0" mnemonicParsing="false" onAction="#consultar" text="Consultar Clientes" visible="false" />
             <SplitMenuButton fx:id="SplitBtn" layoutX="475.0" layoutY="44.0" mnemonicParsing="false" text="Opciones" visible="false">
@@ -81,7 +71,7 @@
             <Label fx:id="txtCodigo" layoutX="510.0" layoutY="119.0" text="Codigo" visible="false" />
             <TextField fx:id="txtConsultar" layoutX="480.0" layoutY="153.0" prefHeight="25.0" prefWidth="99.0" visible="false" />
             <Button fx:id="btnConsultarCliente" layoutX="496.0" layoutY="201.0" mnemonicParsing="false" onAction="#ActualizarDatos" text="Consultar" visible="false" />
-            <Button fx:id="btnConsultarProductosC" layoutX="124.0" layoutY="253.0" mnemonicParsing="false" onAction="#consultarProductos" text="Consultar Productos" visible="false" />
+            <Button fx:id="btnConsultarProductosC" layoutX="124.0" layoutY="253.0" mnemonicParsing="false" onAction="#consultar1Productos" text="Consultar Productos" visible="false" />
             <Button fx:id="BtnVolver" layoutX="523.0" layoutY="355.0" mnemonicParsing="false" onAction="#volver" text="Volver" visible="false" />
             <MenuBar layoutX="497.0" layoutY="2.0">
               <menus>
@@ -93,11 +83,8 @@
               </menus>
             </MenuBar>
             <Label fx:id="LabelCodigo" layoutX="516.0" layoutY="71.0" text="Codigo" visible="false" />
-            <Label fx:id="labelCantidad" layoutX="499.0" layoutY="157.0" text="Cantidad a agregar" visible="false" />
             <TextField fx:id="txtCodigoPro" layoutX="502.0" layoutY="96.0" prefHeight="25.0" prefWidth="89.0" visible="false" />
-            <TextField fx:id="txtCantidadPro" layoutX="500.0" layoutY="180.0" prefHeight="25.0" prefWidth="89.0" visible="false" />
-            <Button fx:id="Aumentar" layoutX="519.0" layoutY="226.0" mnemonicParsing="false" onAction="#aumentar" text="Aumentar" visible="false" />
-            <Button fx:id="BtnConsultarVende" layoutX="400.0" layoutY="191.0" mnemonicParsing="false" onAction="#vendedores" text="Consultar Vendedores" />
+            <Button fx:id="BtnConsultarVende" layoutX="400.0" layoutY="191.0" mnemonicParsing="false" onAction="#vendedores" text="Consultar Vendedores" visible="false" />
          </children>
       </AnchorPane>
    </center>

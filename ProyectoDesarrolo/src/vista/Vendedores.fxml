@@ -29,11 +29,12 @@
                 <TableColumn fx:id="ColumCantidad" minWidth="0.0" prefWidth="185.0" text="Cantidad de Clientes" />
               </columns>
             </TableView>
-            <TextField fx:id="txtNombre" layoutX="440.0" layoutY="52.0" />
-            <TextField fx:id="txtSalario" layoutX="440.0" layoutY="114.0" />
-            <Label fx:id="labelNombre" layoutX="440.0" layoutY="24.0" text="Nobre" />
-            <Label fx:id="LabelSalario" layoutX="440.0" layoutY="89.0" text="Salario" />
-            <Button fx:id="Volverbtn" layoutX="482.0" layoutY="347.0" mnemonicParsing="false" text="Volver" visible="false" />
+            <TextField fx:id="txtNombre" layoutX="440.0" layoutY="52.0" visible="false" />
+            <TextField fx:id="txtSalario" layoutX="440.0" layoutY="114.0" visible="false" />
+            <Label fx:id="labelNombre" layoutX="440.0" layoutY="24.0" text="Nobre" visible="false" />
+            <Label fx:id="LabelSalario" layoutX="440.0" layoutY="89.0" text="Salario" visible="false" />
+            <Button fx:id="Volverbtn" layoutX="482.0" layoutY="347.0" mnemonicParsing="false" onAction="#volver" text="Volver" visible="false" />
+            <Button fx:id="btnCambiarComision" layoutX="251.0" layoutY="255.0" mnemonicParsing="false" onAction="#CambiarComision" prefHeight="25.0" prefWidth="122.0" text="Cambiar Comision" />
          </children>
       </AnchorPane>
    </center>
