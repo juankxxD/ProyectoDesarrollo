@@ -19,17 +19,46 @@ import modelo.Conexion;
  * @author Vicky
  */
 public class Ventas {
+    private String id_ventas;
     private String cod_producto;
     private String cod_cliente;
     private LocalDate fecha;
-    private int descuento;
+    
     private int valor;
+    private int cantidad;
+
+    public String getId_ventas() {
+        return id_ventas;
+    }
+
+    public void setId_ventas(String id_ventas) {
+        this.id_ventas = id_ventas;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
    
+
+    public Ventas(String id_ventas,String cod_producto, String cod_cliente, LocalDate fecha, int valor, int cantidad) {
+       
+        this.id_ventas = id_ventas; 
+        this.cod_producto = cod_producto;
+        this.cod_cliente = cod_cliente;
+        this.fecha = fecha;
+        this.valor = valor;
+        this.cantidad = cantidad;
+    }
 
     public Ventas(String cod_producto, String cod_cliente, LocalDate fecha, int valor) {
         this.cod_producto = cod_producto;
         this.cod_cliente = cod_cliente;
         this.fecha = fecha;
+        
         this.valor = valor;
     }
  
@@ -85,13 +114,9 @@ public class Ventas {
         this.fecha = fecha;
     }
 
-    public int getDescuento() {
-        return descuento;
-    }
+    
 
-    public void setDescuento(int descuento) {
-        this.descuento = descuento;
-    }
+   
 
     public int getValor() {
         return valor;
@@ -101,7 +126,33 @@ public class Ventas {
         this.valor = valor;
     }
    
-    
+  public ObservableList<Ventas> getTotalVentas(){
+        ObservableList<Ventas> obs = FXCollections.observableArrayList();
+        try{
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n" +
+" 				FROM \"ventas\"";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                String codigo =rs.getString("id_venta");
+                String Nombre= rs.getString("cod_cliente");
+                String cod_producto= rs.getString("cod_producto");
+                LocalDate Fecha_Ven= rs.getDate("fecha_compra").toLocalDate();
+                int Valor= rs.getInt("valor");
+               
+                int cantidad= rs.getInt("cantidad");
+                
+                 Ventas v= new Ventas(codigo, Nombre,cod_producto,Fecha_Ven, Valor,  cantidad);
+                obs.add(v);
+                
+            }
+        }catch(SQLException e){
+            System.err.println(e.toString());
+        }
+        return obs;
+    }  
     
     
 }

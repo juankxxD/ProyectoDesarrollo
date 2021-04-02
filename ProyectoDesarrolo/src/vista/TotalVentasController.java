@@ -7,6 +7,7 @@ package vista;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -22,19 +24,23 @@ import javafx.scene.control.TextField;
  * @author Juan
  */
 public class TotalVentasController implements Initializable {
-
+ 
+    
+    private principal programaPrincipal;
     @FXML
-    private TableView<?> Tabla;
+    private TableView<Ventas> Tabla;
     @FXML
-    private TableColumn<?, ?> columcod;
+    private TableColumn<Ventas, String> columid;
     @FXML
-    private TableColumn<?, ?> columNombre;
+    private TableColumn<Ventas, String> columcod;
     @FXML
-    private TableColumn<?, ?> columProducto;
+    private TableColumn<Ventas, String> columNombre;
     @FXML
-    private TableColumn<?, ?> columcantidad;
+    private TableColumn<Ventas, String> columProducto;
     @FXML
-    private TableColumn<?, ?> columTotal;
+    private TableColumn<Ventas, Integer> columcantidad;
+    @FXML
+    private TableColumn<Ventas, Integer> columTotal;
     @FXML
     private Label labelInformacion;
     @FXML
@@ -51,7 +57,10 @@ public class TotalVentasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    public void setProgramaPrincipal(principal programa)
+    {
+        programaPrincipal= programa;
+    }
     @FXML
     private void TotalVentas(ActionEvent event) {
     }
@@ -59,5 +68,16 @@ public class TotalVentasController implements Initializable {
     @FXML
     private void Volver(ActionEvent event) {
     }
-    
+    public void iniciar(){
+     this.columid.setCellValueFactory(new PropertyValueFactory("id_ventas"));
+        this.columcod.setCellValueFactory(new PropertyValueFactory("cod_producto"));
+        this.columNombre.setCellValueFactory(new PropertyValueFactory("cod_cliente"));
+        this.columProducto.setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.columcantidad.setCellValueFactory(new PropertyValueFactory("valor"));
+       this.columTotal.setCellValueFactory(new PropertyValueFactory("cantidad"));
+        Ventas v = new Ventas();
+        ObservableList<Ventas> item = v.getTotalVentas();
+        this.Tabla.setItems(item);  
+    }
 }
+
