@@ -109,6 +109,10 @@ public class MenuController implements Initializable {
     private ButtonBar BtonesADM;
     @FXML
     private ButtonBar BtonesCliente;
+    @FXML
+    private MenuItem Total_Ventas;
+    @FXML
+    private Button btnConsultarVentas;
     
     
     
@@ -268,6 +272,11 @@ public class MenuController implements Initializable {
         BtnConsultarVende.setGraphic(new ImageView(imagenNuevo3));
         MenuConUsu.setGraphic(new ImageView(imagenNuevo4));
         ConsultarVendedor.setGraphic(new ImageView(imagenNuevo4));
+    }
+
+    @FXML
+    private void TotalVentas(ActionEvent event) {
+        programaPrincipal.VentasAdministrador();
     }
     
 }

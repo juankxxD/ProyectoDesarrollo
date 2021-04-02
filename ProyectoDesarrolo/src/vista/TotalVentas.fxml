@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.TotalVentasController">
    <center>
       <AnchorPane prefHeight="405.0" prefWidth="605.0" BorderPane.alignment="CENTER">
@@ -21,6 +20,7 @@
                   <TableColumn fx:id="columProducto" prefWidth="81.0" text="Producto" />
                   <TableColumn fx:id="columcantidad" prefWidth="73.0" text="cantidad" />
                   <TableColumn fx:id="columTotal" prefWidth="97.0" text="Total" />
+                  <TableColumn fx:id="columid" prefWidth="75.0" text="Column X" />
               </columns>
             </TableView>
             <Label fx:id="labelInformacion" layoutX="180.0" layoutY="23.0" text="Informacion Ventas" textAlignment="CENTER">

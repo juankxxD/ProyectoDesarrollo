@@ -56,6 +56,7 @@ public class TotalVentasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        iniciar();
     }    
     public void setProgramaPrincipal(principal programa)
     {

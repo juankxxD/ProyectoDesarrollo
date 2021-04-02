@@ -36,6 +36,7 @@
                <buttons>
                   <Button fx:id="agregarpro" mnemonicParsing="false" onAction="#AgregarPro" stylesheets="@../css/hojaEstilo.css" text="Agregar Productos" visible="false" />
                   <Button fx:id="BtnConsultarVende" mnemonicParsing="false" onAction="#vendedores" stylesheets="@../css/hojaEstilo.css" text="Consultar Vendedores" visible="false" />
+                  <Button fx:id="btnConsultarVentas" mnemonicParsing="false" onAction="#TotalVentas" text="Consultar Ventas" translateX="-150.0" translateY="50.0" />
                </buttons>
             </ButtonBar>
             <ButtonBar fx:id="BtonesCliente" layoutX="119.0" layoutY="137.0" prefHeight="129.0" prefWidth="383.0" visible="false">
@@ -88,7 +89,7 @@
                 </Menu>
                 <Menu fx:id="MenuVentas" mnemonicParsing="false" text="Ventas">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem fx:id="Total_Ventas" mnemonicParsing="false" onAction="#TotalVentas" text="Total Ventas" />
                   </items>
                 </Menu>
                   <Menu fx:id="MenuVendedores" mnemonicParsing="false" text="Vendedores">
