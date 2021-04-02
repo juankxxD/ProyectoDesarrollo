@@ -188,6 +188,7 @@ public class VendedoresController implements Initializable {
     }
     @FXML
     public void volver(){
+        btnCambiarComision.setVisible(true);
         labelNombre.setVisible(false);
         LabelSalario.setVisible(false);
         txtNombre.setVisible(false);

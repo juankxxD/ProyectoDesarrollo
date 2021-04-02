@@ -4,8 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.InicioSesionController">
@@ -13,17 +16,33 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="Fuente" layoutX="-5.0" prefHeight="400.0" prefWidth="607.0" />
-            <Label layoutX="130.0" layoutY="122.0" text="Documento" />
-            <Label layoutX="131.0" layoutY="165.0" text="Contraseña" />
-            <TextField fx:id="TxtDocumento" layoutX="215.0" layoutY="118.0" />
-            <PasswordField fx:id="txtContraseña" layoutX="214.0" layoutY="161.0" />
-            <Button fx:id="BtnIniciar" layoutX="317.0" layoutY="223.0" mnemonicParsing="false" onAction="#entrar" text="Iniciar Sesion" />
-            <Label layoutX="191.0" layoutY="42.0" prefHeight="54.0" prefWidth="221.0" text="Bienvenido">
+            <Label layoutX="154.0" layoutY="186.0" text="Documento" />
+            <Label layoutX="155.0" layoutY="224.0" text="Contraseña" />
+            <TextField fx:id="TxtDocumento" layoutX="227.0" layoutY="182.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <PasswordField fx:id="txtContraseña" layoutX="227.0" layoutY="220.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="BtnIniciar" layoutX="320.0" layoutY="280.0" mnemonicParsing="false" onAction="#entrar" prefWidth="113.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" text="Iniciar Sesion" />
+            <Label layoutX="191.0" layoutY="34.0" prefHeight="54.0" prefWidth="221.0" stylesheets="@../css/hojaEstilo.css" text="Bienvenido">
                <font>
                   <Font name="Bernard MT Condensed" size="43.0" />
                </font>
             </Label>
+            <ImageView fitHeight="87.0" fitWidth="113.0" layoutX="242.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/user.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>
+   <left>
+      <Pane prefHeight="400.0" prefWidth="279.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="288.0" layoutX="-4.0" layoutY="3.0">
+               <image>
+                  <Image url="@../Imagenes/WhatsApp%20Image%202021-03-26%20at%209.58.57%20PM.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </left>
 </BorderPane>

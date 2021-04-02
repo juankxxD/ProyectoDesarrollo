@@ -19,7 +19,7 @@
             <TextField fx:id="txtApellido" disable="true" editable="false" layoutX="31.0" layoutY="132.0" />
             <TextField fx:id="txtComision" disable="true" editable="false" layoutX="407.0" layoutY="132.0" />
             <Button fx:id="btnCambiar" layoutX="243.0" layoutY="230.0" mnemonicParsing="false" onAction="#Cambiar" prefHeight="28.0" prefWidth="127.0" text="Cambiar Comision" />
-            <Button fx:id="btnVolver" layoutX="392.0" layoutY="231.0" mnemonicParsing="false" text="Volver" />
+            <Button fx:id="btnVolver" layoutX="392.0" layoutY="231.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
             <Button fx:id="btnDatos" layoutX="146.0" layoutY="231.0" mnemonicParsing="false" onAction="#TraerDatos" text="Traer Datos" />
          </children>
       </AnchorPane>

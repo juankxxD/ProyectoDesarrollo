@@ -227,7 +227,6 @@ public class Vendedor {
         
         PreparedStatement ps= con.prepareStatement(SQL);
         ps.setInt(1,Numero);
-            System.out.println(Numero_Clientes);
         Numero_Clientes = Numero;
         Administracion a = new Administracion();
         a.Cambiarcomision();

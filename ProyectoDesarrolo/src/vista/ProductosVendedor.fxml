@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ProductosVendedorController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ButtonBar fx:id="Botones" layoutX="75.0" layoutY="160.0" prefHeight="40.0" prefWidth="478.0">
+              <buttons>
+                <Button fx:id="Volver" mnemonicParsing="false" onAction="#Volver" text="Volver" translateX="350.0" translateY="190.0" />
+                  <Button fx:id="btnProductos" layoutX="150.0" maxWidth="238.0" mnemonicParsing="false" onAction="#ConsultarProductos" prefHeight="25.0" prefWidth="175.0" text="Consultar Productos" translateX="-150.0" />
+                  <Button fx:id="btnVentas" mnemonicParsing="false" onAction="#Ventas" prefHeight="25.0" prefWidth="120.0" text="Consultar ventas" translateX="-100.0" />
+              </buttons>
+            </ButtonBar>
+            <TableView fx:id="Tabla" layoutX="14.0" layoutY="35.0" prefHeight="330.0" prefWidth="449.0" visible="false">
+              <columns>
+                <TableColumn fx:id="ProCod" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="ProNom" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha_Venci" />
+                  <TableColumn fx:id="ProVa" prefWidth="75.0" text="Valor" />
+                  <TableColumn fx:id="ProDes" prefWidth="75.0" text="Descuento" />
+                  <TableColumn fx:id="columCantidad" prefWidth="75.0" text="Cantidad" visible="false" />
+              </columns>
+            </TableView>
+            <TextField fx:id="txtCodigo" layoutX="477.0" layoutY="114.0" prefHeight="25.0" prefWidth="103.0" visible="false" />
+            <Label fx:id="labelCodigo" layoutX="515.0" layoutY="84.0" text="Codigo" visible="false" />
+            <Button fx:id="btnvolver" layoutX="527.0" layoutY="353.0" mnemonicParsing="false" onAction="#Volvermenu" text="Volver" visible="false" />
+            <TableView fx:id="Tablaventas" layoutX="42.0" layoutY="25.0" prefHeight="328.0" prefWidth="393.0" visible="false">
+              <columns>
+                <TableColumn fx:id="columcodCliente" prefWidth="124.0" text="Codigo Cliente" />
+                <TableColumn fx:id="columcodProducto" prefWidth="101.0" text="Codigo Producto" />
+                  <TableColumn fx:id="ColumFecha_Entrega" minWidth="0.0" prefWidth="109.0" text="Fecha de entrega" />
+                  <TableColumn fx:id="columTotal" minWidth="0.0" prefWidth="58.0" text="Total" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnConsultarProducto" layoutX="477.0" layoutY="216.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar" visible="false" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

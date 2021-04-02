@@ -26,6 +26,15 @@ public class producto {
     private  int ValorDescuento;
     private  LocalDate FechaVencimiento;
     private  int cantidad;
+    private static String ID;
+
+    
+    public producto(String codigo){
+        this.ID = codigo;
+    }
+    public static void setID(String ID) {
+        producto.ID = ID;
+    }
 
     public  int getCantidad() {
         return cantidad;
@@ -77,6 +86,11 @@ public class producto {
 
     public void setValorDescuento(int ValorDescuento) {
         this.ValorDescuento = ValorDescuento;
+    }
+
+    @Override
+    public String toString() {
+        return  Nombre; 
     }
 
    
@@ -172,5 +186,8 @@ public class producto {
        } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);
     }
+    }
+    public static String getID() {
+        return ID;
     }
 }

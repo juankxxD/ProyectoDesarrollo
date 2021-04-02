@@ -278,6 +278,138 @@ public class principal extends Application{
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void BonoRegalo()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/BonoRegalo.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Bono de regalo");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            BonoRegaloController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      public void ConsultarVendedor()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/ConsultarClienteVendedor.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Consultar Cliente");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ConsultarClienteVendedorController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public void ProductosVendedor()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/ProductosVendedor.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Productos");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ProductosVendedorController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public void ComprarVendedor()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/comprarVendedor.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Comprar");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ComprarVendedorController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public void ProductosCliente()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/ProductosCliente.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Consultar productos");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ProductosClienteController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public void ComprarCliente()
+    {
+        try 
+        {
+            FXMLLoader loader= new FXMLLoader();
+            loader.setLocation(principal.class.getResource("/vista/ComprarCliente.fxml"));
+            BorderPane ventana= (BorderPane) loader.load();
+            
+            primaryStage.setTitle("Comprar");
+            
+            Scene scene = new Scene(ventana);
+            
+            primaryStage.setScene(scene);
+            
+            ComprarClienteController Cliente= loader.getController();
+            
+            Cliente.setProgramaPrincipal(this);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void main(String[] args)
     {
         launch(args); 

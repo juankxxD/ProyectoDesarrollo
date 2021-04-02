@@ -21,7 +21,7 @@
                <right>
                   <Pane prefHeight="367.0" prefWidth="152.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="salir" layoutX="69.0" layoutY="322.0" mnemonicParsing="false" onAction="#salir" text="Button" />
+                        <Button fx:id="salir" layoutX="69.0" layoutY="322.0" mnemonicParsing="false" onAction="#salir" text="Salir" />
                         <SplitMenuButton fx:id="btnOpciones1" layoutX="31.0" layoutY="21.0" mnemonicParsing="false" text="Opciones">
                           <items>
                             <MenuItem fx:id="btnTodos" mnemonicParsing="false" onAction="#consultarUsuarios" text="Consultar Usuarios" />
@@ -32,13 +32,11 @@
                         <Label fx:id="LabelCodigo" layoutX="55.0" layoutY="80.0" text="codigo" visible="false" />
                         <TextField fx:id="txtConsultar" layoutX="15.0" layoutY="97.0" prefHeight="25.0" prefWidth="114.0" visible="false" />
                         <Button fx:id="btnEliminar" layoutX="48.0" layoutY="171.0" mnemonicParsing="false" onAction="#Eliminar" text="Eliminar" visible="false" />
-                        <Button fx:id="btnConsultar" layoutX="50.0" layoutY="171.0" mnemonicParsing="false" text="consultar" visible="false" />
-                        <Button fx:id="btnPuntos" layoutX="43.0" layoutY="159.0" mnemonicParsing="false" onAction="#Puntos" text="Consultar" visible="false" />
                      </children>
                   </Pane>
                </right>
                <center>
-                  <TableView fx:id="Tabla" prefHeight="367.0" prefWidth="424.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="Tabla" onMouseClicked="#Seleccionar" prefHeight="367.0" prefWidth="424.0" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn fx:id="ColumDocu" prefWidth="75.0" text="Documento" />
                       <TableColumn fx:id="ColumNombre" prefWidth="75.0" text="Nombre" />

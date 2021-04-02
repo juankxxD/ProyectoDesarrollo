@@ -101,7 +101,6 @@ public class AgregarProductosController implements Initializable {
     public void regresarAPrincipal()
     {
         Usuarios u = new Usuarios();
-        System.out.println(u.getTipoUsuario());
         programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
     }
 }

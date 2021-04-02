@@ -19,6 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -46,7 +48,7 @@ public class InicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+       //colocarImagenBotones();
     }    
     
     public void setProgramaPrincipal(principal programa)
@@ -94,5 +96,11 @@ public class InicioSesionController implements Initializable {
    }
     }
     
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/login.png");
+        
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        BtnIniciar.setGraphic(new ImageView(imagenNuevo));
+    }
     
 }

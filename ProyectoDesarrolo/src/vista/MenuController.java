@@ -19,16 +19,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.SortEvent;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 import static modelo.Conexion.BD;
@@ -57,20 +61,7 @@ public class MenuController implements Initializable {
     Administracion adm = new Administracion();
     @FXML
     private Label Perfil;
-    @FXML
-    private TableView<Cliente> Tabla;
-    @FXML
-    private TableColumn<Cliente,String> ColumDocu;
-    @FXML
-    private TableColumn<Cliente,String> ColumNombre;
-    @FXML
-    private TableColumn<Cliente,String> ColumApe;
-    @FXML
-    private TableColumn<Cliente,String> ColumTel;
-    @FXML
-    private TableColumn<Cliente,String> ColumDire;
-    @FXML
-    private TableColumn<Cliente,String> ColumPunt;
+    
     private ObservableList<Conexion> MenuController;
     @FXML
     private MenuItem MenuConUsu;
@@ -93,20 +84,11 @@ public class MenuController implements Initializable {
     private Button ActualizarClien;
     @FXML
     private Button ConsultarVendedor;
-    @FXML
-    private SplitMenuButton SplitBtn;
-    @FXML
-    private MenuItem ClientesDeyo;
-    @FXML
-    private MenuItem TodosClientes;
-    @FXML
-    private MenuItem ActualizarClientes;
-    @FXML
+ 
     private Label txtCodigo;
     @FXML
     private TextField txtConsultar;
-    @FXML
-    private Button btnConsultarCliente;
+
     @FXML
     private Button btnConsultarProductosC;
     @FXML
@@ -115,14 +97,20 @@ public class MenuController implements Initializable {
     private Menu CerrarSesion;
     @FXML
     private TextField txtCodigoPro;
-    @FXML
-    private Label LabelCodigo;
+  
     
     @FXML
     private Button BtnConsultarVende; 
+    @FXML
+    private ButtonBar BtonesVendedores;
+    @FXML
+    private Button btnProductos;
+    @FXML
+    private ButtonBar BtonesADM;
+    @FXML
+    private ButtonBar BtonesCliente;
     
-    private SplitMenuButton btnOpciones1;
-    private Button btnEliminar;
+    
     
     //private TableView<Productos> TablaPro;
 
@@ -133,7 +121,7 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
        //iniciar();
-        
+        colocarImagenBotones();
         
        // IniciarSesion();
     }    
@@ -153,32 +141,18 @@ public class MenuController implements Initializable {
         u.setTipoUsuario(programaPrincipal.getTipo());
         
       
-        Tabla.setVisible(false);
+        
         MenuBar.setVisible(false);
         
         Perfil.setVisible(false);
-        BtnRegistrar.setVisible(false);
-        ActualizarClien.setVisible(false);
-        ConsultarVendedor.setVisible(false);
-        SplitBtn.setVisible(false);
-        LabelBienvenido.setVisible(true);
-        btnConsultarCliente.setVisible(false);
+        
+        LabelBienvenido.setVisible(true);   
         txtConsultar.setVisible(false);
-        txtCodigo.setVisible(false);
-        btnConsultarProductosC.setVisible(false);
-        BtnVolver.setVisible(false);
-   
-           
-        LabelCodigo.setVisible(false);
-        BtnConsultarVende.setVisible(false);
         
-        
-        
-                     
-                
-        BtnConsultarVende.setVisible(false);
-      
+        BtnVolver.setVisible(false);      
+        BtonesCliente.setVisible(false);
         if(u.getTipoUsuario().equals("1")){
+            BtonesADM.setVisible(true);
             MenuBar.setVisible(true);
             Perfil.setText("Administrador");
             Perfil.setVisible(true);
@@ -189,12 +163,12 @@ public class MenuController implements Initializable {
         }else if(u.getTipoUsuario().equals("2")){
             Perfil.setText("vendedor");
             Perfil.setVisible(true);
-            BtnRegistrar.setVisible(true);
+            BtonesVendedores.setVisible(true);
             Vendedor v = new Vendedor();
             String aver =v.getNombre() + " " + v.getApellido();
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(false);
-             ConsultarVendedor.setVisible(true);
+             
         }else{
             Perfil.setText("Cliente");
             Perfil.setVisible(true);
@@ -204,6 +178,7 @@ public class MenuController implements Initializable {
             agregarpro.setVisible(false);
             ActualizarClien.setVisible(true);
             btnConsultarProductosC.setVisible(true);
+            BtonesCliente.setVisible(true);
         }
         
     }
@@ -216,30 +191,7 @@ public class MenuController implements Initializable {
         iniciar();
     }
     
-    @FXML
-    public void consultarUsuarios() throws SQLException{
-        txtCodigo.setVisible(false);
-        txtConsultar.setVisible(false);
-        
-        
-       
-        LabelBienvenido.setVisible(false);
-        BtnConsultarVende.setVisible(false);
-        Perfil.setVisible(false);
-        Tabla.setVisible(true);
-        agregarpro.setVisible(false);
-        BtnVolver.setVisible(true);
-        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("IDC"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("NombreC"));
-        this.ColumApe.setCellValueFactory(new PropertyValueFactory("ApellidoC"));
-        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
-        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
-       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("puntosC"));
-        
-        Cliente c = new Cliente();
-        ObservableList<Cliente> item = c.getCliente();
-        this.Tabla.setItems(item);
-        }  
+    
              
     @FXML
     public void abrirOtraVentana()
@@ -256,70 +208,21 @@ public class MenuController implements Initializable {
     }
     @FXML
     public void consultar1Productos(){
-        programaPrincipal.consultarP();
+        programaPrincipal.ProductosCliente();
     }
     @FXML
     public void consultar(){
         
-        txtCodigo.setVisible(false);
-        txtConsultar.setVisible(false);
-        Tabla.setVisible(true);
-        BtnRegistrar.setVisible(false);
-        LabelBienvenido.setVisible(true);
-          SplitBtn.setVisible(true);
-         ConsultarVendedor.setVisible(false);
-        Perfil.setVisible(false);
-        btnConsultarCliente.setVisible(true);
-        txtConsultar.setVisible(true);
-        txtCodigo.setVisible(true);
-        BtnVolver.setVisible(true);
-        BtnConsultarVende.setVisible(false);
+        programaPrincipal.ConsultarVendedor();
     }
-    @FXML             
     public void ActualizarDatos(){
         Cliente c = new Cliente();
         c.setID(txtConsultar.getText());
         programaPrincipal.Actualizar();
     }
-    @FXML
-    public void consultarDeVendedorRegistrados(){
-        
-         LabelBienvenido.setVisible(false);
-         BtnConsultarVende.setVisible(false);
-         ConsultarVendedor.setVisible(false);
-        Perfil.setVisible(false);
-        Tabla.setVisible(true);
-        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("IDC"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("NombreC"));
-        this.ColumApe.setCellValueFactory(new PropertyValueFactory("ApellidoC"));
-        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
-        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
-       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("puntosC"));
-       Cliente c = new Cliente();
-        ObservableList<Cliente> item = c.getConsultar();
-        this.Tabla.setItems(item);
-        BtnVolver.setVisible(true);
-    }
+  
     
-    @FXML
-    public void ConsultarActualizar(){
-       
-         LabelBienvenido.setVisible(false);
-         BtnConsultarVende.setVisible(false);
-         ConsultarVendedor.setVisible(false);
-        Perfil.setVisible(false);
-        Tabla.setVisible(true);
-        this.ColumDocu.setCellValueFactory(new PropertyValueFactory("IDC"));
-        this.ColumNombre.setCellValueFactory(new PropertyValueFactory("NombreC"));
-        this.ColumApe.setCellValueFactory(new PropertyValueFactory("ApellidoC"));
-        this.ColumTel.setCellValueFactory(new PropertyValueFactory("Telefono"));
-        this.ColumDire.setCellValueFactory(new PropertyValueFactory("Direccion"));
-       this.ColumPunt.setCellValueFactory(new PropertyValueFactory("puntosC"));
-       Cliente c = new Cliente();
-        ObservableList<Cliente> item = c.getActualizar();
-        this.Tabla.setItems(item);
-        BtnVolver.setVisible(true);
-    }
+    
 
     @FXML
     private void CerrarSesion(ActionEvent event) {
@@ -336,6 +239,35 @@ public class MenuController implements Initializable {
         programaPrincipal.Vendedores();
     }
 
+    @FXML
+    private void consultarProductos(ActionEvent event) {
+        programaPrincipal.ProductosVendedor();
+    }
 
+    @FXML
+    public void consultarProductosADM(){
+        programaPrincipal.consultarP();
+    }
+
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/AgregarUser.png");
+        URL AgregarP = getClass().getResource("/Imagenes/caja.png");
+        URL consultarP = getClass().getResource("/Imagenes/paquete.png");
+        URL consultarV = getClass().getResource("/Imagenes/empleado.png");
+        URL consultarC = getClass().getResource("/Imagenes/grupo.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(AgregarP.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(consultarP.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(consultarV.toString(), 24,24,false,true);
+        Image imagenNuevo4 = new Image(consultarC.toString(), 24,24,false,true);
+        BtnRegistrar.setGraphic(new ImageView(imagenNuevo));
+        agregarpro.setGraphic(new ImageView(imagenNuevo1));
+        ConsulPro.setGraphic(new ImageView(imagenNuevo2));
+        btnConsultarProductosC.setGraphic(new ImageView(imagenNuevo2));
+        btnProductos.setGraphic(new ImageView(imagenNuevo2));
+        BtnConsultarVende.setGraphic(new ImageView(imagenNuevo3));
+        MenuConUsu.setGraphic(new ImageView(imagenNuevo4));
+        ConsultarVendedor.setGraphic(new ImageView(imagenNuevo4));
+    }
     
 }

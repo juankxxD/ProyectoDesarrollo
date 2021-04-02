@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ProductosClienteController">
+   <center>
+      <AnchorPane prefHeight="318.0" prefWidth="431.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="Tabla" prefHeight="318.0" prefWidth="485.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="ProCod" prefWidth="62.0" text="Codigo" />
+                <TableColumn fx:id="ProNom" prefWidth="60.0" text="Nombre" />
+                  <TableColumn fx:id="ProFec" prefWidth="70.0" text="Fecha_ven" />
+                  <TableColumn fx:id="ProVa" prefWidth="67.0" text="Valor" />
+                  <TableColumn fx:id="ProDes" prefWidth="82.0" text="Descuento" />
+                  <TableColumn fx:id="columCantidad" prefWidth="84.0" text="Cantidad" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <Pane prefHeight="303.0" prefWidth="21.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <Pane prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnVolver" layoutX="528.0" layoutY="2.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+         </children>
+      </Pane>
+   </bottom>
+   <top>
+      <Pane prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="148.0" layoutY="11.0" text="Productos a muy buen precio">
+               <font>
+                  <Font name="Times New Roman" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <right>
+      <Pane prefHeight="318.0" prefWidth="153.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnConsultar" layoutX="51.0" layoutY="218.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar" />
+            <TextField fx:id="txtCodigo" layoutX="22.0" layoutY="134.0" prefHeight="25.0" prefWidth="112.0" />
+            <Label fx:id="labelCodigo" layoutX="22.0" layoutY="109.0" text="codigo" />
+         </children>
+      </Pane>
+   </right>
+</BorderPane>
