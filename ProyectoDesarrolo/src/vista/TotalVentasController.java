@@ -64,11 +64,35 @@ public class TotalVentasController implements Initializable {
     }
     @FXML
     private void TotalVentas(ActionEvent event) {
+        Ventas v = new Ventas();
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        int año = fecha.get(Calendar.YEAR);
+            int MES = fecha.get(Calendar.MONTH) + 1;
+            int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+            String fechaActual = año +"-" + MES + "-" + DIA;
+            int año1 = fecha.get(Calendar.YEAR);
+            int MES1 = fecha.get(Calendar.MONTH) ;
+            int DIA1 = fecha.get(Calendar.DAY_OF_MONTH);
+            String fechaAnterior = año +"-" + MES + "-" + DIA;
+        String sql = "SELECT SUM(valor)\n" +
+" 				FROM \"ventas\"\n" +
+" 				WHERE \"id_venta\" in\n" +
+" 				(SELECT \"id_venta\"\n" +
+" 				FROM \"ventas\"\n" +
+" 				WHERE \"fecha_compra\"BETWEEN '"+ fechaAnterior +"'"+ fechaActual +"')";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+           txtToatalVentas.setText(rs.getInt("sum")+"");
     }
 
     @FXML
     private void Volver(ActionEvent event) {
+        Usuarios u = new Usuarios();
+        programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
     }
+    
     public void iniciar(){
      this.columid.setCellValueFactory(new PropertyValueFactory("id_ventas"));
         this.columcod.setCellValueFactory(new PropertyValueFactory("cod_producto"));
