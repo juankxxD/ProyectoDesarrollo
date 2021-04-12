@@ -23,6 +23,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -79,6 +82,7 @@ public class ConsultarProductosController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarProductosController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        colocarImagenBotones();
     }    
     public void setProgramaPrincipal(principal programa)
     {
@@ -144,5 +148,28 @@ public class ConsultarProductosController implements Initializable {
     {
         Usuarios u = new Usuarios();
         programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
+    }
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/Aumentar.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/etiqueta.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        btnVolver.setGraphic(new ImageView(imagenNuevo));  
+        btnAumentarCan.setGraphic(new ImageView(imagenNuevo1)); 
+        btnCambiDes.setGraphic(new ImageView(imagenNuevo2)); 
+        Aumentar.setGraphic(new ImageView(imagenNuevo1));
+        Cambiarbtn.setGraphic(new ImageView(imagenNuevo2)); 
+        
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCantidadPro)||evt.equals(txtCodigoPro)||evt.equals(btnCambiDes)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
     }
 }

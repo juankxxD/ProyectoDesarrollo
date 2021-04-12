@@ -18,6 +18,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -57,6 +59,7 @@ public class ProductosClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         inicio();
+        colocarImagenBotones();
     }    
 
     public void setProgramaPrincipal(principal programa)
@@ -87,5 +90,12 @@ public class ProductosClienteController implements Initializable {
         ObservableList<producto> item = p.getProducto();
         this.Tabla.setItems(item);  
     }
-    
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/consultar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        btnVolver.setGraphic(new ImageView(imagenNuevo));  
+        btnConsultar.setGraphic(new ImageView(imagenNuevo1));  
+    }
 }

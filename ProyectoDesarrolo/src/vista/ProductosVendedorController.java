@@ -19,6 +19,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -76,6 +79,7 @@ public class ProductosVendedorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBotones();
     }  
     public void setProgramaPrincipal(principal programa)
     {
@@ -144,5 +148,29 @@ public class ProductosVendedorController implements Initializable {
         programaPrincipal.ComprarVendedor();
         
     }
-    
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/caja.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/consultar.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/ventas.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 24,24,false,true);
+        btnvolver.setGraphic(new ImageView(imagenNuevo));
+        Volver.setGraphic(new ImageView(imagenNuevo));
+        btnProductos.setGraphic(new ImageView(imagenNuevo1));
+        btnConsultarProducto.setGraphic(new ImageView(imagenNuevo2));
+        btnVentas.setGraphic(new ImageView(imagenNuevo3));
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCodigo)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+       
+    }
 }

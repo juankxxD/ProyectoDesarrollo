@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.NotificarVendedorController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="50.0" layoutY="39.0" text="ID" />
             <Label layoutX="403.0" layoutY="39.0" text="Nombre" />
@@ -16,12 +16,12 @@
             <Label layoutX="403.0" layoutY="126.0" />
             <Label layoutX="47.0" layoutY="208.0" text="Direccion" />
             <Label layoutX="403.0" layoutY="208.0" text="Contraseña" />
-            <TextField fx:id="txtID" disable="true" layoutX="50.0" layoutY="64.0" />
-            <TextField fx:id="txtNombre" disable="true" layoutX="403.0" layoutY="64.0" />
-            <TextField fx:id="txtApellido" disable="true" layoutX="50.0" layoutY="156.0" />
-            <TextField fx:id="txtTelefono" layoutX="403.0" layoutY="156.0" />
-            <TextField fx:id="txtDireccion" layoutX="50.0" layoutY="245.0" />
-            <TextField fx:id="txtContraseña" layoutX="403.0" layoutY="245.0" />
+            <TextField fx:id="txtID" disable="true" layoutX="50.0" layoutY="64.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtNombre" disable="true" layoutX="403.0" layoutY="64.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtApellido" disable="true" layoutX="50.0" layoutY="156.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtTelefono" layoutX="403.0" layoutY="156.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtDireccion" layoutX="50.0" layoutY="245.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtContraseña" layoutX="403.0" layoutY="245.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
             <Label layoutX="408.0" layoutY="126.0" text="Telefono" />
             <Button fx:id="BtnNotificar" layoutX="351.0" layoutY="329.0" mnemonicParsing="false" onAction="#notificar" text="Notificar" />
             <Button fx:id="BtnVolver" layoutX="463.0" layoutY="329.0" mnemonicParsing="false" onAction="#volver" text="Volver" />

@@ -22,6 +22,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import modelo.Conexion;
 
 /**
@@ -73,6 +76,7 @@ public class VendedoresController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBotones();
     }    
     
     public void setProgramaPrincipal(principal programa)
@@ -204,4 +208,23 @@ public class VendedoresController implements Initializable {
     private void CambiarComision(ActionEvent event) {
         programaPrincipal.Comision();
     }
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/grupo.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/customer.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/comision.png");
+        URL linkNuevo4 = getClass().getResource("/Imagenes/datos.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 15,15,false,true);
+        Image imagenNuevo4 = new Image(linkNuevo4.toString(), 20,20,false,true);
+        Salir.setGraphic(new ImageView(imagenNuevo));  
+        BtnNumeroClientes.setGraphic(new ImageView(imagenNuevo1)); 
+        BtnClientes.setGraphic(new ImageView(imagenNuevo2)); 
+        Volverbtn.setGraphic(new ImageView(imagenNuevo));  
+        btnCambiarComision.setGraphic(new ImageView(imagenNuevo3));
+        
+    }
+    
 }

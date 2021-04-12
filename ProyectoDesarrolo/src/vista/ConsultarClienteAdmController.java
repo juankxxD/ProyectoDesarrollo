@@ -22,6 +22,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -70,6 +73,7 @@ public class ConsultarClienteAdmController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBotones();
     }
 
     public void setProgramaPrincipal(principal programa) {
@@ -160,5 +164,30 @@ public class ConsultarClienteAdmController implements Initializable {
             programaPrincipal.BonoRegalo();
         }
     }
-
+public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/grupo.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/eliminarUsuario.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/regalo.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 24,24,false,true);
+        salir.setGraphic(new ImageView(imagenNuevo));  
+        btnTodos.setGraphic(new ImageView(imagenNuevo1)); 
+        btnEliminarU.setGraphic(new ImageView(imagenNuevo2)); 
+        btnEliminar.setGraphic(new ImageView(imagenNuevo2)); 
+        BonoRegalo.setGraphic(new ImageView(imagenNuevo3));
+        
+        
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtConsultar)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+    }
 }

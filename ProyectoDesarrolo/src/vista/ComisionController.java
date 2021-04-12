@@ -16,6 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -48,6 +51,7 @@ public class ComisionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBotones();
     }  
     public void setProgramaPrincipal(principal programa)
     {
@@ -97,6 +101,33 @@ public class ComisionController implements Initializable {
       txtApellido.setDisable(true);   
       txtComision.setDisable(false);
       txtComision.setEditable(true);
+    }
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/grupo.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/customer.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/datos.png");
+        URL linkNuevo4 = getClass().getResource("/Imagenes/actualizar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 15,15,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 15,15,false,true);
+        Image imagenNuevo4 = new Image(linkNuevo4.toString(), 15,15,false,true);
+        btnVolver.setGraphic(new ImageView(imagenNuevo));  
+        btnCambiar.setGraphic(new ImageView(imagenNuevo4)); 
+        btnDatos.setGraphic(new ImageView(imagenNuevo3));
+        
+        
+        
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCodig)||evt.equals(txtComision)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
     }
     
 }

@@ -36,7 +36,7 @@
                <buttons>
                   <Button fx:id="agregarpro" mnemonicParsing="false" onAction="#AgregarPro" stylesheets="@../css/hojaEstilo.css" text="Agregar Productos" visible="false" />
                   <Button fx:id="BtnConsultarVende" mnemonicParsing="false" onAction="#vendedores" stylesheets="@../css/hojaEstilo.css" text="Consultar Vendedores" visible="false" />
-                  <Button fx:id="btnConsultarVentas" mnemonicParsing="false" onAction="#TotalVentas" text="Consultar Ventas" translateX="-150.0" translateY="50.0" />
+                  <Button fx:id="btnConsultarVentas" mnemonicParsing="false" onAction="#TotalVentas" stylesheets="@../css/hojaEstilo.css" text="Consultar Ventas" translateX="10.0" />
                </buttons>
             </ButtonBar>
             <ButtonBar fx:id="BtonesCliente" layoutX="119.0" layoutY="137.0" prefHeight="129.0" prefWidth="383.0" visible="false">

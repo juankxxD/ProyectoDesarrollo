@@ -11,9 +11,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.TotalVentasController">
    <center>
-      <AnchorPane prefHeight="405.0" prefWidth="605.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="405.0" prefWidth="605.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="Tabla" layoutY="62.0" prefHeight="338.0" prefWidth="421.0">
+            <TableView fx:id="Tabla" layoutY="62.0" prefHeight="338.0" prefWidth="421.0" styleClass="table-row-cell" stylesheets="@../css/hojaEstilo.css">
               <columns>
                 <TableColumn fx:id="columcod" prefWidth="84.0" text="cod_cliente" />
                 <TableColumn fx:id="columNombre" prefWidth="85.0" text="Nombre" />
@@ -23,18 +23,18 @@
                   <TableColumn fx:id="columid" prefWidth="75.0" text="Column X" />
               </columns>
             </TableView>
-            <Label fx:id="labelInformacion" layoutX="180.0" layoutY="23.0" text="Informacion Ventas" textAlignment="CENTER">
+            <Label fx:id="labelInformacion" layoutX="157.0" layoutY="14.0" text="Informacion Ventas" textAlignment="CENTER">
                <font>
-                  <Font name="Arial" size="25.0" />
+                  <Font name="Times New Roman" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotal" layoutX="440.0" layoutY="97.0" text="Total de ventas del mes">
+            <Label fx:id="labelTotal" layoutX="440.0" layoutY="97.0" prefHeight="26.0" prefWidth="143.0" stylesheets="@../css/hojaEstilo.css" text="Total de ventas del mes">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Times New Roman" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTotalVentas" layoutX="440.0" layoutY="129.0" onAction="#TotalVentas" />
-            <Button fx:id="btnVolver" layoutX="513.0" layoutY="361.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+            <TextField fx:id="txtTotalVentas" layoutX="440.0" layoutY="129.0" onAction="#TotalVentas" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="btnVolver" layoutX="513.0" layoutY="361.0" mnemonicParsing="false" onAction="#Volver" stylesheets="@../css/hojaEstilo.css" text="Volver" />
          </children>
       </AnchorPane>
    </center>

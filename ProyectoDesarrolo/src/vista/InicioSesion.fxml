@@ -18,9 +18,9 @@
             <Label fx:id="Fuente" layoutX="-5.0" prefHeight="400.0" prefWidth="607.0" />
             <Label layoutX="154.0" layoutY="186.0" text="Documento" />
             <Label layoutX="155.0" layoutY="224.0" text="Contraseña" />
-            <TextField fx:id="TxtDocumento" layoutX="227.0" layoutY="182.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="TxtDocumento" layoutX="227.0" layoutY="182.0" onKeyTyped="#jeje" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <PasswordField fx:id="txtContraseña" layoutX="227.0" layoutY="220.0" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
-            <Button fx:id="BtnIniciar" layoutX="320.0" layoutY="280.0" mnemonicParsing="false" onAction="#entrar" prefWidth="113.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" text="Iniciar Sesion" />
+            <Button fx:id="BtnIniciar" layoutX="320.0" layoutY="280.0" mnemonicParsing="false" onAction="#entrar" onKeyReleased="#entrar" prefWidth="113.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" text="Iniciar Sesion" />
             <Label layoutX="191.0" layoutY="34.0" prefHeight="54.0" prefWidth="221.0" stylesheets="@../css/hojaEstilo.css" text="Bienvenido">
                <font>
                   <Font name="Bernard MT Condensed" size="43.0" />

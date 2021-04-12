@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.VendedoresController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="BtnNumeroClientes" layoutX="131.0" layoutY="188.0" mnemonicParsing="false" onAction="#CantidadClientes" text="Numero de Clientes" />
             <Button fx:id="BtnClientes" layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#ClientesRegis" text="Clientes por Vendedor" />
@@ -29,8 +29,8 @@
                 <TableColumn fx:id="ColumCantidad" minWidth="0.0" prefWidth="185.0" text="Cantidad de Clientes" />
               </columns>
             </TableView>
-            <TextField fx:id="txtNombre" layoutX="440.0" layoutY="52.0" visible="false" />
-            <TextField fx:id="txtSalario" layoutX="440.0" layoutY="114.0" visible="false" />
+            <TextField fx:id="txtNombre" layoutX="440.0" layoutY="52.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
+            <TextField fx:id="txtSalario" layoutX="440.0" layoutY="114.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
             <Label fx:id="labelNombre" layoutX="440.0" layoutY="24.0" text="Nobre" visible="false" />
             <Label fx:id="LabelSalario" layoutX="440.0" layoutY="89.0" text="Salario" visible="false" />
             <Button fx:id="Volverbtn" layoutX="482.0" layoutY="347.0" mnemonicParsing="false" onAction="#volver" text="Volver" visible="false" />

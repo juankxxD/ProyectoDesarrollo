@@ -25,6 +25,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -69,6 +72,7 @@ public class BonoRegaloController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(BonoRegaloController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        colocarImagenBotones();
     }
 
     public void setProgramaPrincipal(principal programa) {
@@ -134,7 +138,7 @@ public class BonoRegaloController implements Initializable {
             int año = fecha.get(Calendar.YEAR);
             int MES = fecha.get(Calendar.MONTH) + 1;
             int DIA = fecha.get(Calendar.DAY_OF_MONTH);
-            String fechaActual = año +"-" + MES + "-" + DIA;
+            String fechaActual = año +"-" + MES + "-" + DIA;            
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDate;
              java.util.Date nfecha = formato.parse(fechaActual);
@@ -217,5 +221,21 @@ public class BonoRegaloController implements Initializable {
         ps.setInt(1,resta);
          ps.executeUpdate();
     }
-
+public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/comprar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 15,15,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 15,15,false,true);
+        volver.setGraphic(new ImageView(imagenNuevo));  
+        BtnDar.setGraphic(new ImageView(imagenNuevo1));  
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCantidad)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+    }
 }

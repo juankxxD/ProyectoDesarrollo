@@ -12,14 +12,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ConsultarClienteAdmController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+            <BorderPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
                <right>
-                  <Pane prefHeight="367.0" prefWidth="152.0" BorderPane.alignment="CENTER">
+                  <Pane prefHeight="367.0" prefWidth="152.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="salir" layoutX="69.0" layoutY="322.0" mnemonicParsing="false" onAction="#salir" text="Salir" />
                         <SplitMenuButton fx:id="btnOpciones1" layoutX="31.0" layoutY="21.0" mnemonicParsing="false" text="Opciones">
@@ -48,13 +49,16 @@
                   </TableView>
                </center>
                <top>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="156.0" text="Consulta de clientes" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="258.0" text="Consulta de clientes" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                      <effect>
                         <Glow />
                      </effect>
+                     <font>
+                        <Font size="23.0" />
+                     </font>
                   </Label>
                </top>
             </BorderPane>

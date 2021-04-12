@@ -16,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -53,7 +56,21 @@ public class ActualizarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         iniciar();
-    }    
+    }   
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtID)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }else if(evt.equals(txtTelefono)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+       
+    }
+    }
     public void setProgramaPrincipal(principal programa)
     {
         programaPrincipal= programa;
@@ -125,4 +142,12 @@ public class ActualizarController implements Initializable {
        JOptionPane.showMessageDialog(null, ex);
     }
         }
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/actualizar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        volver.setGraphic(new ImageView(imagenNuevo));
+        btnActualizar.setGraphic(new ImageView(imagenNuevo1));
+    }
 }

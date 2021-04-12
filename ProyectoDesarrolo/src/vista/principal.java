@@ -151,7 +151,7 @@ public class principal extends Application{
             loader.setLocation(principal.class.getResource("/vista/NotificarVendedor.fxml"));
             BorderPane ventana= (BorderPane) loader.load();
             
-            primaryStage.setTitle("Noticiar datos");
+            primaryStage.setTitle("Notificar datos");
             
             Scene scene = new Scene(ventana);
             

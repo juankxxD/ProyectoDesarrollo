@@ -259,11 +259,13 @@ public class MenuController implements Initializable {
         URL consultarP = getClass().getResource("/Imagenes/paquete.png");
         URL consultarV = getClass().getResource("/Imagenes/empleado.png");
         URL consultarC = getClass().getResource("/Imagenes/grupo.png");
+        URL conVentas = getClass().getResource("/Imagenes/ventas.png");
         Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
         Image imagenNuevo1 = new Image(AgregarP.toString(), 24,24,false,true);
         Image imagenNuevo2 = new Image(consultarP.toString(), 24,24,false,true);
         Image imagenNuevo3 = new Image(consultarV.toString(), 24,24,false,true);
         Image imagenNuevo4 = new Image(consultarC.toString(), 24,24,false,true);
+        Image imagenNuevo5 = new Image(conVentas.toString(), 24,24,false,true);
         BtnRegistrar.setGraphic(new ImageView(imagenNuevo));
         agregarpro.setGraphic(new ImageView(imagenNuevo1));
         ConsulPro.setGraphic(new ImageView(imagenNuevo2));
@@ -272,6 +274,7 @@ public class MenuController implements Initializable {
         BtnConsultarVende.setGraphic(new ImageView(imagenNuevo3));
         MenuConUsu.setGraphic(new ImageView(imagenNuevo4));
         ConsultarVendedor.setGraphic(new ImageView(imagenNuevo4));
+        btnConsultarVentas.setGraphic(new ImageView(imagenNuevo5));
     }
 
     @FXML

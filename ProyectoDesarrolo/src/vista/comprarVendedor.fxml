@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ComprarVendedorController">
    <center>
-      <AnchorPane prefHeight="208.0" prefWidth="571.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="208.0" prefWidth="571.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="39.0" layoutY="14.0" text="codigo producto" />
             <Label layoutX="412.0" layoutY="14.0" text="Nombre Producto" />
@@ -18,19 +18,19 @@
             <Label layoutX="39.0" layoutY="172.0" text="Descuento" />
             <Label layoutX="412.0" layoutY="172.0" text="cod_clliente" />
             <Label layoutX="39.0" layoutY="260.0" text="cantidad" />
-            <ButtonBar layoutX="349.0" layoutY="297.0" prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar layoutX="349.0" layoutY="297.0" prefHeight="40.0" prefWidth="200.0" stylesheets="@../css/hojaEstilo.css">
               <buttons>
                 <Button fx:id="Comprar" mnemonicParsing="false" onAction="#Comprar" text="Comprar" />
                   <Button fx:id="Volver" mnemonicParsing="false" onAction="#Volver" text="Volver" />
               </buttons>
             </ButtonBar>
-            <TextField fx:id="txtCod_pro" disable="true" layoutX="39.0" layoutY="40.0" />
-            <TextField fx:id="txt_nombre" disable="true" layoutX="412.0" layoutY="40.0" />
-            <TextField fx:id="txt_fecha" disable="true" layoutX="39.0" layoutY="122.0" />
-            <TextField fx:id="txtValor" disable="true" layoutX="412.0" layoutY="122.0" />
-            <TextField fx:id="txtDescuento" disable="true" layoutX="39.0" layoutY="199.0" />
-            <TextField fx:id="txtcod_Cliente" layoutX="412.0" layoutY="199.0" />
-            <TextField fx:id="txtCantidad" layoutX="39.0" layoutY="285.0" prefHeight="25.0" prefWidth="44.0" />
+            <TextField fx:id="txtCod_pro" disable="true" layoutX="39.0" layoutY="40.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txt_nombre" disable="true" layoutX="412.0" layoutY="40.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txt_fecha" disable="true" layoutX="39.0" layoutY="122.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtValor" disable="true" layoutX="412.0" layoutY="122.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtDescuento" disable="true" layoutX="39.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtcod_Cliente" layoutX="412.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtCantidad" layoutX="39.0" layoutY="285.0" prefHeight="25.0" prefWidth="44.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
          </children>
       </AnchorPane>
    </center>

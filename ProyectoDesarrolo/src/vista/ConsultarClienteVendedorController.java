@@ -19,6 +19,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -65,6 +68,7 @@ public class ConsultarClienteVendedorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBotones();
     }    
      public void setProgramaPrincipal(principal programa) {
         programaPrincipal = programa;
@@ -140,5 +144,33 @@ public class ConsultarClienteVendedorController implements Initializable {
         c.setID(txtConsultar.getText());
         programaPrincipal.Actualizar();
     }
-    
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/grupo.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/customer.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/opciones.png");
+        URL linkNuevo4 = getClass().getResource("/Imagenes/actualizar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 15,15,false,true);
+        Image imagenNuevo4 = new Image(linkNuevo4.toString(), 20,20,false,true);
+        Volver.setGraphic(new ImageView(imagenNuevo));  
+        TodosClientes.setGraphic(new ImageView(imagenNuevo1)); 
+        ClientesDeyo.setGraphic(new ImageView(imagenNuevo2)); 
+        btnConsultarCliente.setGraphic(new ImageView(imagenNuevo4)); 
+        ActualizarClientes.setGraphic(new ImageView(imagenNuevo4));
+        SplitBtn.setGraphic(new ImageView(imagenNuevo3));
+        
+        
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtConsultar)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+    }
 }

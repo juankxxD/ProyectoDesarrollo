@@ -24,6 +24,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -65,6 +68,7 @@ public class ComprarVendedorController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ComprarVendedorController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        colocarImagenBotones();
     }    
     public void setProgramaPrincipal(principal programa)
     {
@@ -215,5 +219,21 @@ public class ComprarVendedorController implements Initializable {
         programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
          
     }
-    
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/comprar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Volver.setGraphic(new ImageView(imagenNuevo));  
+        Comprar.setGraphic(new ImageView(imagenNuevo1));  
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCantidad)||evt.equals(txtcod_Cliente)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+    }
 }

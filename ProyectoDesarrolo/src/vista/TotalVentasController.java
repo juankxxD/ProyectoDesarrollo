@@ -6,7 +6,15 @@
 package vista;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +25,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import modelo.Conexion;
 
 /**
  * FXML Controller class
@@ -57,16 +68,23 @@ public class TotalVentasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         iniciar();
+        try {
+            TotalVentas();
+        } catch (SQLException ex) {
+            Logger.getLogger(TotalVentasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        colocarImagenBotones();
     }    
     public void setProgramaPrincipal(principal programa)
     {
         programaPrincipal= programa;
     }
     @FXML
-    private void TotalVentas(ActionEvent event) {
+    private void TotalVentas() throws SQLException {
         Ventas v = new Ventas();
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
+        Calendar fecha = new GregorianCalendar();
         int año = fecha.get(Calendar.YEAR);
             int MES = fecha.get(Calendar.MONTH) + 1;
             int DIA = fecha.get(Calendar.DAY_OF_MONTH);
@@ -74,19 +92,21 @@ public class TotalVentasController implements Initializable {
             int año1 = fecha.get(Calendar.YEAR);
             int MES1 = fecha.get(Calendar.MONTH) ;
             int DIA1 = fecha.get(Calendar.DAY_OF_MONTH);
-            String fechaAnterior = año +"-" + MES + "-" + DIA;
+            String fechaAnterior = año1 +"-" + MES1 + "-" + DIA1;
+            System.out.println(fechaActual);
+            System.out.println(fechaAnterior);
         String sql = "SELECT SUM(valor)\n" +
 " 				FROM \"ventas\"\n" +
 " 				WHERE \"id_venta\" in\n" +
 " 				(SELECT \"id_venta\"\n" +
 " 				FROM \"ventas\"\n" +
-" 				WHERE \"fecha_compra\"BETWEEN '"+ fechaAnterior +"'"+ fechaActual +"')";
+" 				WHERE \"fecha_compra\"BETWEEN '"+ fechaAnterior +"' AND '"+  fechaActual +"')";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-           txtToatalVentas.setText(rs.getInt("sum")+"");
+           txtTotalVentas.setText(rs.getInt("sum")+"");
     }
-
+    }
     @FXML
     private void Volver(ActionEvent event) {
         Usuarios u = new Usuarios();
@@ -98,11 +118,16 @@ public class TotalVentasController implements Initializable {
         this.columcod.setCellValueFactory(new PropertyValueFactory("cod_producto"));
         this.columNombre.setCellValueFactory(new PropertyValueFactory("cod_cliente"));
         this.columProducto.setCellValueFactory(new PropertyValueFactory("fecha"));
-        this.columcantidad.setCellValueFactory(new PropertyValueFactory("valor"));
-       this.columTotal.setCellValueFactory(new PropertyValueFactory("cantidad"));
+        this.columcantidad.setCellValueFactory(new PropertyValueFactory("cantidad"));
+       this.columTotal.setCellValueFactory(new PropertyValueFactory("valor"));
         Ventas v = new Ventas();
         ObservableList<Ventas> item = v.getTotalVentas();
         this.Tabla.setItems(item);  
+    }
+     public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        btnVolver.setGraphic(new ImageView(imagenNuevo));       
     }
 }
 

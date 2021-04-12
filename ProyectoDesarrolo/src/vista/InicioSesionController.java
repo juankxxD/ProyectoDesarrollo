@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +22,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -47,7 +50,7 @@ public class InicioSesionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        prueba();
        //colocarImagenBotones();
     }    
     
@@ -55,10 +58,29 @@ public class InicioSesionController implements Initializable {
     {
         programaPrincipal= programa;
     }
-    
+    public void prueba(){
+        txtContraseña.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+        public void handle(KeyEvent event) {
+            if(event.getCode() == KeyCode.ENTER){
+                entrar();
+            }
+        }
+        });
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(TxtDocumento)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
+    }
     public void IniciarSesion(String Tipo){//, String ID ){
         programaPrincipal.AbrirTerceraVentana(Tipo);//, ID);
     }
+    @FXML
     public void entrar(){
         try{
         Conexion conn = new Conexion();
