@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,11 +62,11 @@ public class MenuController implements Initializable {
     Administracion adm = new Administracion();
     @FXML
     private Label Perfil;
-    
+
     private ObservableList<Conexion> MenuController;
     @FXML
     private MenuItem MenuConUsu;
-    
+
     @FXML
     private Button BtnRegistrar;
     private String ID;
@@ -77,14 +78,14 @@ public class MenuController implements Initializable {
     private Label LabelBienvenido;
     @FXML
     private Button agregarpro;
-   
+
     @FXML
     private MenuItem ConsulPro;
     @FXML
     private Button ActualizarClien;
     @FXML
     private Button ConsultarVendedor;
- 
+
     private Label txtCodigo;
     @FXML
     private TextField txtConsultar;
@@ -97,10 +98,9 @@ public class MenuController implements Initializable {
     private Menu CerrarSesion;
     @FXML
     private TextField txtCodigoPro;
-  
-    
+
     @FXML
-    private Button BtnConsultarVende; 
+    private Button BtnConsultarVende;
     @FXML
     private ButtonBar BtonesVendedores;
     @FXML
@@ -113,133 +113,132 @@ public class MenuController implements Initializable {
     private MenuItem Total_Ventas;
     @FXML
     private Button btnConsultarVentas;
-    
-    
-    
-    //private TableView<Productos> TablaPro;
+    @FXML
+    private Button btnVentasCliente;
+    @FXML
+    private Button btnSECTORES;
 
+    //private TableView<Productos> TablaPro;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       //iniciar();
+        //iniciar();
         colocarImagenBotones();
-        
-       // IniciarSesion();
-    }    
-    public void recibirDatos(String ID, String Nombre, String Apellido){
-        this.ID=ID;
-        this.Nombre=Nombre;
-        this.Apellido=Apellido;
+        // IniciarSesion();
+    }
+
+    public void recibirDatos(String ID, String Nombre, String Apellido) {
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
         //V.getApellido();
     }
-    public void setProgramaPrincipal(principal programa)
-    {
-        programaPrincipal= programa;
+
+    public void setProgramaPrincipal(principal programa) {
+        programaPrincipal = programa;
     }
-    
-    public void iniciar(){
+
+    public void iniciar() {
         Usuarios u = new Usuarios();
         u.setTipoUsuario(programaPrincipal.getTipo());
-        
-      
-        
+
         MenuBar.setVisible(false);
-        
+
         Perfil.setVisible(false);
-        
-        LabelBienvenido.setVisible(true);   
+
+        LabelBienvenido.setVisible(true);
         txtConsultar.setVisible(false);
-        
-        BtnVolver.setVisible(false);      
+
+        BtnVolver.setVisible(false);
         BtonesCliente.setVisible(false);
-        if(u.getTipoUsuario().equals("1")){
+        if (u.getTipoUsuario().equals("1")) {
             BtonesADM.setVisible(true);
             MenuBar.setVisible(true);
             Perfil.setText("Administrador");
             Perfil.setVisible(true);
-            String aver =u.getNombre() + " " + u.getApellido();
+            String aver = u.getNombre() + " " + u.getApellido();
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(true);
             BtnConsultarVende.setVisible(true);
-        }else if(u.getTipoUsuario().equals("2")){
+        } else if (u.getTipoUsuario().equals("2")) {
             Perfil.setText("vendedor");
             Perfil.setVisible(true);
             BtonesVendedores.setVisible(true);
             Vendedor v = new Vendedor();
-            String aver =v.getNombre() + " " + v.getApellido();
+            String aver = v.getNombre() + " " + v.getApellido();
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(false);
-             
-        }else{
+
+        } else {
             Perfil.setText("Cliente");
             Perfil.setVisible(true);
             Cliente c = new Cliente();
-            String aver =c.getNombre() + " " + c.getApellido();
+            String aver = c.getNombre() + " " + c.getApellido();
             LabelBienvenido.setText("Bienvenido " + aver);
             agregarpro.setVisible(false);
             ActualizarClien.setVisible(true);
             btnConsultarProductosC.setVisible(true);
             BtonesCliente.setVisible(true);
         }
-        
+
     }
+
     @FXML
-    public void autorizarActualizar(){
-            programaPrincipal.Notificar();
-        }
+    public void autorizarActualizar() {
+        programaPrincipal.Notificar();
+    }
+
     @FXML
-    public void volver(){
+    public void volver() {
         iniciar();
     }
-    
-    
-             
+
     @FXML
-    public void abrirOtraVentana()
-    {
+    public void abrirOtraVentana() {
         programaPrincipal.abrirOtraVentana();
-    }       
+    }
+
     @FXML
-    public void AgregarPro(){
+    public void AgregarPro() {
         programaPrincipal.AgregarP();
     }
+
     @FXML
-    public void consultarClientesadmin(){
+    public void consultarClientesadmin() {
         programaPrincipal.ConsultarClienteAdm();
     }
+
     @FXML
-    public void consultar1Productos(){
+    public void consultar1Productos() {
         programaPrincipal.ProductosCliente();
     }
+
     @FXML
-    public void consultar(){
-        
+    public void consultar() {
+
         programaPrincipal.ConsultarVendedor();
     }
-    public void ActualizarDatos(){
+
+    public void ActualizarDatos() {
         Cliente c = new Cliente();
         c.setID(txtConsultar.getText());
         programaPrincipal.Actualizar();
     }
-  
-    
-    
 
     @FXML
     private void CerrarSesion(ActionEvent event) {
-        Cliente c = new Cliente("","","","","", 0);
-        Vendedor v = new Vendedor("","","","","",0,0,0);
-        Usuarios u = new Usuarios("","","","","", "");
+        Cliente c = new Cliente("", "", "", "", "", 0);
+        Vendedor v = new Vendedor("", "", "", "", "", 0, 0, 0);
+        Usuarios u = new Usuarios("", "", "", "", "", "");
         u.setTipoUsuario("");
         programaPrincipal.initRootLayout();
     }
-    
-   
+
     @FXML
-    public void vendedores(){
+    public void vendedores() {
         programaPrincipal.Vendedores();
     }
 
@@ -249,23 +248,23 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    public void consultarProductosADM(){
+    public void consultarProductosADM() {
         programaPrincipal.consultarP();
     }
 
-    public void colocarImagenBotones(){
+    public void colocarImagenBotones() {
         URL linkNuevo = getClass().getResource("/Imagenes/AgregarUser.png");
         URL AgregarP = getClass().getResource("/Imagenes/caja.png");
         URL consultarP = getClass().getResource("/Imagenes/paquete.png");
         URL consultarV = getClass().getResource("/Imagenes/empleado.png");
         URL consultarC = getClass().getResource("/Imagenes/grupo.png");
         URL conVentas = getClass().getResource("/Imagenes/ventas.png");
-        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
-        Image imagenNuevo1 = new Image(AgregarP.toString(), 24,24,false,true);
-        Image imagenNuevo2 = new Image(consultarP.toString(), 24,24,false,true);
-        Image imagenNuevo3 = new Image(consultarV.toString(), 24,24,false,true);
-        Image imagenNuevo4 = new Image(consultarC.toString(), 24,24,false,true);
-        Image imagenNuevo5 = new Image(conVentas.toString(), 24,24,false,true);
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24, 24, false, true);
+        Image imagenNuevo1 = new Image(AgregarP.toString(), 24, 24, false, true);
+        Image imagenNuevo2 = new Image(consultarP.toString(), 24, 24, false, true);
+        Image imagenNuevo3 = new Image(consultarV.toString(), 24, 24, false, true);
+        Image imagenNuevo4 = new Image(consultarC.toString(), 24, 24, false, true);
+        Image imagenNuevo5 = new Image(conVentas.toString(), 24, 24, false, true);
         BtnRegistrar.setGraphic(new ImageView(imagenNuevo));
         agregarpro.setGraphic(new ImageView(imagenNuevo1));
         ConsulPro.setGraphic(new ImageView(imagenNuevo2));
@@ -281,5 +280,13 @@ public class MenuController implements Initializable {
     private void TotalVentas(ActionEvent event) {
         programaPrincipal.VentasAdministrador();
     }
-    
+
+    @FXML
+    private void ConsultarVentasCliente(ActionEvent event) {
+        programaPrincipal.Ventascliente();
+    }
+
+    @FXML
+    private void sectores(){
+    }
 }

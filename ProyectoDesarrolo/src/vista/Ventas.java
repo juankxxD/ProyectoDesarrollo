@@ -19,11 +19,12 @@ import modelo.Conexion;
  * @author Vicky
  */
 public class Ventas {
+
     private String id_ventas;
     private String cod_producto;
     private String cod_cliente;
     private LocalDate fecha;
-    
+
     private int valor;
     private int cantidad;
 
@@ -42,11 +43,10 @@ public class Ventas {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-   
 
-    public Ventas(String id_ventas,String cod_producto, String cod_cliente, LocalDate fecha, int valor, int cantidad) {
-       
-        this.id_ventas = id_ventas; 
+    public Ventas(String id_ventas, String cod_producto, String cod_cliente, LocalDate fecha, int valor, int cantidad) {
+
+        this.id_ventas = id_ventas;
         this.cod_producto = cod_producto;
         this.cod_cliente = cod_cliente;
         this.fecha = fecha;
@@ -58,31 +58,30 @@ public class Ventas {
         this.cod_producto = cod_producto;
         this.cod_cliente = cod_cliente;
         this.fecha = fecha;
-        
+
         this.valor = valor;
     }
- 
-    public ObservableList<Ventas> getVentas(){
+
+    public ObservableList<Ventas> getVentas() {
         ObservableList<Ventas> obs = FXCollections.observableArrayList();
-        try{
+        try {
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
-            String sql = "SELECT \"cod_cliente\", \"cod_producto\", (\"fecha_compra\" + 2) AS fecha_compra, \"valor\"\n" +
-" 				FROM \"ventas\"";
-            PreparedStatement ps= con.prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
-                String codigo =rs.getString("cod_cliente");
-                String codigoProducto= rs.getString("cod_producto");
-                LocalDate Fecha_Ven= rs.getDate("fecha_compra").toLocalDate();
-                int Valor= rs.getInt("valor");
-                
-                
-                Ventas v = new Ventas(codigo, codigoProducto,Fecha_Ven, Valor );
+            String sql = "SELECT \"cod_cliente\", \"cod_producto\", (\"fecha_compra\" + 2) AS fecha_compra, \"valor\"\n"
+                    + " 				FROM \"ventas\"";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String codigo = rs.getString("cod_cliente");
+                String codigoProducto = rs.getString("cod_producto");
+                LocalDate Fecha_Ven = rs.getDate("fecha_compra").toLocalDate();
+                int Valor = rs.getInt("valor");
+
+                Ventas v = new Ventas(codigo, codigoProducto, Fecha_Ven, Valor);
                 obs.add(v);
-                
+
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e.toString());
         }
         return obs;
@@ -90,6 +89,7 @@ public class Ventas {
 
     public Ventas() {
     }
+
     public String getCod_producto() {
         return cod_producto;
     }
@@ -114,10 +114,6 @@ public class Ventas {
         this.fecha = fecha;
     }
 
-    
-
-   
-
     public int getValor() {
         return valor;
     }
@@ -125,34 +121,91 @@ public class Ventas {
     public void setValor(int valor) {
         this.valor = valor;
     }
-   
-  public ObservableList<Ventas> getTotalVentas(){
+
+    public ObservableList<Ventas> getTotalVentas() {
         ObservableList<Ventas> obs = FXCollections.observableArrayList();
-        try{
+        try {
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
-            String sql = "SELECT *\n" +
-" 				FROM \"ventas\"";
-            PreparedStatement ps= con.prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
-                String codigo =rs.getString("id_venta");
-                String Nombre= rs.getString("cod_cliente");
-                String cod_producto= rs.getString("cod_producto");
-                LocalDate Fecha_Ven= rs.getDate("fecha_compra").toLocalDate();
-                int Valor= rs.getInt("valor");
-               
-                int cantidad= rs.getInt("cantidad");
-                
-                 Ventas v= new Ventas(codigo, Nombre,cod_producto,Fecha_Ven, Valor,  cantidad);
+            String sql = "SELECT *\n"
+                    + " 				FROM \"ventas\"";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String codigo = rs.getString("id_venta");
+                String Nombre = rs.getString("cod_cliente");
+                String cod_producto = rs.getString("cod_producto");
+                LocalDate Fecha_Ven = rs.getDate("fecha_compra").toLocalDate();
+                int Valor = rs.getInt("valor");
+
+                int cantidad = rs.getInt("cantidad");
+
+                Ventas v = new Ventas(codigo, Nombre, cod_producto, Fecha_Ven, Valor, cantidad);
                 obs.add(v);
-                
+
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e.toString());
         }
         return obs;
-    }  
-    
-    
+    }
+
+    public ObservableList<Ventas> EliminarVentas(String id) {
+        ObservableList<Ventas> obs = FXCollections.observableArrayList();
+        try {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n"
+                    + "FROM \"ventas\"\n"
+                    + "WHERE (\"fecha_compra\" + 3)< '2021-04-13' AND \"cod_cliente\" = '" + id + "'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String codigo = rs.getString("id_venta");
+                String Nombre = rs.getString("cod_cliente");
+                String cod_producto = rs.getString("cod_producto");
+                LocalDate Fecha_Ven = rs.getDate("fecha_compra").toLocalDate();
+                int Valor = rs.getInt("valor");
+
+                int cantidad = rs.getInt("cantidad");
+
+                Ventas v = new Ventas(codigo, Nombre, cod_producto, Fecha_Ven, Valor, cantidad);
+                obs.add(v);
+
+            }
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+
+    public ObservableList<Ventas> esteCliente(String id) {
+        ObservableList<Ventas> obs = FXCollections.observableArrayList();
+        try {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n"
+                    + "FROM \"ventas\"\n"
+                    + "WHERE \"cod_cliente\" = '"+ id +"'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String codigo = rs.getString("id_venta");
+                String Nombre = rs.getString("cod_cliente");
+                String cod_producto = rs.getString("cod_producto");
+                LocalDate Fecha_Ven = rs.getDate("fecha_compra").toLocalDate();
+                int Valor = rs.getInt("valor");
+
+                int cantidad = rs.getInt("cantidad");
+
+                Ventas v = new Ventas(codigo, Nombre, cod_producto, Fecha_Ven, Valor, cantidad);
+                obs.add(v);
+
+            }
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        }
+        return obs;
+    }
+
 }

@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/hojaEstilo.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.VentasClienteController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="216.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
@@ -18,20 +19,26 @@
    <right>
       <Pane prefHeight="400.0" prefWidth="226.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txtCodigo" layoutX="16.0" layoutY="134.0" prefHeight="20.0" prefWidth="117.0" promptText="codigo" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
-            <Button fx:id="Eliminar" layoutX="48.0" layoutY="192.0" mnemonicParsing="false" text="Eliminar" />
+            <TextField fx:id="txtCodigo" editable="false" layoutX="16.0" layoutY="134.0" prefHeight="20.0" prefWidth="117.0" promptText="codigo" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="Eliminar" layoutX="48.0" layoutY="192.0" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
+            <SplitMenuButton fx:id="Opciones" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" text="opciones">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#ConsultarProductos" text="Consultar ventas" />
+                <MenuItem mnemonicParsing="false" onAction="#consultarEliminar" text="Eliminar productos" />
+              </items>
+            </SplitMenuButton>
          </children>
       </Pane>
    </right>
    <left>
-      <TableView fx:id="Tabla" prefHeight="400.0" prefWidth="452.0" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="Tabla" onMouseClicked="#Seleccionar" prefHeight="400.0" prefWidth="452.0" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="ProCod" prefWidth="68.99999809265137" text="Codigo" />
-          <TableColumn fx:id="ProNom" prefWidth="60.000030517578125" text="Nombre" />
-            <TableColumn fx:id="ProFec" prefWidth="111.0" text="Fecha_vencimiento" />
-            <TableColumn fx:id="columCantidad" prefWidth="65.0" text="Cantidad" />
-            <TableColumn fx:id="ProDes" prefWidth="71.0" text="Descuento" />
-            <TableColumn fx:id="ProVa" prefWidth="73.99996948242188" text="Valor" />
+          <TableColumn fx:id="columid" prefWidth="68.99999809265137" text="columid" />
+          <TableColumn fx:id="columcod" prefWidth="60.000030517578125" text="columcod" />
+            <TableColumn fx:id="columNombre" prefWidth="111.0" text="columNombre" />
+            <TableColumn fx:id="columProducto" prefWidth="65.0" text="columProducto" />
+            <TableColumn fx:id="columcantidad" prefWidth="71.0" text="columcantidad" />
+            <TableColumn fx:id="columTotal" prefWidth="73.99996948242188" text="columTotal" />
         </columns>
       </TableView>
    </left>

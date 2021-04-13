@@ -30,6 +30,7 @@
                 <Button fx:id="btnProductos" mnemonicParsing="false" onAction="#consultarProductos" stylesheets="@../css/hojaEstilo.css" text="Productos" translateY="-70.0" />
                   <Button fx:id="BtnRegistrar" mnemonicParsing="false" onAction="#abrirOtraVentana" stylesheets="@../css/hojaEstilo.css" text="Registrar usuario" />
                   <Button fx:id="ConsultarVendedor" mnemonicParsing="false" onAction="#consultar" prefHeight="27.0" prefWidth="164.0" stylesheets="@../css/hojaEstilo.css" text="Consultar Clientes" translateY="-70.0" />
+                  <Button fx:id="btnSECTORES" mnemonicParsing="false" onAction="#sectores" text="Button" />
               </buttons>
             </ButtonBar>
             <ButtonBar fx:id="BtonesADM" layoutX="109.0" layoutY="127.0" prefHeight="129.0" prefWidth="383.0" visible="false">
@@ -43,6 +44,7 @@
                <buttons>
                   <Button fx:id="btnConsultarProductosC" mnemonicParsing="false" onAction="#consultar1Productos" stylesheets="@../css/hojaEstilo.css" text="Consultar Productos" visible="false" />
                   <Button fx:id="ActualizarClien" mnemonicParsing="false" onAction="#autorizarActualizar" stylesheets="@../css/hojaEstilo.css" text="Actualizar Datos" visible="false" />
+                  <Button fx:id="btnVentasCliente" mnemonicParsing="false" onAction="#ConsultarVentasCliente" stylesheets="@../css/hojaEstilo.css" text="Compras" translateX="60.0" />
                </buttons>
             </ButtonBar>
          </children>
