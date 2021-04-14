@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ComprarVendedorController">
    <center>
-      <AnchorPane prefHeight="208.0" prefWidth="571.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="txtDescuentoPuntos" prefHeight="208.0" prefWidth="571.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="39.0" layoutY="14.0" text="codigo producto" />
             <Label layoutX="412.0" layoutY="14.0" text="Nombre Producto" />
@@ -31,6 +31,7 @@
             <TextField fx:id="txtDescuento" disable="true" layoutX="39.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtcod_Cliente" layoutX="412.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtCantidad" layoutX="39.0" layoutY="285.0" prefHeight="25.0" prefWidth="44.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="BtnComprarDescuento" layoutX="167.0" layoutY="305.0" mnemonicParsing="false" onAction="#ComprarDescuento" stylesheets="@../css/hojaEstilo.css" text="Comprar utilizando puntos" />
          </children>
       </AnchorPane>
    </center>

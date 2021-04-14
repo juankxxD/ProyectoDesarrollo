@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -56,6 +57,10 @@ public class ComprarVendedorController implements Initializable {
     private TextField txtcod_Cliente;
     @FXML
     private TextField txtCantidad;
+    @FXML
+    private AnchorPane txtDescuentoPuntos;
+    @FXML
+    private Button BtnComprarDescuento;
 
     /**
      * Initializes the controller class.
@@ -157,7 +162,7 @@ public class ComprarVendedorController implements Initializable {
         }
          
         int suma = puntos + 5;
-         System.out.println(suma);
+       
         String sql1 = "UPDATE \"clientes\"\n" +
 " 				SET \"puntos\" = ?\n" +
 " 				WHERE \"ID\" = '" + txtcod_Cliente.getText()+"'";
@@ -227,7 +232,6 @@ public class ComprarVendedorController implements Initializable {
         Volver.setGraphic(new ImageView(imagenNuevo));  
         Comprar.setGraphic(new ImageView(imagenNuevo1));  
     }
-    @FXML
     public void jeje(KeyEvent a){
        Object evt = a.getSource();
        if(evt.equals(txtCantidad)||evt.equals(txtcod_Cliente)){
@@ -236,4 +240,10 @@ public class ComprarVendedorController implements Initializable {
                     }
         }
     }
+
+    @FXML
+    private void ComprarDescuento(ActionEvent event){
+        
+    } 
+    
 }
