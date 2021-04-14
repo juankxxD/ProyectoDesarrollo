@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -28,7 +30,7 @@
                   <TableColumn fx:id="ProFec" prefWidth="75.0" text="Fecha_Venci" />
                   <TableColumn fx:id="ProVa" prefWidth="75.0" text="Valor" />
                   <TableColumn fx:id="ProDes" prefWidth="75.0" text="Descuento" />
-                  <TableColumn fx:id="columCantidad" prefWidth="75.0" text="Cantidad" visible="false" />
+                  <TableColumn fx:id="columCantidad" prefWidth="75.0" text="Cantidad" />
               </columns>
             </TableView>
             <TextField fx:id="txtCodigo" layoutX="477.0" layoutY="114.0" prefHeight="25.0" prefWidth="103.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
@@ -39,13 +41,24 @@
             <Button fx:id="btnvolver" layoutX="527.0" layoutY="353.0" mnemonicParsing="false" onAction="#Volvermenu" text="Volver" visible="false" />
             <TableView fx:id="Tablaventas" layoutX="42.0" layoutY="25.0" prefHeight="328.0" prefWidth="393.0" visible="false">
               <columns>
-                <TableColumn fx:id="columcodCliente" prefWidth="124.0" text="Codigo Cliente" />
-                <TableColumn fx:id="columcodProducto" prefWidth="101.0" text="Codigo Producto" />
-                  <TableColumn fx:id="ColumFecha_Entrega" minWidth="0.0" prefWidth="109.0" text="Fecha de entrega" />
-                  <TableColumn fx:id="columTotal" minWidth="0.0" prefWidth="58.0" text="Total" />
+                <TableColumn fx:id="ColumVenta" prefWidth="83.0" text="Venta" />
+                <TableColumn fx:id="columcodCliente" prefWidth="81.0" text="Codigo cliente" />
+                  <TableColumn fx:id="columcodProducto" minWidth="0.0" prefWidth="79.0" text="Codigo Producto" />
+                  <TableColumn fx:id="ColumFecha_Entrega" minWidth="0.0" prefWidth="56.0" text="Fecha de entrega" />
+                  <TableColumn fx:id="columTotal" prefWidth="93.0" text="Total" />
               </columns>
             </TableView>
             <Button fx:id="btnConsultarProducto" layoutX="477.0" layoutY="216.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar" visible="false" />
+            <SplitMenuButton fx:id="opciones" layoutX="462.0" layoutY="59.0" mnemonicParsing="false" text="Opciones" visible="false">
+              <items>
+                <MenuItem fx:id="Ventasc" mnemonicParsing="false" onAction="#Ventas" text="Consultar Ventas" />
+                <MenuItem fx:id="Devolciones" mnemonicParsing="false" onAction="#Devoluciones" text="Ver devolucines" />
+                  <MenuItem fx:id="MenuEliminar" mnemonicParsing="false" onAction="#EliminarProducto" text="Eliminar producto" />
+              </items>
+            </SplitMenuButton>
+            <Button fx:id="Devolution" layoutX="486.0" layoutY="216.0" mnemonicParsing="false" onAction="#DevolucionFun" text="Devolucion" visible="false" />
+            <TextField fx:id="txtCodigo" layoutX="474.0" layoutY="148.0" prefHeight="25.0" prefWidth="119.0" promptText="Codigo Cliente" visible="false" />
+            <Button fx:id="Eliminar" layoutX="496.0" layoutY="226.0" mnemonicParsing="false" onAction="#Eliminarfun" prefHeight="27.0" prefWidth="107.0" text="Eliminar Producto" visible="false" />
          </children>
       </AnchorPane>
    </center>

@@ -294,80 +294,60 @@ public class MenuController implements Initializable {
         String nombre = "";
         int cantidad = 0;
         String SQL = "SELECT COUNT(\"codigo\")\n"
-                + "FROM \"Sectores\"";
+                + "FROM \"Sectores\"\n"
+                + "WHERE \"estado\" = 'disponible'";
         PreparedStatement ps = con.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
-        int contador = 0;
         while (rs.next()) {
             cantidad = rs.getInt("count");
         }
-
-        String[] sectores = new String[cantidad];
-
-        for (int i = 0; i < sectores.length; i++) {
-            System.out.println(i);
-            String SQL1 = "SELECT \"nombre\", \"estado\"\n"
-                    + "FROM \"Sectores\"\n"
-                    + "WHERE \"codigo\" = '" + (i + 1) + "';";
-            PreparedStatement ps1 = con.prepareStatement(SQL1);
-            ResultSet rs1 = ps1.executeQuery();
-            while (rs1.next()) {
-                nombre = rs1.getString("nombre");
-                estado = rs1.getString("estado");
-            }
-            if (estado.equals("disponible")) {
-                sectores[i] = nombre;
-                contador++;
-            } else {
-                continue;
-            }
+        int bandera = 0;
+        int contador = 0;
+        String SQL5 = "SELECT COUNT(\"codigo\")\n"
+                + "FROM \"Sectores\"";
+         PreparedStatement ps5 = con.prepareStatement(SQL5);
+        ResultSet rs5 = ps5.executeQuery();
+        while (rs5.next()) {
+            contador = rs5.getInt("count");
         }
-        int random = (int) Math.floor(Math.random() * (contador) + 1);
-        if(contador == 1){
-            for(int i = 0; i < sectores.length; i++){
-                if(sectores[i]==null){
+        if (cantidad != 0) {
+            String[] sectores = new String[cantidad];
+
+            for (int i = 1; i <= contador; i++) {
+
+                String SQL1 = "SELECT \"nombre\", \"estado\"\n"
+                        + "FROM \"Sectores\"\n"
+                        + "WHERE \"codigo\" = '" + i  + "';";
+                PreparedStatement ps1 = con.prepareStatement(SQL1);
+                ResultSet rs1 = ps1.executeQuery();
+                while (rs1.next()) {
+                    nombre = rs1.getString("nombre");
+                    estado = rs1.getString("estado");
+                }
+                if (estado.equals("disponible")) {
+                    sectores[bandera] = nombre;
+                    bandera++;
+                } else {
                     continue;
-                }else{
-                    random = i;
-                    break;
                 }
             }
+            int random = (int) Math.floor(Math.random() * (cantidad + 1 - 1) + 1);
+            random -= 1;
+
             JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random]);
             String SQL3 = "UPDATE \"Sectores\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"nombre\" = '" + sectores[random] +"'";
-        PreparedStatement ps3 = con.prepareStatement(SQL3);
-        ps3.setString(1, "ocupado");
-        ps3.executeUpdate();
-        }else{
-        if(sectores[random] == null){
-            for(int i = 0; i < sectores.length; i++){
-                if(sectores[i]==null){
-                    continue;
-                }else{
-                    random = i;
-                    break;
-                }
-            }
-                JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random]);
-            String SQL3 = "UPDATE \"Sectores\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"nombre\" = '" + sectores[random] +"'";
-        PreparedStatement ps3 = con.prepareStatement(SQL3);
-        ps3.setString(1, "ocupado");
-        ps3.executeUpdate();
-            }else{
-        
-        JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random - 1]);
-        String SQL3 = "UPDATE \"Sectores\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"nombre\" = '" + sectores[random - 1] +"'";
-        PreparedStatement ps3 = con.prepareStatement(SQL3);
-        ps3.setString(1, "ocupado");
-        ps3.executeUpdate();
-        
-      
-        }
+                    + "SET \"estado\" = ?\n"
+                    + "WHERE \"nombre\" = '" + sectores[random] + "'";
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setString(1, "ocupado");
+            ps3.executeUpdate();
+                    } else {
+            String SQL4 = "UPDATE \"Sectores\"\n"
+                    + "SET \"estado\" = ?";
+            PreparedStatement ps3 = con.prepareStatement(SQL4);
+            ps3.setString(1, "disponible");
+            ps3.executeUpdate();
+            sectores();
         }
     }
 }

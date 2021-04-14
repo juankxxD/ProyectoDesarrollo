@@ -25,27 +25,29 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#ConsultarProductos" text="Consultar ventas" />
                 <MenuItem mnemonicParsing="false" onAction="#consultarEliminar" text="Eliminar productos" />
+                  <MenuItem fx:id="MenuDevolution" mnemonicParsing="false" onAction="#Devolucion" text="Hacer devolucion" />
               </items>
             </SplitMenuButton>
+            <Button fx:id="Devolucion" layoutX="27.0" layoutY="192.0" mnemonicParsing="false" onAction="#funDevolucion" text="Devolucion" />
          </children>
       </Pane>
    </right>
    <left>
       <TableView fx:id="Tabla" onMouseClicked="#Seleccionar" prefHeight="400.0" prefWidth="452.0" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="columid" prefWidth="68.99999809265137" text="columid" />
-          <TableColumn fx:id="columcod" prefWidth="60.000030517578125" text="columcod" />
-            <TableColumn fx:id="columNombre" prefWidth="111.0" text="columNombre" />
-            <TableColumn fx:id="columProducto" prefWidth="65.0" text="columProducto" />
-            <TableColumn fx:id="columcantidad" prefWidth="71.0" text="columcantidad" />
-            <TableColumn fx:id="columTotal" prefWidth="73.99996948242188" text="columTotal" />
+          <TableColumn fx:id="columid" prefWidth="98.99999809265137" text="Numero venta" />
+          <TableColumn fx:id="columcod" prefWidth="95.00003814697266" text="codigo" />
+            <TableColumn fx:id="columNombre" prefWidth="75.0" text="Codigo cliente" />
+            <TableColumn fx:id="columProducto" prefWidth="68.0" text="fecha" />
+            <TableColumn fx:id="columcantidad" prefWidth="51.0" text="cantidad" />
+            <TableColumn fx:id="columTotal" prefWidth="64.0" text="Total" />
         </columns>
       </TableView>
    </left>
    <bottom>
       <Pane prefHeight="64.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnVolver" layoutX="507.0" layoutY="19.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="btnVolver" layoutX="507.0" layoutY="19.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
          </children>
       </Pane>
    </bottom>

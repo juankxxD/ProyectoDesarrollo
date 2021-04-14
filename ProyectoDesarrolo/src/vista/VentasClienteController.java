@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,6 +58,10 @@ public class VentasClienteController implements Initializable {
     private Button Eliminar;
     @FXML
     private SplitMenuButton Opciones;
+    @FXML
+    private MenuItem MenuDevolution;
+    @FXML
+    private Button Devolucion;
 
     /**
      * Initializes the controller class.
@@ -76,6 +81,7 @@ public class VentasClienteController implements Initializable {
 
         Tabla.setVisible(true);
         txtCodigo.setVisible(false);
+        Devolucion.setVisible(false);
         Eliminar.setVisible(false);
         this.columid.setCellValueFactory(new PropertyValueFactory("id_ventas"));
         this.columcod.setCellValueFactory(new PropertyValueFactory("cod_producto"));
@@ -94,6 +100,7 @@ public class VentasClienteController implements Initializable {
     private void consultarEliminar() {
         txtCodigo.setText("");
         Tabla.setVisible(true);
+        Devolucion.setVisible(false);
         txtCodigo.setVisible(true);
         Eliminar.setVisible(true);
         this.columid.setCellValueFactory(new PropertyValueFactory("id_ventas"));
@@ -146,9 +153,11 @@ public class VentasClienteController implements Initializable {
             codigo = rs.getString("cod_producto");
         }
 
-        String SQL1 = "DELETE FROM \"ventas\"\n"
-                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+        String SQL1 = "UPDATE \"ventas\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"id_venta\" = '"+ txtCodigo.getText() +"';";
         PreparedStatement ps1 = con.prepareStatement(SQL1);
+        ps1.setString(1, "eliminado");
         ps1.executeUpdate();
         JOptionPane.showMessageDialog(null, "Producto eliminado");
         String SQL2 = "SELECT \"cantidad\"\n"
@@ -172,5 +181,27 @@ public class VentasClienteController implements Initializable {
     private void Volver(ActionEvent event) {
         Usuarios u = new Usuarios();
         programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
+    }
+
+    @FXML
+    private void Devolucion(ActionEvent event) {
+        Tabla.setVisible(true);
+        txtCodigo.setVisible(true);
+        Eliminar.setVisible(false);
+        Devolucion.setVisible(true);
+        this.columid.setCellValueFactory(new PropertyValueFactory("id_ventas"));
+        this.columcod.setCellValueFactory(new PropertyValueFactory("cod_producto"));
+        this.columNombre.setCellValueFactory(new PropertyValueFactory("cod_cliente"));
+        this.columProducto.setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.columcantidad.setCellValueFactory(new PropertyValueFactory("cantidad"));
+        this.columTotal.setCellValueFactory(new PropertyValueFactory("valor"));
+        Ventas v = new Ventas();
+        Cliente c = new Cliente();
+        ObservableList<Ventas> item = v.esteCliente(c.getID());
+        this.Tabla.setItems(item);
+    }
+
+    @FXML
+    private void funDevolucion(ActionEvent event) {
     }
 }

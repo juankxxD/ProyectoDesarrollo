@@ -95,12 +95,13 @@ public class TotalVentasController implements Initializable {
             String fechaAnterior = año1 +"-" + MES1 + "-" + DIA1;
             System.out.println(fechaActual);
             System.out.println(fechaAnterior);
-        String sql = "SELECT SUM(valor)\n" +
-" 				FROM \"ventas\"\n" +
-" 				WHERE \"id_venta\" in\n" +
+        String sql = "SELECT SUM(valor) \n" +
+" 				FROM \"ventas\" \n" +
+"				WHERE \"id_venta\" in\n" +
 " 				(SELECT \"id_venta\"\n" +
 " 				FROM \"ventas\"\n" +
-" 				WHERE \"fecha_compra\"BETWEEN '"+ fechaAnterior +"' AND '"+  fechaActual +"')";
+" 				WHERE \"fecha_compra\"BETWEEN '" + fechaAnterior + "' AND '" + fechaActual + "')\n" +
+" 				AND \"estado\" = 'entregado'";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

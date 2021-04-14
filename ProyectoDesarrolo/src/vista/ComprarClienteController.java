@@ -120,13 +120,14 @@ public class ComprarClienteController implements Initializable {
             java.util.Date nfecha = formato.parse(fechaActual);
             fechaDate = new java.sql.Date(nfecha.getTime());
             String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n" +
-" 				VALUES (?, ?, ?, ?, ?)";
+" 				VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps1= con.prepareStatement(SQL);
             ps1.setString(1, c.getID());
             ps1.setString(2, txtCod_pro.getText().trim());
             ps1.setDate(3, fechaDate);
             ps1.setInt(4, traerTotal());
         ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
+        ps1.setString(6, "entregado");
         ps1.executeUpdate();
         cantidadTotal(cantidad);
         JOptionPane.showMessageDialog(null, "Has comprado  " + txt_nombre.getText());
@@ -220,7 +221,6 @@ public class ComprarClienteController implements Initializable {
         Volver.setGraphic(new ImageView(imagenNuevo));  
         Comprar.setGraphic(new ImageView(imagenNuevo1));  
     }
-    @FXML
     public void jeje(KeyEvent a){
        Object evt = a.getSource();
        if(evt.equals(txtCantidad)){
