@@ -242,8 +242,102 @@ public class ComprarVendedorController implements Initializable {
     }
 
     @FXML
-    private void ComprarDescuento(ActionEvent event){
+    private void ComprarDescuento(ActionEvent event) throws SQLException, ParseException {
+        producto p = new producto();
+        Conexion conn = new Conexion();
+       
+        int cantidad = 0;
+        Connection con = conn.getConexion();
+        String sql = "SELECT *\n" +
+" 				FROM \"Productos\"\n" +
+" 				WHERE \"codigo\" = '"+ p.getID() +"'";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+    
+            txtCod_pro.setText(rs.getString("codigo"));
+            txt_nombre.setText(rs.getString("Nombre"));
+            LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
+            txtValor.setText(rs.getString("Valor"));
+            txtDescuento.setText(rs.getString("valor_Descuento"));
+            cantidad = rs.getInt("cantidad");
+            txt_fecha.setText(fecha + "");
+    }
+        if(txtcod_Cliente.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe de poner el codigo del cliente");
+        }else{
+        if(cantidad <= 0){
+            JOptionPane.showMessageDialog(null, "No quedan productos existentes");
+        } else {
+            int resta = Integer.parseInt(txtCantidad.getText());
+            cantidad -= resta;
+            if(cantidad < 0){
+                JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
+            } else{
+               Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int MES = fecha.get(Calendar.MONTH) + 1;
+            int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+            String fechaActual = año +"-" + MES + "-" + DIA;
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaDate;
+            java.util.Date nfecha = formato.parse(fechaActual);
+            fechaDate = new java.sql.Date(nfecha.getTime());
+            int valor = traerTotal();
+            int valorDes = (valor * 5)/100;
+            valor -= valorDes; 
+            String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n" +
+" 				VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps1= con.prepareStatement(SQL);
+            ps1.setString(1, txtcod_Cliente.getText().trim());
+            ps1.setString(2, txtCod_pro.getText().trim());
+            ps1.setDate(3, fechaDate);
+            ps1.setInt(4, valor);
+        ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
+        ps1.executeUpdate();
+        cantidadTotalPuntos(cantidad);
+        
+        JOptionPane.showMessageDialog(null, "El cliente " + txtcod_Cliente.getText() + " a comprado " + txt_nombre.getText());
+    }
+        }
+        }
+        }
         
     } 
+public void cantidadTotalPuntos(int cantidad)throws SQLException{
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        int resta = cantidad; 
+        String sql = "UPDATE \"Productos\"\n" +
+" 				SET \"cantidad\" = ?\n" +
+" 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setInt(1,resta);
+         ps.executeUpdate();
+         Puntos();
+    }
+        public void Puntos()throws SQLException{
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        int puntos = 0;
+        String sql = "SELECT \"puntos\"\n" +
+" 				FROM \"clientes\"\n" +
+" 				WHERE \"ID\" = '"+ txtcod_Cliente.getText() +"'";
+        PreparedStatement ps= con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+        puntos = rs.getInt("puntos");
+        }
+         
+        int resta = puntos - 10;
+       
+        String sql1 = "UPDATE \"clientes\"\n" +
+" 				SET \"puntos\" = ?\n" +
+" 				WHERE \"ID\" = '" + txtcod_Cliente.getText()+"'";
+        PreparedStatement ps1= con.prepareStatement(sql1);
+        ps1.setInt(1,resta);
+         ps1.executeUpdate();
+    }
+
     
 }

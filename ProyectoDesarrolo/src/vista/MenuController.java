@@ -287,6 +287,87 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void sectores(){
+    private void sectores() throws SQLException {
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String estado = "";
+        String nombre = "";
+        int cantidad = 0;
+        String SQL = "SELECT COUNT(\"codigo\")\n"
+                + "FROM \"Sectores\"";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        int contador = 0;
+        while (rs.next()) {
+            cantidad = rs.getInt("count");
+        }
+
+        String[] sectores = new String[cantidad];
+
+        for (int i = 0; i < sectores.length; i++) {
+            System.out.println(i);
+            String SQL1 = "SELECT \"nombre\", \"estado\"\n"
+                    + "FROM \"Sectores\"\n"
+                    + "WHERE \"codigo\" = '" + (i + 1) + "';";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                nombre = rs1.getString("nombre");
+                estado = rs1.getString("estado");
+            }
+            if (estado.equals("disponible")) {
+                sectores[i] = nombre;
+                contador++;
+            } else {
+                continue;
+            }
+        }
+        int random = (int) Math.floor(Math.random() * (contador) + 1);
+        if(contador == 1){
+            for(int i = 0; i < sectores.length; i++){
+                if(sectores[i]==null){
+                    continue;
+                }else{
+                    random = i;
+                    break;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random]);
+            String SQL3 = "UPDATE \"Sectores\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"nombre\" = '" + sectores[random] +"'";
+        PreparedStatement ps3 = con.prepareStatement(SQL3);
+        ps3.setString(1, "ocupado");
+        ps3.executeUpdate();
+        }else{
+        if(sectores[random] == null){
+            for(int i = 0; i < sectores.length; i++){
+                if(sectores[i]==null){
+                    continue;
+                }else{
+                    random = i;
+                    break;
+                }
+            }
+                JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random]);
+            String SQL3 = "UPDATE \"Sectores\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"nombre\" = '" + sectores[random] +"'";
+        PreparedStatement ps3 = con.prepareStatement(SQL3);
+        ps3.setString(1, "ocupado");
+        ps3.executeUpdate();
+            }else{
+        
+        JOptionPane.showMessageDialog(null, "Te toca en el sector: " + sectores[random - 1]);
+        String SQL3 = "UPDATE \"Sectores\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"nombre\" = '" + sectores[random - 1] +"'";
+        PreparedStatement ps3 = con.prepareStatement(SQL3);
+        ps3.setString(1, "ocupado");
+        ps3.executeUpdate();
+        
+      
+        }
+        }
     }
 }
