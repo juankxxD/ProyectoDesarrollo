@@ -202,6 +202,41 @@ public class VentasClienteController implements Initializable {
     }
 
     @FXML
-    private void funDevolucion(ActionEvent event) {
+    private void funDevolucion(ActionEvent event) throws SQLException {
+         Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        int cantidad = 0;
+        String codigo = "";
+        String SQL = "SELECT \"cantidad\", \"cod_producto\"\n"
+                + "FROM \"ventas\"\n"
+                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            cantidad = rs.getInt("cantidad");
+            codigo = rs.getString("cod_producto");
+        }
+
+        String SQL1 = "UPDATE \"ventas\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"id_venta\" = '"+ txtCodigo.getText() +"';";
+        PreparedStatement ps1 = con.prepareStatement(SQL1);
+        ps1.setString(1, "pendiente");
+        ps1.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Producto pendiente para devolucion");
+        String SQL2 = "SELECT \"cantidad\"\n"
+                + "FROM \"Productos\"\n"
+                + "WHERE \"codigo\" = '" + codigo + "'";
+        PreparedStatement ps2 = con.prepareStatement(SQL2);
+        ResultSet rs2 = ps2.executeQuery();
+        while (rs2.next()) {
+            cantidad += rs2.getInt("cantidad");
+        }
+        String SQL3 = "UPDATE  \"Productos\"\n"
+                + "SET \"cantidad\" = ?\n"
+                + "WHERE \"codigo\" = '" + codigo + "'";
+        PreparedStatement ps3 = con.prepareStatement(SQL3);
+        ps3.setInt(1, cantidad);
+        ps3.executeUpdate();
     }
 }

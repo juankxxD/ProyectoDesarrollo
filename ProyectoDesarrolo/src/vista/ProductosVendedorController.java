@@ -222,7 +222,17 @@ public class ProductosVendedorController implements Initializable {
     }
 
     @FXML
-    private void DevolucionFun(ActionEvent event) {
+    private void DevolucionFun(ActionEvent event) throws SQLException {
+         Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String SQL = "UPDATE \"ventas\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+        PreparedStatement ps1 = con.prepareStatement(SQL);
+        ps1.setString(1, "Devolucion");
+        ps1.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Devolucion Exitosa");
+    }
         
     }
 
