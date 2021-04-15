@@ -257,7 +257,15 @@ public class ProductosVendedorController implements Initializable {
     }
 
     @FXML
-    private void Eliminarfun(ActionEvent event) {
-    }
+    private void Eliminarfun(ActionEvent event) throws SQLException {
+         Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String SQL = "UPDATE \"ventas\"\n"
+                + "SET \"estado\" = ?\n"
+                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+        PreparedStatement ps1 = con.prepareStatement(SQL);
+        ps1.setString(1, "Eliminado");
+        ps1.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Producto eliminado");
     
 }
