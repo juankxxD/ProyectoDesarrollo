@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -140,9 +141,13 @@ public class ConsultarClienteVendedorController implements Initializable {
 
     @FXML
     private void ActualizarDatos(ActionEvent event) {
+        if(!txtConsultar.getText().equals("")){
         Cliente c = new Cliente();
         c.setID(txtConsultar.getText());
         programaPrincipal.Actualizar();
+        }else{
+            JOptionPane.showMessageDialog(null,"Debe llenar los datos");
+        }
     }
     public void colocarImagenBotones(){
         URL linkNuevo = getClass().getResource("/Imagenes/volver.png");

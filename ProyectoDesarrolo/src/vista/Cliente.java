@@ -234,11 +234,16 @@ public class Cliente {
             String fechaActual = año +"-" + MES + "-" + DIA;
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
-            String sql = "SELECT \"cod_cliente\", p2.\"Nombre\", p2.\"Apellido\", p2.\"Telefono\", p2.\"direccion\", p1.\"puntos\"\n" +
+            String sql = "SELECT DISTINCT \"cod_cliente\", p2.\"Nombre\", p2.\"Apellido\", p2.\"Telefono\", p2.\"direccion\", p1.\"puntos\"\n" +
 "				from\n" +
 "				(SELECT (\"fecha_compra\" + 365) AS fecha, P10.\"cod_cliente\" AS IDP\n" +
-"				FROM \"ventas\" p10) AS pofavor, \"ventas\" p11, \"clientes\" p1, \"Usuario\" p2\n" +
-"				where fecha <= '" + fechaActual +"' AND p11.\"cod_cliente\" = \"idp\" AND p1.\"ID\" = p11.cod_cliente AND p2.\"ID\" = p11.cod_cliente";
+"				FROM \"ventas\" p10\n" +
+"				GROUP BY IDP, fecha) AS pofavor, \"ventas\" p11, \"clientes\" p1, \"Usuario\" p2\n" +
+"				WHERE \"fecha\" <= '"+ fechaActual +"' AND p11.\"cod_cliente\" = \"idp\" AND p1.\"ID\" = p11.cod_cliente AND p2.\"ID\" = p11.\"cod_cliente\"\n" +
+"				AND p11.\"cod_cliente\" NOT in (SELECT \"cod_cliente\"\n" +
+"				FROM (SELECT  \"cod_cliente\", (\"fecha_compra\" + 365) AS fechaActuales\n" +
+"				FROM \"ventas\") AS prueba\n" +
+"				WHERE fechaActuales > '"+ fechaActual +"')";
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs= ps.executeQuery();
             while(rs.next()){

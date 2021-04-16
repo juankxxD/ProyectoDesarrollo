@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -83,6 +84,7 @@ public class ConsultarProductosController implements Initializable {
             Logger.getLogger(ConsultarProductosController.class.getName()).log(Level.SEVERE, null, ex);
         }
         colocarImagenBotones();
+        Aumentar.setVisible(false);
     }    
     public void setProgramaPrincipal(principal programa)
     {
@@ -114,14 +116,22 @@ public class ConsultarProductosController implements Initializable {
 
     @FXML
     private void aumentar(ActionEvent event) {
-        producto p = new producto();
+        if(txtCodigoPro.getText().equals("") || txtCantidadPro.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }else{
+            producto p = new producto();
         p.seleccion(txtCodigoPro.getText(),txtCantidadPro.getText());   
+        }
     }
 
     @FXML
     private void Cambiar(ActionEvent event) {
+         if(!txtCodigoPro.getText().equals("")){
         producto p = new producto();
         p.CambiarDescuento(txtCodigoPro.getText());
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }
     }
     
     public void consultarProductos() throws SQLException{
@@ -153,15 +163,17 @@ public class ConsultarProductosController implements Initializable {
         URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
         URL linkNuevo1 = getClass().getResource("/Imagenes/Aumentar.png");
         URL linkNuevo2 = getClass().getResource("/Imagenes/etiqueta.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/opciones.png");
         Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
         Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
         Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 15,15,false,true);
         btnVolver.setGraphic(new ImageView(imagenNuevo));  
         btnAumentarCan.setGraphic(new ImageView(imagenNuevo1)); 
         btnCambiDes.setGraphic(new ImageView(imagenNuevo2)); 
         Aumentar.setGraphic(new ImageView(imagenNuevo1));
         Cambiarbtn.setGraphic(new ImageView(imagenNuevo2)); 
-        
+        Opciones.setGraphic(new ImageView(imagenNuevo3)); 
     }
     @FXML
     public void jeje(KeyEvent a){

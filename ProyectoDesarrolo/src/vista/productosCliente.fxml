@@ -33,7 +33,7 @@
    <bottom>
       <Pane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnVolver" layoutX="528.0" layoutY="2.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+            <Button fx:id="btnVolver" layoutX="493.0" layoutY="1.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
          </children>
       </Pane>
    </bottom>
@@ -51,8 +51,8 @@
    <right>
       <Pane prefHeight="318.0" prefWidth="153.0" style="-fx-background-color: white;" stylesheets="@../css/hojaEstilo.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnConsultar" layoutX="51.0" layoutY="218.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar" />
-            <TextField fx:id="txtCodigo" layoutX="22.0" layoutY="134.0" prefHeight="25.0" prefWidth="112.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="btnConsultar" layoutX="20.0" layoutY="218.0" mnemonicParsing="false" onAction="#Consultar" text="Consultar" />
+            <TextField fx:id="txtCodigo" layoutX="22.0" layoutY="134.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="112.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <Label fx:id="labelCodigo" layoutX="22.0" layoutY="109.0" text="codigo">
                <font>
                   <Font name="Times New Roman" size="15.0" />

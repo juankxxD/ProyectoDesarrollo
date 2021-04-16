@@ -68,10 +68,10 @@ public class ComprarClienteController implements Initializable {
             Logger.getLogger(ComprarClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
         colocarImagenBotones();
-    }  
-    public void setProgramaPrincipal(principal programa)
-    {
-        programaPrincipal= programa;
+    }
+
+    public void setProgramaPrincipal(principal programa) {
+        programaPrincipal = programa;
     }
 
     @FXML
@@ -81,106 +81,109 @@ public class ComprarClienteController implements Initializable {
 
     @FXML
     private void Comprar(ActionEvent event) throws SQLException, ParseException {
-        producto p = new producto();
-        
-        Conexion conn = new Conexion();
-        int cantidad = 0;
-        Connection con = conn.getConexion();
-        String sql = "SELECT *\n" +
-" 				FROM \"Productos\"\n" +
-" 				WHERE \"codigo\" = '"+ p.getID() +"'";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-    
-            txtCod_pro.setText(rs.getString("codigo"));
-            txt_nombre.setText(rs.getString("Nombre"));
-            LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
-            txtValor.setText(rs.getString("Valor"));
-            txtDescuento.setText(rs.getString("valor_Descuento"));
-            cantidad = rs.getInt("cantidad");
-            txt_fecha.setText(fecha + "");
-    }
-        
-        if(cantidad <= 0){
-            JOptionPane.showMessageDialog(null, "No quedan productos existentes");
+        if (!txtCantidad.getText().equals("")) {
+            producto p = new producto();
+
+            Conexion conn = new Conexion();
+            int cantidad = 0;
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n"
+                    + " 				FROM \"Productos\"\n"
+                    + " 				WHERE \"codigo\" = '" + p.getID() + "'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                txtCod_pro.setText(rs.getString("codigo"));
+                txt_nombre.setText(rs.getString("Nombre"));
+                LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
+                txtValor.setText(rs.getString("Valor"));
+                txtDescuento.setText(rs.getString("valor_Descuento"));
+                cantidad = rs.getInt("cantidad");
+                txt_fecha.setText(fecha + "");
+            }
+
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(null, "No quedan productos existentes");
+            } else {
+                int resta = Integer.parseInt(txtCantidad.getText());
+                cantidad -= resta;
+                if (cantidad < 0) {
+                    JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
+                } else {
+                    Calendar fecha = new GregorianCalendar();
+                    int año = fecha.get(Calendar.YEAR);
+                    int MES = fecha.get(Calendar.MONTH) + 1;
+                    int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+                    String fechaActual = año + "-" + MES + "-" + DIA;
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaDate;
+                    java.util.Date nfecha = formato.parse(fechaActual);
+                    fechaDate = new java.sql.Date(nfecha.getTime());
+                    String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\", \"estado\")\n" +
+"                 				VALUES (?, ?, ?, ?, ?, ?)";
+                    PreparedStatement ps1 = con.prepareStatement(SQL);
+                    ps1.setString(1, c.getID());
+                    ps1.setString(2, txtCod_pro.getText().trim());
+                    ps1.setDate(3, fechaDate);
+                    ps1.setInt(4, traerTotal());
+                    ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
+                    ps1.setString(6, "entregado");
+                    ps1.executeUpdate();
+                    cantidadTotal(cantidad);
+                    JOptionPane.showMessageDialog(null, "Has comprado  " + txt_nombre.getText());
+                }
+            }
         } else {
-            int resta = Integer.parseInt(txtCantidad.getText());
-            cantidad -= resta;
-            if(cantidad < 0){
-                JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
-            } else{
-               Calendar fecha = new GregorianCalendar();
-            int año = fecha.get(Calendar.YEAR);
-            int MES = fecha.get(Calendar.MONTH) + 1;
-            int DIA = fecha.get(Calendar.DAY_OF_MONTH);
-            String fechaActual = año +"-" + MES + "-" + DIA;
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaDate;
-            java.util.Date nfecha = formato.parse(fechaActual);
-            fechaDate = new java.sql.Date(nfecha.getTime());
-            String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n" +
-" 				VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps1= con.prepareStatement(SQL);
-            ps1.setString(1, c.getID());
-            ps1.setString(2, txtCod_pro.getText().trim());
-            ps1.setDate(3, fechaDate);
-            ps1.setInt(4, traerTotal());
-        ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
-        ps1.setString(6, "entregado");
-        ps1.executeUpdate();
-        cantidadTotal(cantidad);
-        JOptionPane.showMessageDialog(null, "Has comprado  " + txt_nombre.getText());
-    }
+            JOptionPane.showMessageDialog(null, "Debe de llenar los datos");
         }
-        
     }
-    
-    public void cantidadTotal(int cantidad) throws SQLException{
+
+    public void cantidadTotal(int cantidad) throws SQLException {
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
-        int resta = cantidad; 
-        String sql = "UPDATE \"Productos\"\n" +
-" 				SET \"cantidad\" = ?\n" +
-" 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
-        PreparedStatement ps= con.prepareStatement(sql);
-        ps.setInt(1,resta);
-         ps.executeUpdate();
-         restarPuntos();
+        int resta = cantidad;
+        String sql = "UPDATE \"Productos\"\n"
+                + " 				SET \"cantidad\" = ?\n"
+                + " 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, resta);
+        ps.executeUpdate();
+        restarPuntos();
     }
-    
-    public void restarPuntos() throws SQLException{
+
+    public void restarPuntos() throws SQLException {
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
         int puntos = 0;
-        String sql = "SELECT \"puntos\"\n" +
-" 				FROM \"clientes\"\n" +
-" 				WHERE \"ID\" = '"+ c.getID() +"'";
-        PreparedStatement ps= con.prepareStatement(sql);
+        String sql = "SELECT \"puntos\"\n"
+                + " 				FROM \"clientes\"\n"
+                + " 				WHERE \"ID\" = '" + c.getID() + "'";
+        PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-        puntos = rs.getInt("puntos");
+            puntos = rs.getInt("puntos");
         }
-         
+
         int suma = puntos + 5;
-         System.out.println(suma);
-        String sql1 = "UPDATE \"clientes\"\n" +
-" 				SET \"puntos\" = ?\n" +
-" 				WHERE \"ID\" = '" + c.getID()+"'";
-        PreparedStatement ps1= con.prepareStatement(sql1);
-        ps1.setInt(1,suma);
-         ps1.executeUpdate();
+        System.out.println(suma);
+        String sql1 = "UPDATE \"clientes\"\n"
+                + " 				SET \"puntos\" = ?\n"
+                + " 				WHERE \"ID\" = '" + c.getID() + "'";
+        PreparedStatement ps1 = con.prepareStatement(sql1);
+        ps1.setInt(1, suma);
+        ps1.executeUpdate();
     }
-    
-    public int traerTotal() throws SQLException{
+
+    public int traerTotal() throws SQLException {
         int descuento1 = 0;
         int total = 0;
         Conexion conn = new Conexion();
         System.out.println("Llegue aqui");
         Connection con = conn.getConexion();
-        String sql = "SELECT \"Valor\", \"valor_Descuento\"\n" +
-" 				FROM \"Productos\"\n" +
-" 				WHERE \"codigo\" = '" + txtCod_pro.getText() +"'";
+        String sql = "SELECT \"Valor\", \"valor_Descuento\"\n"
+                + " 				FROM \"Productos\"\n"
+                + " 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -189,18 +192,18 @@ public class ComprarClienteController implements Initializable {
             descuento1 = (valor * descuento) / 100;
             total = valor - descuento1;
             total *= Integer.parseInt(txtCantidad.getText());
-    }
+        }
         return total;
     }
-    
-    public void Iniciar() throws SQLException{
+
+    public void Iniciar() throws SQLException {
         Conexion conn = new Conexion();
         int cantidad;
         Connection con = conn.getConexion();
-         producto p = new producto();
-        String sql = "SELECT *\n" +
-" 				FROM \"Productos\"\n" +
-" 				WHERE \"codigo\" = '"+ p.getID() +"'";
+        producto p = new producto();
+        String sql = "SELECT *\n"
+                + " 				FROM \"Productos\"\n"
+                + " 				WHERE \"codigo\" = '" + p.getID() + "'";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -211,23 +214,25 @@ public class ComprarClienteController implements Initializable {
             txtDescuento.setText(rs.getString("valor_Descuento"));
             cantidad = rs.getInt("cantidad");
             txt_fecha.setText(fecha + "");
-    }
-    }
-    public void colocarImagenBotones(){
-        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
-        URL linkNuevo1 = getClass().getResource("/Imagenes/comprar.png");
-        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
-        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
-        Volver.setGraphic(new ImageView(imagenNuevo));  
-        Comprar.setGraphic(new ImageView(imagenNuevo1));  
-    }
-    public void jeje(KeyEvent a){
-       Object evt = a.getSource();
-       if(evt.equals(txtCantidad)){
-                    if(!Character.isDigit(a.getCharacter().charAt(0))){
-             a.consume();
-                    }
         }
     }
-    
+
+    public void colocarImagenBotones() {
+        URL linkNuevo = getClass().getResource("/Imagenes/volver.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/comprar.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24, 24, false, true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24, 24, false, true);
+        Volver.setGraphic(new ImageView(imagenNuevo));
+        Comprar.setGraphic(new ImageView(imagenNuevo1));
+    }
+
+    public void jeje(KeyEvent a) {
+        Object evt = a.getSource();
+        if (evt.equals(txtCantidad)) {
+            if (!Character.isDigit(a.getCharacter().charAt(0))) {
+                a.consume();
+            }
+        }
+    }
+
 }

@@ -18,17 +18,17 @@
             <Label layoutX="354.0" layoutY="99.0" text="Telefono" />
             <Label layoutX="38.0" layoutY="173.0" text="Direccion" />
             <Label layoutX="356.0" layoutY="174.0" text="Puntos" />
-            <TextField fx:id="txtCodigo" layoutX="35.0" layoutY="41.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtNombre" layoutX="354.0" layoutY="42.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtApellido" layoutX="37.0" layoutY="117.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtTelefono" layoutX="356.0" layoutY="118.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtDireccion" layoutX="39.0" layoutY="192.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtPuntos" layoutX="354.0" layoutY="193.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtCodigo" editable="false" layoutX="35.0" layoutY="41.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtNombre" editable="false" layoutX="354.0" layoutY="42.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtApellido" editable="false" layoutX="37.0" layoutY="117.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtTelefono" editable="false" layoutX="356.0" layoutY="118.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtDireccion" editable="false" layoutX="39.0" layoutY="192.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtPuntos" editable="false" layoutX="354.0" layoutY="193.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <Label layoutX="281.0" layoutY="267.0" />
             <Button fx:id="volver" layoutX="456.0" layoutY="273.0" mnemonicParsing="false" onAction="#Volver" stylesheets="@../css/hojaEstilo.css" text="Volver" />
             <TextField fx:id="txtCantidad" layoutX="42.0" layoutY="255.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <Label layoutX="38.0" layoutY="237.0" text="cantidad" />
-            <Button fx:id="BtnDar" layoutX="357.0" layoutY="271.0" mnemonicParsing="false" onAction="#Regalar" stylesheets="@../css/hojaEstilo.css" text="Aceptar" />
+            <Button fx:id="BtnDar" layoutX="365.0" layoutY="273.0" mnemonicParsing="false" onAction="#Regalar" stylesheets="@../css/hojaEstilo.css" text="Aceptar" />
          </children>
       </AnchorPane>
    </center>

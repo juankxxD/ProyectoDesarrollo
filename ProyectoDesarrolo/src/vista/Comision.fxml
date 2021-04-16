@@ -18,9 +18,9 @@
             <TextField fx:id="txtNombre" disable="true" editable="false" layoutX="407.0" layoutY="38.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtApellido" disable="true" editable="false" layoutX="31.0" layoutY="132.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtComision" disable="true" editable="false" layoutX="407.0" layoutY="132.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <Button fx:id="btnCambiar" layoutX="256.0" layoutY="231.0" mnemonicParsing="false" onAction="#Cambiar" prefHeight="28.0" prefWidth="127.0" text="Cambiar Comision" />
-            <Button fx:id="btnVolver" layoutX="392.0" layoutY="231.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
-            <Button fx:id="btnDatos" layoutX="146.0" layoutY="231.0" mnemonicParsing="false" onAction="#TraerDatos" text="Traer Datos" />
+            <Button fx:id="btnCambiar" layoutX="256.0" layoutY="231.0" mnemonicParsing="false" onAction="#Cambiar" prefHeight="28.0" prefWidth="156.0" text="Cambiar Comision" />
+            <Button fx:id="btnVolver" layoutX="451.0" layoutY="231.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+            <Button fx:id="btnDatos" layoutX="107.0" layoutY="231.0" mnemonicParsing="false" onAction="#TraerDatos" text="Traer Datos" />
          </children>
       </AnchorPane>
    </center>

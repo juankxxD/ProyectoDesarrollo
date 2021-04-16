@@ -52,6 +52,7 @@ public class NotificarVendedorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         mandarDatos();
+        colocarImagenBotones();
     }    
     public void setProgramaPrincipal(principal programa)
     {
@@ -64,6 +65,7 @@ public class NotificarVendedorController implements Initializable {
     
     @FXML
     public void notificar(){
+        if(!txtTelefono.getText().equals("")||!txtDireccion.getText().equals("")||!txtContraseña.getText().equals("")){
         Cliente u = new Cliente();
         String mensaje = "Cambiar  telefono a " + txtTelefono.getText() +"\n"
                 + "Cambiar direccion a " + txtDireccion.getText() + " " +"\n"
@@ -86,6 +88,9 @@ public class NotificarVendedorController implements Initializable {
        } catch(SQLException ex){
        JOptionPane.showMessageDialog(null, ex);
     }
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }
     }
     public void mandarDatos(){
         Cliente u = new Cliente();

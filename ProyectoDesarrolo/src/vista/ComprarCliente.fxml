@@ -21,9 +21,9 @@
             <TextField fx:id="txt_fecha" disable="true" editable="false" layoutX="29.0" layoutY="131.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtValor" disable="true" editable="false" layoutX="421.0" layoutY="131.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtDescuento" disable="true" editable="false" layoutX="29.0" layoutY="219.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtCantidad" layoutX="421.0" layoutY="219.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtCantidad" layoutX="421.0" layoutY="219.0" onKeyTyped="#jeje" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <Button fx:id="Volver" layoutX="496.0" layoutY="275.0" mnemonicParsing="false" onAction="#Volver" stylesheets="@../css/hojaEstilo.css" text="Volver" />
-            <Button fx:id="Comprar" layoutX="395.0" layoutY="275.0" mnemonicParsing="false" onAction="#Comprar" stylesheets="@../css/hojaEstilo.css" text="Comprar" />
+            <Button fx:id="Comprar" layoutX="356.0" layoutY="275.0" mnemonicParsing="false" onAction="#Comprar" stylesheets="@../css/hojaEstilo.css" text="Comprar" />
          </children>
       </AnchorPane>
    </center>

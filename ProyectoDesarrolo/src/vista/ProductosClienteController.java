@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -75,9 +77,13 @@ public class ProductosClienteController implements Initializable {
 
     @FXML
     private void Consultar(ActionEvent event) {
+        if(!txtCodigo.getText().equals("")){
         producto p = new producto();
         p.setID(txtCodigo.getText());
         programaPrincipal.ComprarCliente();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar datos");
+        }
     }
     public void inicio(){
         this.ProCod.setCellValueFactory(new PropertyValueFactory("codigo"));
@@ -98,4 +104,13 @@ public class ProductosClienteController implements Initializable {
         btnVolver.setGraphic(new ImageView(imagenNuevo));  
         btnConsultar.setGraphic(new ImageView(imagenNuevo1));  
     }
+    public void jeje(KeyEvent a) {
+        Object evt = a.getSource();
+        if (evt.equals(txtCodigo)) {
+            if (!Character.isDigit(a.getCharacter().charAt(0))) {
+                a.consume();
+            }
+        }
+    }
+
 }

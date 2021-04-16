@@ -98,11 +98,11 @@ public class Usuarios {
     }
     public Usuarios(String ID){
         this.ID= ID;
-        System.out.println(getID());
+ 
     }
     public void guardarTipo(String Tipo){
         TipoUsuario = Tipo.trim();
-        System.out.println(TipoUsuario);
+
     }
     public void registrarCliente(String Documento, String nombre, String Apellido, String telefono, String Direccion, String Puntos, String contraseña){
         try{
@@ -166,9 +166,9 @@ public class Usuarios {
              String direccion = rs.getString("direccion");
              String contraseña = rs.getString("Contraseña");
              
-             System.out.println(Nombre);
+        
              Usuarios u = new Usuarios(ID, Nombre, Apellido, Telefono, direccion, contraseña);
-             System.out.println(this.Apellido);
+            
             // MenuController m = new MenuController();
              //m.recibirDatos(ID, Nombre, Apellido);
         }

@@ -112,6 +112,7 @@ public class BonoRegaloController implements Initializable {
 
     @FXML
     private void Regalar(ActionEvent event) throws SQLException, ParseException {
+        if(!txtCantidad.getText().equals("")){
         String codigo = "";
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
@@ -143,8 +144,8 @@ public class BonoRegaloController implements Initializable {
             Date fechaDate;
              java.util.Date nfecha = formato.parse(fechaActual);
              fechaDate = new java.sql.Date(nfecha.getTime());
-                String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n" +
-" 				VALUES (?, ?, ?, ?, ?)";
+                String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\", \"estado\")\n" +
+"                 				VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps1= con.prepareStatement(SQL);
                  
         ps1.setString(1, txtCodigo.getText().trim());
@@ -152,13 +153,16 @@ public class BonoRegaloController implements Initializable {
         ps1.setDate(3, fechaDate);
         ps1.setInt(4, traerTotal(codigo));
         ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
+        ps1.setString(6, "entregado");
         ps1.executeUpdate();
         cantidadTotal(codigo);
         JOptionPane.showMessageDialog(null, "Se le ha dado exitosamente un bono de regalo a " + txtNombre.getText());
             }
             
         }
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }
     }
 
     public int restarCantidad(String ID) throws SQLException {

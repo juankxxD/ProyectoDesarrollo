@@ -82,60 +82,66 @@ public class ComprarVendedorController implements Initializable {
 
     @FXML
     private void Comprar(ActionEvent event) throws SQLException, ParseException {
-        producto p = new producto();
-        Conexion conn = new Conexion();
-        int cantidad = 0;
-        Connection con = conn.getConexion();
-        String sql = "SELECT *\n"
-                + " 				FROM \"Productos\"\n"
-                + " 				WHERE \"codigo\" = '" + txtCod_pro.getText()  + "'";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
+        if (txtcod_Cliente.getText().equals("") || txtCantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe de llenar los datos");
 
-            txtCod_pro.setText(rs.getString("codigo"));
-            txt_nombre.setText(rs.getString("Nombre"));
-            LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
-            txtValor.setText(rs.getString("Valor"));
-            txtDescuento.setText(rs.getString("valor_Descuento"));
-            cantidad = rs.getInt("cantidad");
-            txt_fecha.setText(fecha + "");
-        }
-        System.out.println("");
-        if (txtcod_Cliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Debe de poner el codigo del cliente");
         } else {
-            if (cantidad <= 0) {
-                JOptionPane.showMessageDialog(null, "No quedan productos existentes");
+            producto p = new producto();
+            Conexion conn = new Conexion();
+            int cantidad = 0;
+            Connection con = conn.getConexion();
+            String sql = "SELECT *\n"
+                    + " 				FROM \"Productos\"\n"
+                    + " 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                txtCod_pro.setText(rs.getString("codigo"));
+                txt_nombre.setText(rs.getString("Nombre"));
+                LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
+                txtValor.setText(rs.getString("Valor"));
+                txtDescuento.setText(rs.getString("valor_Descuento"));
+                cantidad = rs.getInt("cantidad");
+                txt_fecha.setText(fecha + "");
+            }
+            System.out.println("");
+            if (txtcod_Cliente.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Debe de poner el codigo del cliente");
             } else {
-                int resta = Integer.parseInt(txtCantidad.getText());
-                cantidad -= resta;
-                if (cantidad < 0) {
-                    JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
+                if (cantidad <= 0) {
+                    JOptionPane.showMessageDialog(null, "No quedan productos existentes");
                 } else {
-                    Calendar fecha = new GregorianCalendar();
-                    int año = fecha.get(Calendar.YEAR);
-                    int MES = fecha.get(Calendar.MONTH) + 1;
-                    int DIA = fecha.get(Calendar.DAY_OF_MONTH);
-                    String fechaActual = año + "-" + MES + "-" + DIA;
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                    Date fechaDate;
-                    java.util.Date nfecha = formato.parse(fechaActual);
-                    fechaDate = new java.sql.Date(nfecha.getTime());
-                    String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n"
-                            + " 				VALUES (?, ?, ?, ?, ?, ?)";
-                    PreparedStatement ps1 = con.prepareStatement(SQL);
-                    ps1.setString(1, txtcod_Cliente.getText().trim());
-                    ps1.setString(2, txtCod_pro.getText().trim());
-                    ps1.setDate(3, fechaDate);
-                    ps1.setInt(4, traerTotal());
-                    ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
-                    ps1.setString(6, "entregado");
-                    ps1.executeUpdate();
-                    cantidadTotal(cantidad);
-                    JOptionPane.showMessageDialog(null, "El cliente " + txtcod_Cliente.getText() + " a comprado " + txt_nombre.getText());
+                    int resta = Integer.parseInt(txtCantidad.getText());
+                    cantidad -= resta;
+                    if (cantidad < 0) {
+                        JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
+                    } else {
+                        Calendar fecha = new GregorianCalendar();
+                        int año = fecha.get(Calendar.YEAR);
+                        int MES = fecha.get(Calendar.MONTH) + 1;
+                        int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+                        String fechaActual = año + "-" + MES + "-" + DIA;
+                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaDate;
+                        java.util.Date nfecha = formato.parse(fechaActual);
+                        fechaDate = new java.sql.Date(nfecha.getTime());
+                        String SQL = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\", \"estado\")\n" +
+"                 				VALUES (?, ?, ?, ?, ?, ?)";
+                        PreparedStatement ps1 = con.prepareStatement(SQL);
+                        ps1.setString(1, txtcod_Cliente.getText().trim());
+                        ps1.setString(2, txtCod_pro.getText().trim());
+                        ps1.setDate(3, fechaDate);
+                        ps1.setInt(4, traerTotal());
+                        ps1.setInt(5, Integer.parseInt(txtCantidad.getText()));
+                        ps1.setString(6, "entregado");
+                        ps1.executeUpdate();
+                        cantidadTotal(cantidad);
+                        JOptionPane.showMessageDialog(null, "El cliente " + txtcod_Cliente.getText() + " a comprado " + txt_nombre.getText());
+                    }
                 }
             }
+        
         }
     }
 
@@ -222,7 +228,7 @@ public class ComprarVendedorController implements Initializable {
     @FXML
     private void Volver(ActionEvent event) {
         Usuarios u = new Usuarios();
-        programaPrincipal.AbrirTerceraVentana(u.getTipoUsuario());
+        programaPrincipal.ProductosVendedor();
 
     }
 
@@ -233,6 +239,7 @@ public class ComprarVendedorController implements Initializable {
         Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24, 24, false, true);
         Volver.setGraphic(new ImageView(imagenNuevo));
         Comprar.setGraphic(new ImageView(imagenNuevo1));
+        BtnComprarDescuento.setGraphic(new ImageView(imagenNuevo1));
     }
 
     public void jeje(KeyEvent a) {
@@ -246,76 +253,82 @@ public class ComprarVendedorController implements Initializable {
 
     @FXML
     private void ComprarDescuento(ActionEvent event) throws SQLException, ParseException {
-        producto p = new producto();
-        Conexion conn = new Conexion();
-        int puntos = 0;
-        Connection con = conn.getConexion();
-        String SQL = "SELECT \"puntos\"\n"
-                + "FROM \"clientes\"\n"
-                + "WHERE \"ID\" = '"+ txtcod_Cliente.getText() +"'";
-        PreparedStatement ps1 = con.prepareStatement(SQL);
-        ResultSet rs1 = ps1.executeQuery();
-        while (rs1.next()) {
-            puntos = rs1.getInt("puntos");
-        }
-        int cantidad = 0;
-        if (puntos >= 10) {
-            String sql = "SELECT *\n"
-                    + " 				FROM \"Productos\"\n"
-                    + " 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+        if (txtcod_Cliente.getText().equals("") || txtCantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe de llenar los datos");
 
-                txtCod_pro.setText(rs.getString("codigo"));
-                txt_nombre.setText(rs.getString("Nombre"));
-                LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
-                txtValor.setText(rs.getString("Valor"));
-                txtDescuento.setText(rs.getString("valor_Descuento"));
-                cantidad = rs.getInt("cantidad");
-                txt_fecha.setText(fecha + "");
+        } else {
+
+            producto p = new producto();
+            Conexion conn = new Conexion();
+            int puntos = 0;
+            Connection con = conn.getConexion();
+            String SQL = "SELECT \"puntos\"\n"
+                    + "FROM \"clientes\"\n"
+                    + "WHERE \"ID\" = '" + txtcod_Cliente.getText() + "'";
+            PreparedStatement ps1 = con.prepareStatement(SQL);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                puntos = rs1.getInt("puntos");
             }
-            if (txtcod_Cliente.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Debe de poner el codigo del cliente");
-            } else {
-                if (cantidad <= 0) {
-                    JOptionPane.showMessageDialog(null, "No quedan productos existentes");
-                } else {
-                    int resta = Integer.parseInt(txtCantidad.getText());
-                    cantidad -= resta;
-                    if (cantidad < 0) {
-                        JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
-                    } else {
-                        Calendar fecha = new GregorianCalendar();
-                        int año = fecha.get(Calendar.YEAR);
-                        int MES = fecha.get(Calendar.MONTH) + 1;
-                        int DIA = fecha.get(Calendar.DAY_OF_MONTH);
-                        String fechaActual = año + "-" + MES + "-" + DIA;
-                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                        Date fechaDate;
-                        java.util.Date nfecha = formato.parse(fechaActual);
-                        fechaDate = new java.sql.Date(nfecha.getTime());
-                        int valor = traerTotal();
-                        int valorDes = (valor * 5) / 100;
-                        valor -= valorDes;
-                        String SQL1 = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\")\n"
-                                + " 				VALUES (?, ?, ?, ?, ?, ?)";
-                        PreparedStatement ps2 = con.prepareStatement(SQL1);
-                        ps2.setString(1, txtcod_Cliente.getText().trim());
-                        ps2.setString(2, txtCod_pro.getText().trim());
-                        ps2.setDate(3, fechaDate);
-                        ps2.setInt(4, valor);
-                        ps2.setInt(5, Integer.parseInt(txtCantidad.getText()));
-                        ps2.setString(6, "entregado");
-                        ps2.executeUpdate();
-                        cantidadTotalPuntos(cantidad);
+            int cantidad = 0;
+            if (puntos >= 10) {
+                String sql = "SELECT *\n"
+                        + " 				FROM \"Productos\"\n"
+                        + " 				WHERE \"codigo\" = '" + txtCod_pro.getText() + "'";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
 
-                        JOptionPane.showMessageDialog(null, "El cliente " + txtcod_Cliente.getText() + " a comprado " + txt_nombre.getText());
+                    txtCod_pro.setText(rs.getString("codigo"));
+                    txt_nombre.setText(rs.getString("Nombre"));
+                    LocalDate fecha = rs.getDate("Fecha_Ven").toLocalDate();
+                    txtValor.setText(rs.getString("Valor"));
+                    txtDescuento.setText(rs.getString("valor_Descuento"));
+                    cantidad = rs.getInt("cantidad");
+                    txt_fecha.setText(fecha + "");
+                }
+                if (txtcod_Cliente.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe de poner el codigo del cliente");
+                } else {
+                    if (cantidad <= 0) {
+                        JOptionPane.showMessageDialog(null, "No quedan productos existentes");
+                    } else {
+                        int resta = Integer.parseInt(txtCantidad.getText());
+                        cantidad -= resta;
+                        if (cantidad < 0) {
+                            JOptionPane.showMessageDialog(null, "No hay la cantidad de productos solicitados");
+                        } else {
+                            Calendar fecha = new GregorianCalendar();
+                            int año = fecha.get(Calendar.YEAR);
+                            int MES = fecha.get(Calendar.MONTH) + 1;
+                            int DIA = fecha.get(Calendar.DAY_OF_MONTH);
+                            String fechaActual = año + "-" + MES + "-" + DIA;
+                            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                            Date fechaDate;
+                            java.util.Date nfecha = formato.parse(fechaActual);
+                            fechaDate = new java.sql.Date(nfecha.getTime());
+                            int valor = traerTotal();
+                            int valorDes = (valor * 5) / 100;
+                            valor -= valorDes;
+                            String SQL1 = "INSERT INTO PUBLIC.\"ventas\"(\"cod_cliente\", \"cod_producto\", \"fecha_compra\", \"valor\", \"cantidad\", \"estado\")\n" +
+"                 				VALUES (?, ?, ?, ?, ?, ?)";
+                            PreparedStatement ps2 = con.prepareStatement(SQL1);
+                            ps2.setString(1, txtcod_Cliente.getText().trim());
+                            ps2.setString(2, txtCod_pro.getText().trim());
+                            ps2.setDate(3, fechaDate);
+                            ps2.setInt(4, valor);
+                            ps2.setInt(5, Integer.parseInt(txtCantidad.getText()));
+                            ps2.setString(6, "entregado");
+                            ps2.executeUpdate();
+                            cantidadTotalPuntos(cantidad);
+
+                            JOptionPane.showMessageDialog(null, "El cliente " + txtcod_Cliente.getText() + " a comprado " + txt_nombre.getText());
+                        }
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "No tiene puntos suficientes para el descuento");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No tiene puntos suficientes para el descuento");
         }
     }
 

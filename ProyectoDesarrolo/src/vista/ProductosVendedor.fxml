@@ -38,7 +38,7 @@
                <font>
                   <Font name="Times New Roman" size="12.0" />
                </font></Label>
-            <Button fx:id="btnvolver" layoutX="527.0" layoutY="353.0" mnemonicParsing="false" onAction="#Volvermenu" text="Volver" visible="false" />
+            <Button fx:id="btnvolver" layoutX="527.0" layoutY="353.0" mnemonicParsing="false" onAction="#Volvermenu" text="Volver" translateX="-50.0" visible="false" />
             <TableView fx:id="Tablaventas" layoutX="42.0" layoutY="25.0" prefHeight="328.0" prefWidth="393.0" visible="false">
               <columns>
                 <TableColumn fx:id="ColumVenta" prefWidth="83.0" text="Venta" />
@@ -57,7 +57,7 @@
               </items>
             </SplitMenuButton>
             <Button fx:id="Devolution" layoutX="486.0" layoutY="216.0" mnemonicParsing="false" onAction="#DevolucionFun" text="Devolucion" visible="false" />
-            <TextField fx:id="txtCodigo" layoutX="474.0" layoutY="148.0" prefHeight="25.0" prefWidth="119.0" promptText="Codigo Cliente" visible="false" />
+            <TextField fx:id="txtCodigo" layoutX="474.0" layoutY="148.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="119.0" promptText="Codigo Cliente" visible="false" />
             <Button fx:id="Eliminar" layoutX="496.0" layoutY="226.0" mnemonicParsing="false" onAction="#Eliminarfun" prefHeight="27.0" prefWidth="107.0" text="Eliminar Producto" visible="false" />
          </children>
       </AnchorPane>

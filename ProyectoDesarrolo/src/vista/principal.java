@@ -12,6 +12,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -47,6 +48,7 @@ public class principal extends Application{
     {
         primaryStage= stage;
         primaryStage.setTitle("JVD Inversion");
+        primaryStage.getIcons().add(new Image("/Imagenes/Logo.jpeg"));
         initRootLayout();
         
     }
@@ -57,7 +59,7 @@ public class principal extends Application{
             FXMLLoader loader= new FXMLLoader();
             loader.setLocation(principal.class.getResource("/vista/InicioSesion.fxml"));
             rootLayout= (BorderPane) loader.load();
-            
+            primaryStage.setTitle("JVD Inversion");
             //Aquí se carga la escena principal
             Scene scene= new Scene(rootLayout);
             
@@ -104,9 +106,13 @@ public class principal extends Application{
             FXMLLoader loader= new FXMLLoader();
             loader.setLocation(principal.class.getResource("/vista/Menu.fxml"));
             BorderPane ventana= (BorderPane) loader.load();
-            
-            primaryStage.setTitle("Ventana alternativa");
-            
+            if(tipo.equals("1")){
+            primaryStage.setTitle("Menu Administrador");
+            }else if(tipo.equals("2")){
+                primaryStage.setTitle("Menu Vendedor");
+            }else{
+                primaryStage.setTitle("Menu Cliente");
+            }
             Scene scene = new Scene(ventana);
             
             primaryStage.setScene(scene);

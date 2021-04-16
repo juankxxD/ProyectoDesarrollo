@@ -24,6 +24,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
 
@@ -62,6 +65,10 @@ public class VentasClienteController implements Initializable {
     private MenuItem MenuDevolution;
     @FXML
     private Button Devolucion;
+    @FXML
+    private MenuItem ItemEliminar;
+    @FXML
+    private MenuItem itemVentas;
 
     /**
      * Initializes the controller class.
@@ -70,6 +77,7 @@ public class VentasClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ConsultarProductos();
+        colocarImagenBotones();
     }
 
     public void setProgramaPrincipal(principal programa) {
@@ -139,42 +147,45 @@ public class VentasClienteController implements Initializable {
 
     @FXML
     private void eliminar() throws SQLException {
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        int cantidad = 0;
-        String codigo = "";
-        String SQL = "SELECT \"cantidad\", \"cod_producto\"\n"
-                + "FROM \"ventas\"\n"
-                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
-        PreparedStatement ps = con.prepareStatement(SQL);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            cantidad = rs.getInt("cantidad");
-            codigo = rs.getString("cod_producto");
-        }
+        if (txtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        } else {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            int cantidad = 0;
+            String codigo = "";
+            String SQL = "SELECT \"cantidad\", \"cod_producto\"\n"
+                    + "FROM \"ventas\"\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cantidad = rs.getInt("cantidad");
+                codigo = rs.getString("cod_producto");
+            }
 
-        String SQL1 = "UPDATE \"ventas\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"id_venta\" = '"+ txtCodigo.getText() +"';";
-        PreparedStatement ps1 = con.prepareStatement(SQL1);
-        ps1.setString(1, "eliminado");
-        ps1.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Producto eliminado");
-        String SQL2 = "SELECT \"cantidad\"\n"
-                + "FROM \"Productos\"\n"
-                + "WHERE \"codigo\" = '" + codigo + "'";
-        PreparedStatement ps2 = con.prepareStatement(SQL2);
-        ResultSet rs2 = ps2.executeQuery();
-        while (rs2.next()) {
-            cantidad += rs2.getInt("cantidad");
+            String SQL1 = "UPDATE \"ventas\"\n"
+                    + "SET \"estado\" = ?\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "';";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setString(1, "eliminado");
+            ps1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Producto eliminado");
+            String SQL2 = "SELECT \"cantidad\"\n"
+                    + "FROM \"Productos\"\n"
+                    + "WHERE \"codigo\" = '" + codigo + "'";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                cantidad += rs2.getInt("cantidad");
+            }
+            String SQL3 = "UPDATE  \"Productos\"\n"
+                    + "SET \"cantidad\" = ?\n"
+                    + "WHERE \"codigo\" = '" + codigo + "'";
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setInt(1, cantidad);
+            ps3.executeUpdate();
         }
-        String SQL3 = "UPDATE  \"Productos\"\n"
-                + "SET \"cantidad\" = ?\n"
-                + "WHERE \"codigo\" = '" + codigo + "'";
-        PreparedStatement ps3 = con.prepareStatement(SQL3);
-        ps3.setInt(1, cantidad);
-        ps3.executeUpdate();
-
     }
 
     @FXML
@@ -203,40 +214,69 @@ public class VentasClienteController implements Initializable {
 
     @FXML
     private void funDevolucion(ActionEvent event) throws SQLException {
-         Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        int cantidad = 0;
-        String codigo = "";
-        String SQL = "SELECT \"cantidad\", \"cod_producto\"\n"
-                + "FROM \"ventas\"\n"
-                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
-        PreparedStatement ps = con.prepareStatement(SQL);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            cantidad = rs.getInt("cantidad");
-            codigo = rs.getString("cod_producto");
-        }
+        if (txtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        } else {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            int cantidad = 0;
+            String codigo = "";
+            String SQL = "SELECT \"cantidad\", \"cod_producto\"\n"
+                    + "FROM \"ventas\"\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cantidad = rs.getInt("cantidad");
+                codigo = rs.getString("cod_producto");
+            }
 
-        String SQL1 = "UPDATE \"ventas\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"id_venta\" = '"+ txtCodigo.getText() +"';";
-        PreparedStatement ps1 = con.prepareStatement(SQL1);
-        ps1.setString(1, "pendiente");
-        ps1.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Producto pendiente para devolucion");
-        String SQL2 = "SELECT \"cantidad\"\n"
-                + "FROM \"Productos\"\n"
-                + "WHERE \"codigo\" = '" + codigo + "'";
-        PreparedStatement ps2 = con.prepareStatement(SQL2);
-        ResultSet rs2 = ps2.executeQuery();
-        while (rs2.next()) {
-            cantidad += rs2.getInt("cantidad");
+            String SQL1 = "UPDATE \"ventas\"\n"
+                    + "SET \"estado\" = ?\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "';";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setString(1, "pendiente");
+            ps1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Producto pendiente para devolucion");
+            String SQL2 = "SELECT \"cantidad\"\n"
+                    + "FROM \"Productos\"\n"
+                    + "WHERE \"codigo\" = '" + codigo + "'";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                cantidad += rs2.getInt("cantidad");
+            }
+            String SQL3 = "UPDATE  \"Productos\"\n"
+                    + "SET \"cantidad\" = ?\n"
+                    + "WHERE \"codigo\" = '" + codigo + "'";
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setInt(1, cantidad);
+            ps3.executeUpdate();
         }
-        String SQL3 = "UPDATE  \"Productos\"\n"
-                + "SET \"cantidad\" = ?\n"
-                + "WHERE \"codigo\" = '" + codigo + "'";
-        PreparedStatement ps3 = con.prepareStatement(SQL3);
-        ps3.setInt(1, cantidad);
-        ps3.executeUpdate();
+    }
+    public void colocarImagenBotones(){
+        URL linkNuevo = getClass().getResource("/Imagenes/devolucion.png");
+        URL linkNuevo1 = getClass().getResource("/Imagenes/consultar.png");
+        URL linkNuevo2 = getClass().getResource("/Imagenes/opciones.png");
+        URL linkNuevo3 = getClass().getResource("/Imagenes/ventas.png");
+        Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
+        Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
+        Image imagenNuevo2 = new Image(linkNuevo2.toString(), 15,15,false,true);
+        Image imagenNuevo3 = new Image(linkNuevo3.toString(), 24,24,false,true);
+        Devolucion.setGraphic(new ImageView(imagenNuevo)); 
+        MenuDevolution.setGraphic(new ImageView(imagenNuevo)); 
+        Eliminar.setGraphic(new ImageView(imagenNuevo1));  
+        ItemEliminar.setGraphic(new ImageView(imagenNuevo1));
+        Opciones.setGraphic(new ImageView(imagenNuevo2));
+        itemVentas.setGraphic(new ImageView(imagenNuevo3));
+    }
+    @FXML
+    public void jeje(KeyEvent a){
+       Object evt = a.getSource();
+       if(evt.equals(txtCodigo)){
+                    if(!Character.isDigit(a.getCharacter().charAt(0))){
+             a.consume();
+                    }
+        }
     }
 }

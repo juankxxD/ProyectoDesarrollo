@@ -31,12 +31,12 @@
                 <MenuItem fx:id="btnCambiDes" mnemonicParsing="false" onAction="#cambiarDescuento" text="Cambiar Descuento" />
               </items>
             </SplitMenuButton>
-            <Button fx:id="Cambiarbtn" layoutX="497.0" layoutY="263.0" mnemonicParsing="false" onAction="#Cambiar" text="Cambiar" visible="false" />
+            <Button fx:id="Cambiarbtn" layoutX="497.0" layoutY="263.0" mnemonicParsing="false" onAction="#Cambiar" text="Cambiar" translateX="-10.0" visible="false" />
             <Label fx:id="labelCodigo" layoutX="513.0" layoutY="92.0" text="Codigo" visible="false" />
-            <TextField fx:id="txtCodigoPro" layoutX="476.0" layoutY="123.0" prefHeight="25.0" prefWidth="107.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
-            <Label fx:id="labelCantidad" layoutX="516.0" layoutY="166.0" text="Label" visible="false" />
-            <TextField fx:id="txtCantidadPro" layoutX="473.0" layoutY="199.0" prefHeight="25.0" prefWidth="103.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
-            <Button fx:id="Aumentar" layoutX="502.0" layoutY="251.0" mnemonicParsing="false" onAction="#aumentar" text="Aumentar" visible="false" />
+            <TextField fx:id="txtCodigoPro" layoutX="476.0" layoutY="123.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="107.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
+            <Label fx:id="labelCantidad" layoutX="516.0" layoutY="166.0" text="Cantidad" visible="false" />
+            <TextField fx:id="txtCantidadPro" layoutX="473.0" layoutY="199.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="103.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" visible="false" />
+            <Button fx:id="Aumentar" layoutX="473.0" layoutY="250.0" mnemonicParsing="false" onAction="#aumentar" text="Aumentar" />
          </children>
       </AnchorPane>
    </center>

@@ -259,12 +259,18 @@ public class MenuController implements Initializable {
         URL consultarV = getClass().getResource("/Imagenes/empleado.png");
         URL consultarC = getClass().getResource("/Imagenes/grupo.png");
         URL conVentas = getClass().getResource("/Imagenes/ventas.png");
+        URL Lugar = getClass().getResource("/Imagenes/visitante.png");
+        URL Actualizar = getClass().getResource("/Imagenes/actualizar.png");
+        URL comprar = getClass().getResource("/Imagenes/comprar.png");
         Image imagenNuevo = new Image(linkNuevo.toString(), 24, 24, false, true);
         Image imagenNuevo1 = new Image(AgregarP.toString(), 24, 24, false, true);
         Image imagenNuevo2 = new Image(consultarP.toString(), 24, 24, false, true);
         Image imagenNuevo3 = new Image(consultarV.toString(), 24, 24, false, true);
         Image imagenNuevo4 = new Image(consultarC.toString(), 24, 24, false, true);
         Image imagenNuevo5 = new Image(conVentas.toString(), 24, 24, false, true);
+        Image imagenNuevo6 = new Image(Lugar.toString(), 24, 24, false, true);
+        Image imagenNuevo7 = new Image(Actualizar.toString(), 24, 24, false, true);
+        Image imagenNuevo8 = new Image(comprar.toString(), 24, 24, false, true);
         BtnRegistrar.setGraphic(new ImageView(imagenNuevo));
         agregarpro.setGraphic(new ImageView(imagenNuevo1));
         ConsulPro.setGraphic(new ImageView(imagenNuevo2));
@@ -274,6 +280,9 @@ public class MenuController implements Initializable {
         MenuConUsu.setGraphic(new ImageView(imagenNuevo4));
         ConsultarVendedor.setGraphic(new ImageView(imagenNuevo4));
         btnConsultarVentas.setGraphic(new ImageView(imagenNuevo5));
+        btnSECTORES.setGraphic(new ImageView(imagenNuevo6));
+        ActualizarClien.setGraphic(new ImageView(imagenNuevo7));
+        btnVentasCliente.setGraphic(new ImageView(imagenNuevo8));
     }
 
     @FXML
@@ -341,6 +350,7 @@ public class MenuController implements Initializable {
             PreparedStatement ps3 = con.prepareStatement(SQL3);
             ps3.setString(1, "ocupado");
             ps3.executeUpdate();
+            btnSECTORES.setDisable(true);
                     } else {
             String SQL4 = "UPDATE \"Sectores\"\n"
                     + "SET \"estado\" = ?";

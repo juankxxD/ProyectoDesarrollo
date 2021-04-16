@@ -18,10 +18,10 @@
             <Label layoutX="39.0" layoutY="172.0" text="Descuento" />
             <Label layoutX="412.0" layoutY="172.0" text="cod_clliente" />
             <Label layoutX="39.0" layoutY="260.0" text="cantidad" />
-            <ButtonBar layoutX="349.0" layoutY="297.0" prefHeight="40.0" prefWidth="200.0" stylesheets="@../css/hojaEstilo.css">
+            <ButtonBar layoutX="326.0" layoutY="295.0" prefHeight="43.0" prefWidth="243.0" stylesheets="@../css/hojaEstilo.css">
               <buttons>
-                <Button fx:id="Comprar" mnemonicParsing="false" onAction="#Comprar" text="Comprar" />
-                  <Button fx:id="Volver" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+                <Button fx:id="Comprar" mnemonicParsing="false" onAction="#Comprar" prefHeight="27.0" prefWidth="123.0" text="Comprar" translateX="10.0" />
+                  <Button fx:id="Volver" mnemonicParsing="false" onAction="#Volver" text="Volver" translateX="10.0" />
               </buttons>
             </ButtonBar>
             <TextField fx:id="txtCod_pro" disable="true" layoutX="39.0" layoutY="40.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
@@ -29,9 +29,9 @@
             <TextField fx:id="txt_fecha" disable="true" layoutX="39.0" layoutY="122.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtValor" disable="true" layoutX="412.0" layoutY="122.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
             <TextField fx:id="txtDescuento" disable="true" layoutX="39.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtcod_Cliente" layoutX="412.0" layoutY="199.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <TextField fx:id="txtCantidad" layoutX="39.0" layoutY="285.0" prefHeight="25.0" prefWidth="44.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
-            <Button fx:id="BtnComprarDescuento" layoutX="167.0" layoutY="305.0" mnemonicParsing="false" onAction="#ComprarDescuento" stylesheets="@../css/hojaEstilo.css" text="Comprar utilizando puntos" />
+            <TextField fx:id="txtcod_Cliente" layoutX="412.0" layoutY="199.0" onKeyTyped="#jeje" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtCantidad" layoutX="39.0" layoutY="285.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="44.0" styleClass="id" stylesheets="@../css/hojaEstilo.css" />
+            <Button fx:id="BtnComprarDescuento" layoutX="115.0" layoutY="303.0" mnemonicParsing="false" onAction="#ComprarDescuento" prefHeight="22.0" prefWidth="196.0" stylesheets="@../css/hojaEstilo.css" text="Comprar utilizando puntos" />
          </children>
       </AnchorPane>
    </center>

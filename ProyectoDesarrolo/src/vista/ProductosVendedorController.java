@@ -169,10 +169,13 @@ public class ProductosVendedorController implements Initializable {
 
     @FXML
     private void Consultar(ActionEvent event) {
+        if (txtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        } else {
         producto p = new producto();
         p.setID(txtCodigo.getText());
         programaPrincipal.ComprarVendedor();
-
+        }
     }
 
     public void colocarImagenBotones() {
@@ -223,17 +226,19 @@ public class ProductosVendedorController implements Initializable {
 
     @FXML
     private void DevolucionFun(ActionEvent event) throws SQLException {
-         Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        String SQL = "UPDATE \"ventas\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
-        PreparedStatement ps1 = con.prepareStatement(SQL);
-        ps1.setString(1, "Devolucion");
-        ps1.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Devolucion Exitosa");
-    }
-        
+        if (txtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        } else {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String SQL = "UPDATE \"ventas\"\n"
+                    + "SET \"estado\" = ?\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+            PreparedStatement ps1 = con.prepareStatement(SQL);
+            ps1.setString(1, "Devolucion");
+            ps1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Devolucion Exitosa");
+        }
     }
 
     @FXML
@@ -252,20 +257,24 @@ public class ProductosVendedorController implements Initializable {
         this.ColumFecha_Entrega.setCellValueFactory(new PropertyValueFactory("fecha"));
         this.columTotal.setCellValueFactory(new PropertyValueFactory("valor"));
         Ventas v = new Ventas();
-        ObservableList<Ventas> item = v.getVentas();
+        ObservableList<Ventas> item = v.getTotalVentas();
         this.Tablaventas.setItems(item);
     }
 
     @FXML
     private void Eliminarfun(ActionEvent event) throws SQLException {
-         Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        String SQL = "UPDATE \"ventas\"\n"
-                + "SET \"estado\" = ?\n"
-                + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
-        PreparedStatement ps1 = con.prepareStatement(SQL);
-        ps1.setString(1, "Eliminado");
-        ps1.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Producto eliminado");
-    
+        if (txtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        } else {
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String SQL = "UPDATE \"ventas\"\n"
+                    + "SET \"estado\" = ?\n"
+                    + "WHERE \"id_venta\" = '" + txtCodigo.getText() + "'";
+            PreparedStatement ps1 = con.prepareStatement(SQL);
+            ps1.setString(1, "Eliminado");
+            ps1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Producto eliminado");
+        }
+    }
 }

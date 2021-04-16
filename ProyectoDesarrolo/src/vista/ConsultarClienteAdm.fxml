@@ -31,7 +31,7 @@
                           </items>
                         </SplitMenuButton>
                         <Label fx:id="LabelCodigo" layoutX="55.0" layoutY="80.0" text="codigo" visible="false" />
-                        <TextField fx:id="txtConsultar" layoutX="15.0" layoutY="97.0" prefHeight="25.0" prefWidth="114.0" visible="false" />
+                        <TextField fx:id="txtConsultar" layoutX="15.0" layoutY="97.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="114.0" visible="false" />
                         <Button fx:id="btnEliminar" layoutX="48.0" layoutY="171.0" mnemonicParsing="false" onAction="#Eliminar" text="Eliminar" visible="false" />
                      </children>
                   </Pane>

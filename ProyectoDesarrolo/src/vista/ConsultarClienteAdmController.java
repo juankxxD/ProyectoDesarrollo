@@ -26,6 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -120,8 +121,12 @@ public class ConsultarClienteAdmController implements Initializable {
 
     @FXML
     private void Eliminar(ActionEvent event) throws SQLException {
+         if(!txtConsultar.getText().equals("")){
         Cliente c = new Cliente();
         c.Eliminar(txtConsultar.getText());
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }
     }
 
     @FXML
@@ -169,16 +174,18 @@ public void colocarImagenBotones(){
         URL linkNuevo1 = getClass().getResource("/Imagenes/grupo.png");
         URL linkNuevo2 = getClass().getResource("/Imagenes/eliminarUsuario.png");
         URL linkNuevo3 = getClass().getResource("/Imagenes/regalo.png");
+        URL linkNuevo4 = getClass().getResource("/Imagenes/opciones.png");
         Image imagenNuevo = new Image(linkNuevo.toString(), 24,24,false,true);
         Image imagenNuevo1 = new Image(linkNuevo1.toString(), 24,24,false,true);
         Image imagenNuevo2 = new Image(linkNuevo2.toString(), 24,24,false,true);
         Image imagenNuevo3 = new Image(linkNuevo3.toString(), 24,24,false,true);
+        Image imagenNuevo4 = new Image(linkNuevo4.toString(), 15,15,false,true);
         salir.setGraphic(new ImageView(imagenNuevo));  
         btnTodos.setGraphic(new ImageView(imagenNuevo1)); 
         btnEliminarU.setGraphic(new ImageView(imagenNuevo2)); 
         btnEliminar.setGraphic(new ImageView(imagenNuevo2)); 
         BonoRegalo.setGraphic(new ImageView(imagenNuevo3));
-        
+        btnOpciones1.setGraphic(new ImageView(imagenNuevo4));
         
     }
     @FXML

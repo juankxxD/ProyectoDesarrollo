@@ -52,6 +52,7 @@ public class ComisionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         colocarImagenBotones();
+        btnCambiar.setDisable(true);
     }  
     public void setProgramaPrincipal(principal programa)
     {
@@ -84,6 +85,8 @@ public class ComisionController implements Initializable {
 
     @FXML
     private void TraerDatos(ActionEvent event) throws SQLException {
+        if(!txtCodig.getText().equals(""))
+        {
         String SQL = "SELECT p2.\"Nombre\", p2.\"Apellido\", P1.\"Comision\"\n" +
 "				FROM \"Vendedores\" P1, \"Usuario\" p2\n" +
 "				WHERE P1.\"ID\" = p2.\"ID\" AND P1.\"ID\"='" + txtCodig.getText() +"'";
@@ -101,6 +104,10 @@ public class ComisionController implements Initializable {
       txtApellido.setDisable(true);   
       txtComision.setDisable(false);
       txtComision.setEditable(true);
+      btnCambiar.setDisable(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe llenar los datos");
+        }
     }
     public void colocarImagenBotones(){
         URL linkNuevo = getClass().getResource("/Imagenes/volver.png");

@@ -35,8 +35,8 @@
                         <Pane prefHeight="406.0" prefWidth="157.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <children>
                               <Label fx:id="LabelCodigo" layoutX="65.0" layoutY="53.0" text="Codigo" visible="false" />
-                              <TextField fx:id="txtConsultar" layoutX="33.0" layoutY="86.0" prefHeight="25.0" prefWidth="107.0" visible="false" />
-                              <Button fx:id="btnConsultarCliente" layoutX="36.0" layoutY="176.0" mnemonicParsing="false" onAction="#ActualizarDatos" text="Actualizar Datos" visible="false" />
+                              <TextField fx:id="txtConsultar" layoutX="33.0" layoutY="86.0" onKeyTyped="#jeje" prefHeight="25.0" prefWidth="107.0" visible="false" />
+                              <Button fx:id="btnConsultarCliente" layoutX="36.0" layoutY="176.0" mnemonicParsing="false" onAction="#ActualizarDatos" stylesheets="@../css/hojaEstilo.css" text="Actualizar Datos" translateX="-25.0" visible="false" />
                               <SplitMenuButton fx:id="SplitBtn" layoutX="19.0" layoutY="2.0" mnemonicParsing="false" styleClass="menu-button1" stylesheets="@../css/hojaEstilo.css" text="Opciones">
                                 <items>
                                   <MenuItem fx:id="ClientesDeyo" mnemonicParsing="false" onAction="#consultarDeVendedorRegistrados" text="Clientes que he registrado" />
@@ -69,7 +69,7 @@
    <bottom>
       <Pane prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="Volver" layoutX="532.0" layoutY="17.0" mnemonicParsing="false" onAction="#Volver" styleClass="menu-button1" stylesheets="@../css/hojaEstilo.css" text="Volver" />
+            <Button fx:id="Volver" layoutX="501.0" layoutY="16.0" mnemonicParsing="false" onAction="#Volver" styleClass="menu-button1" stylesheets="@../css/hojaEstilo.css" text="Volver" />
          </children>
       </Pane>
    </bottom>

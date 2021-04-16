@@ -19,12 +19,12 @@
    <right>
       <Pane prefHeight="400.0" prefWidth="226.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txtCodigo" editable="false" layoutX="16.0" layoutY="134.0" prefHeight="20.0" prefWidth="117.0" promptText="codigo" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
+            <TextField fx:id="txtCodigo" editable="false" layoutX="16.0" layoutY="134.0" onKeyTyped="#jeje" prefHeight="20.0" prefWidth="117.0" promptText="codigo" styleClass="Password" stylesheets="@../css/hojaEstilo.css" />
             <Button fx:id="Eliminar" layoutX="48.0" layoutY="192.0" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
             <SplitMenuButton fx:id="Opciones" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" text="opciones">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#ConsultarProductos" text="Consultar ventas" />
-                <MenuItem mnemonicParsing="false" onAction="#consultarEliminar" text="Eliminar productos" />
+                <MenuItem fx:id="itemVentas" mnemonicParsing="false" onAction="#ConsultarProductos" text="Consultar ventas" />
+                <MenuItem fx:id="ItemEliminar" mnemonicParsing="false" onAction="#consultarEliminar" text="Eliminar productos" />
                   <MenuItem fx:id="MenuDevolution" mnemonicParsing="false" onAction="#Devolucion" text="Hacer devolucion" />
               </items>
             </SplitMenuButton>

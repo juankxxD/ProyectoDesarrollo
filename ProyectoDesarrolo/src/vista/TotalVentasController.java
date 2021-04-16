@@ -73,6 +73,7 @@ public class TotalVentasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TotalVentasController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtTotalVentas.setEditable(false);
         colocarImagenBotones();
     }    
     public void setProgramaPrincipal(principal programa)
